@@ -52,8 +52,10 @@ Personaje 4 (edgy): posee dos habilidades especiales, por una parte puede lanzar
 6.- Estética
 Gráficos: PixelArt.
 Música: Música bit.
+
 7.- Controles
 El juego será jugable con teclado y ratón, utilizando las teclas AD(movimiento), W (salto) y ESPACIO (Acción especial)
+
 8.- Tabla de datos
 
 PERSONAJE
