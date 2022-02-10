@@ -59,32 +59,35 @@ El juego será jugable con teclado y ratón, utilizando las teclas AD(movimiento
 8.- Tabla de datos
 
 PERSONAJE
-VIDA
-VELOCIDAD
-DAÑO
+vida
+velocidad
+daño
+
 Forzudo
 2
-
-
-
 3
 1
+
 Niño
+3
 3
 1
 Minero
 4
+3
 1
 Edgy
 5
+3
 2
 
 
 
 ENEMIGO
-VIDA
-VELOCIDAD
-DAÑO
+vida
+velocidad
+daño
+
 Esqueleto
 1
 3
