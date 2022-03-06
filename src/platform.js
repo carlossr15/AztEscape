@@ -25,4 +25,9 @@ export default class Platform extends Phaser.GameObjects.Sprite {
     new Base(scene, this, x, y, baseGroup);
     this.scene.physics.add.collider(this, player);   
   }
+
+
+
+
+  
 }

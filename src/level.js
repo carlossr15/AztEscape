@@ -1,3 +1,4 @@
+import Escalera from './escalera.js';
 import Platform from './platform.js';
 import Player from './player.js';
 
@@ -23,6 +24,9 @@ export default class Level extends Phaser.Scene {
   create() {
     this.stars = 10;
     this.bases = this.add.group();
+
+    new Escalera(this, this.player, this.bases, 500, 400);
+
     this.player = new Player(this, 200, 300);
 
     new Platform(this, this.player, this.bases, 500, 450);

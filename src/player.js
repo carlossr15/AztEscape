@@ -50,6 +50,41 @@ export default class Player extends Phaser.GameObjects.Sprite {
    */
   preUpdate(t,dt) {
     super.preUpdate(t,dt);
+
+
+    //Codigo escalera
+    if(this.onLadder)
+    {
+      this.body.setAllowGravity(false);
+      console.log("cayyendo");
+      this.body.setVelocityY(0);
+    }
+    else
+    {
+      this.body.setAllowGravity(true);
+    }
+    if(this.cursors.up.isDown && this.onLadder)
+    {
+      console.log("subiendo");
+
+      this.body.setVelocityY(-300);
+
+    }
+    else
+    {
+      /*console.log("cayyendo");
+      this.body.setVelocityY(100);*/
+    }
+    if(this.cursors.down.isDown && this.onLadder)
+    {
+      console.log("bajando");
+
+      this.body.setVelocityY(250);
+
+    }
+
+
+
     if (this.cursors.up.isDown && this.body.onFloor()) {
       this.body.setVelocityY(this.jumpSpeed);
     }
