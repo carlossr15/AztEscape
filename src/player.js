@@ -36,14 +36,14 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
 
-  create(){
+ /* create(){
     this.scene.anims.create({
       key: 'walk',
       frames: this.scene.anims.generateFrameNumbers('player', {frames: [0, 1, 2]}),
       frameRate: 10,
       repeat: -1
     })
-  }
+  }*/
 
   /**
    * El jugador ha recogido una estrella por lo que este método añade un punto y
