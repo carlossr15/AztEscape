@@ -9,8 +9,8 @@ import MyMap from './map.js';
  */
 let config = {
     type: Phaser.CANVAS,
-    width: 1000,
-    height: 1000,
+    width: 800,
+    height: 400,
     scale: {
         // mode: Phaser.Scale.FIT,  
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
