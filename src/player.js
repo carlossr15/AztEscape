@@ -1,3 +1,4 @@
+
 import Star from './star.js';
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.
@@ -21,10 +22,13 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.body.setCollideWorldBounds();
     this.speed = 300;
     this.jumpSpeed = -400;
+    this.onLadder = false;
     // Esta label es la UI en la que pondremos la puntuación del jugador
     this.label = this.scene.add.text(10, 10, "");
     this.cursors = this.scene.input.keyboard.createCursorKeys();
     this.updateScore();
+    this.scene.add.layer(this);
+    this.vida = 10;
   }
 
   /**
@@ -36,6 +40,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.updateScore();
   }
   
+  hurt()
+  {
+    this.vida--;
+    console.log("Vida" + this.vida);
+  }
   /**
    * Actualiza la UI con la puntuación actual
    */
@@ -52,18 +61,18 @@ export default class Player extends Phaser.GameObjects.Sprite {
   preUpdate(t,dt) {
     super.preUpdate(t,dt);
 
-
-    //Codigo escalera
     if(this.onLadder)
     {
       this.body.setAllowGravity(false);
       console.log("cayyendo");
       this.body.setVelocityY(0);
+      //this.body.setVelocityY(0);
     }
     else
     {
       this.body.setAllowGravity(true);
     }
+
     if(this.cursors.up.isDown && this.onLadder)
     {
       console.log("subiendo");
@@ -84,10 +93,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     }
 
-
-
     if (this.cursors.up.isDown && this.body.onFloor()) {
-      this.body.setVelocityY(this.jumpSpeed);
     }
     if (this.cursors.left.isDown) {
       this.body.setVelocityX(-this.speed);
