@@ -3,17 +3,34 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" href="assets/sprites/player.png" type="image/png" />
+    <link rel="shortcut icon" href="assets/azteca.png" type="image/png" />
     <meta name="viewport" content="width=device-width, initial-scale=2.0">
     <link rel="stylesheet" href="./css/game.css">
     <script src="./lib/phaser.min.js"></script>
+    <style>
+        @font-face { font-family: PapaKilo; src: url('PapakiloFont.ttf'); } 
 
-    <title>¡Juego con Phaser!</title>
+        body {
+          background-image: url('./assets/PageBackground.jpg');
+          background-repeat: no-repeat;
+          background-size: 100%;
+        }
+
+        .titulo{
+            width: 100%;
+            font-style:italic;
+            font-size: 75px;
+            font-family: PapaKilo;
+            text-align: center;
+        }
+
+    </style>
+    <title>AztEscape</title>
 </head>
 
 <body>
-    <h1>Juego con Phaser</h1>
-    <script src="./src/game.js" type="module"></script>
+    <div class="titulo">AztEscape</div>
+    <script class="marco" src="./src/game.js" type="module"></script>
 </body>
 
 </html>
