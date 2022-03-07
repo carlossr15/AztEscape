@@ -9,7 +9,7 @@ import MyMap from './map.js';
  */
 let config = {
     type: Phaser.CANVAS,
-    width: 800,
+    width: 1000,
     height: 400,
     scale: {
         // mode: Phaser.Scale.FIT,  

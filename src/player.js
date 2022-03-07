@@ -20,6 +20,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.scene.physics.add.existing(this);
     this.setSize(16,16);
     this.setScale(0.2,0.2);
+
     
     // Queremos que el jugador no se salga de los límites del mundo
     this.body.setCollideWorldBounds();
@@ -28,12 +29,20 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.onLadder = false;
     
     // Esta label es la UI en la que pondremos la puntuación del jugador
-    this.label = this.scene.add.text(10, 10, "");
     this.cursors = this.scene.input.keyboard.createCursorKeys();
-    this.updateScore();
     this.scene.add.layer(this);
     this.vida = 10;
     
+  }
+
+
+  create(){
+    this.scene.anims.create({
+      key: 'walk',
+      frames: this.scene.anims.generateFrameNumbers('player', {frames: [0, 1, 2]}),
+      frameRate: 10,
+      repeat: -1
+    })
   }
 
   /**
@@ -97,15 +106,17 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.body.setVelocityY(250);
 
     }
-
+    
     if (this.cursors.up.isDown && this.body.onFloor()) {
       this.body.setVelocityY(this.jumpSpeed);
     }
     if (this.cursors.left.isDown) {
       this.body.setVelocityX(-this.speed);
+      this.scene.add.sprite(600,600).play('walk');
     }
     else if (this.cursors.right.isDown) {
       this.body.setVelocityX(this.speed);
+      this.scene.add.sprite(600,600).play('walk');
     }
     else {
       this.body.setVelocityX(0);
