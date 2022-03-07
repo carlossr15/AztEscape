@@ -13,8 +13,7 @@ export default class MyMap extends Phaser.Scene {
     preload(){
         this.load.spritesheet('templo', 'assets/tilesets/SueloDorado.png', {frameWidth: 50, frameHeight: 50});
         this.load.tilemapTiledJSON('map', 'assets/maps/MyMap2.json');
-        this.load.image('player', 'assets/sprites/player.png');
-        this.load.spritesheet('player2', 'assets/sprites/MC-Spritesheet.png', {frameWidth: 602, frameHeight: 602});
+        this.load.spritesheet('player', 'assets/sprites/MC-Spritesheet.png', {frameWidth: 600, frameHeight: 600});
     }
 
     create(){
@@ -27,8 +26,9 @@ export default class MyMap extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, 1600,400);
         this.physics.world.setBounds(0, 0, 1600,400);
-
-        this.player = new Player(this, 0, 300);
+        this.player = new Player(this, 0, 250);
+        this.anims.create({key:'move', frame: this.anims.generateFrameNumbers('player', {start: 0, end: 20 }), frameRate: 10, repeat: -1})
+        
         this.physics.add.collider(this.player, suelo);
         this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
 

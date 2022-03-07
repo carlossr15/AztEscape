@@ -8,9 +8,9 @@ import MyMap from './map.js';
  * la clase Game de Phaser, encargada de crear e iniciar el juego.
  */
 let config = {
-    type: Phaser.AUTO,
-    width: 800,
-    height: 400,
+    type: Phaser.CANVAS,
+    width: 1000,
+    height: 1000,
     scale: {
         // mode: Phaser.Scale.FIT,  
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
@@ -21,7 +21,7 @@ let config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 700 },
-            debug: false
+            debug: true
         }
     }
 };
