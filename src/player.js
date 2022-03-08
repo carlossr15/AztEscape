@@ -42,7 +42,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   pintarVida()  {
-    if(this.vida >= 0)
+    if(this.vida >= -0.5)
     {
       for(let j = 0; j < this.vidas.length; j++)
       {
@@ -79,7 +79,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   hurt()
   {
-    this.vida--;
+    this.vida = this.vida - 0.1;
     console.log("Vida" + this.vida);
 
     this.pintarVida();

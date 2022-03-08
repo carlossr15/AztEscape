@@ -39,6 +39,9 @@ export default class MyMap extends Phaser.Scene {
         this.player = new Player(this, 0, 450);
         this.player.pintarVida();
         this.enemy = new Enemy(this, 150, 500);
+
+
+        
         this.bandera = new Bandera(this, 500, 455);
 
         this.physics.add.collider(this.player, suelo);
