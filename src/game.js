@@ -2,6 +2,8 @@ import Boot from './boot.js';
 import End from './end.js';
 import Level from './level.js';
 import MyMap from './map.js';
+import menu from './menu.js';
+import winMenu from './winMenu.js';
 
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos
@@ -12,11 +14,11 @@ let config = {
     width: 1000,
     height: 400,
     scale: {
-        // mode: Phaser.Scale.FIT,  
+        // mode: Phaser.Scale.FIT,      
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
     },
     pixelArt: true,
-    scene: [Boot, MyMap],
+    scene: [Boot, menu, MyMap, winMenu],
     physics: {
         default: 'arcade',
         arcade: {

@@ -1,5 +1,6 @@
 import Enemy from './enemy.js';
 import Player from './player.js';
+import Bandera from './bandera.js';
 
 /**
  * @extends Phaser.Scene
@@ -17,6 +18,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.tilemapTiledJSON('map', 'assets/maps/Level1.json');
         this.load.spritesheet('player', 'assets/sprites/MC-Spritesheet.png', {frameWidth: 600, frameHeight: 600});
         this.load.image('enemy', 'assets/sprites/araña.png');
+        this.load.image('bandera','assets/sprites/bandera.png');
     }
 
     create(){
@@ -31,12 +33,15 @@ export default class MyMap extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, 4800,800);
         this.physics.world.setBounds(0, 0, 4800,800);
-        this.player = new Player(this, 0, 0);
         
-        this.enemy = new Enemy(this, 100, 100);
-        
+        this.player = new Player(this, 0, 450);
+        this.enemy = new Enemy(this, 100, 500);
+        this.bandera = new Bandera(this, 500, 455);
+
         this.physics.add.collider(this.player, suelo);
         this.physics.add.collider(this.enemy, suelo);
+        this.physics.add.collider(this.bandera, suelo);
+
         this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
         this.cameras.main.fadeIn(1000);
 
