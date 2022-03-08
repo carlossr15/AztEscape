@@ -77,6 +77,8 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
   preUpdate() {
     // IMPORTANTE: Si no ponemos esta instrucción y el sprite está animado
     // no se podrá ejecutar la animación del sprite. 
+
+
     super.preUpdate();
     this.checkGolpe();
   }

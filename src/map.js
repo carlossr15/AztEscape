@@ -36,13 +36,17 @@ export default class MyMap extends Phaser.Scene {
 
         //var piedra = map.createFromObjects('PiedraObject', {gid: })
 
-        this.cameras.main.setBounds(0, 0, 4800,800);
+        this.cameras.main.setBounds(0, 0, 4800,1000);
         this.cameras.main.zoom = 1;
-        this.physics.world.setBounds(0, 0, 4800,800);
+        this.physics.world.setBounds(0, 0, 4800,1000);
         
         this.player = new Player(this, 0, 450);
         
         this.enemy = new Enemy(this, 150, 500);
+        this.enemy2 = new Enemy(this, 1500, 500);
+        this.enemy3 = new Enemy(this, 4000, 500);
+        this.enemy4 = new Enemy(this, 4300, 500);
+        this.enemy5 = new Enemy(this, 3800, 500);
 
         this.bandera = new Bandera(this, 500, 455);
 
@@ -52,7 +56,14 @@ export default class MyMap extends Phaser.Scene {
         this.batido = new Batido(this, 975, 260);
 
         this.physics.add.collider(this.player, suelo);
+        
         this.physics.add.collider(this.enemy, suelo);
+        this.physics.add.collider(this.enemy2, suelo);
+        this.physics.add.collider(this.enemy3, suelo);
+        this.physics.add.collider(this.enemy4, suelo);
+        this.physics.add.collider(this.enemy5, suelo);
+
+
         this.physics.add.collider(this.bandera, suelo);
         //if(this.physics.add.overlap(this.pinchos, this.player)) this.player.hurt()
 
@@ -99,6 +110,14 @@ export default class MyMap extends Phaser.Scene {
             frameRate: 10,
             repeat: -1
         })
+
+        this.anims.create({
+            key: 'move',
+            frames: this.anims.generateFrameNames('enemy', {frames: [1, 2]}),
+            frameRate: 10,
+            repeat: -1
+        })
+
 
 
     }
