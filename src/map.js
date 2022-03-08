@@ -37,7 +37,7 @@ export default class MyMap extends Phaser.Scene {
         this.physics.world.setBounds(0, 0, 4800,800);
         
         this.player = new Player(this, 0, 450);
-        this.player.pintarVida();
+        
         this.enemy = new Enemy(this, 150, 500);
 
 
@@ -50,6 +50,7 @@ export default class MyMap extends Phaser.Scene {
 
         this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
         this.cameras.main.fadeIn(1000);
+        
 
         suelo.setCollisionByExclusion(-1, true);
 

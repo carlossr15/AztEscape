@@ -39,6 +39,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.vidas = [];
     //this.scene.add.image(0, 500, 'vida').setDepth(1);
     //this.scene.add.image(200, 500, 'vida').setDepth(1);
+    this.pintarVida()
   }
 
   pintarVida()  {
@@ -50,8 +51,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
       }
       for(let i = 0; i < this.vida; i++)
       {
-        this.vidas[i] = this.scene.add.image(31*i + 35, 280, 'vida').setDepth(1);
-
+        this.vidas[i] = this.scene.add.image(31*i + 35, 30, 'vida').setDepth(1).setScrollFactor(0);
       }
     }
   }
