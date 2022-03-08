@@ -85,6 +85,14 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.pintarVida();
   }
 
+  eat(){
+    this.vida = this.vida + 1;
+    console.log("Vida" + this.vida);
+
+    this.pintarVida();
+
+  }
+
   
   /**
    * Actualiza la UI con la puntuación actual

@@ -1,6 +1,7 @@
 import Enemy from './enemy.js';
 import Player from './player.js';
 import Bandera from './bandera.js';
+import Batido from './batido.js';
 
 /**
  * @extends Phaser.Scene
@@ -21,6 +22,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.image('bandera','assets/sprites/bandera.png');
         this.load.image('vida', 'assets/sprites/life.png' );
         this.load.image('escalera', 'assets/sprites/escalera.png');
+        this.load.spritesheet('batido', 'assets/sprites/Batido.png', {frameWidth: 32, frameHeight: 32});
     }
 
     create(){
@@ -34,6 +36,7 @@ export default class MyMap extends Phaser.Scene {
         //var piedra = map.createFromObjects('PiedraObject', {gid: })
 
         this.cameras.main.setBounds(0, 0, 4800,800);
+        this.cameras.main.zoom = 1;
         this.physics.world.setBounds(0, 0, 4800,800);
         
         this.player = new Player(this, 0, 450);
@@ -44,15 +47,24 @@ export default class MyMap extends Phaser.Scene {
         
         this.bandera = new Bandera(this, 500, 455);
 
+
+        
+
+        this.batido = new Batido(this, 975, 260);
+
         this.physics.add.collider(this.player, suelo);
         this.physics.add.collider(this.enemy, suelo);
         this.physics.add.collider(this.bandera, suelo);
+
+        this.physics.add.collider(this.batido, suelo);
+
 
         this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
         this.cameras.main.fadeIn(1000);
         
 
         suelo.setCollisionByExclusion(-1, true);
+
 
         
     }
