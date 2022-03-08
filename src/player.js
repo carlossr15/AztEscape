@@ -18,8 +18,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.score = 0;
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
+
+    //Establecemos tamaño y hitbox
     this.setSize(16,16);
     this.setScale(0.2,0.2);
+    this.body.setSize(400,420);
+    this.body.setOffset(0,175);
 
     
     // Queremos que el jugador no se salga de los límites del mundo
@@ -32,9 +36,25 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.cursors = this.scene.input.keyboard.createCursorKeys();
     this.scene.add.layer(this);
     this.vida = 10;
-    
+    this.vidas = [];
+    //this.scene.add.image(0, 500, 'vida').setDepth(1);
+    //this.scene.add.image(200, 500, 'vida').setDepth(1);
   }
 
+  pintarVida()  {
+    if(this.vida >= -0.5)
+    {
+      for(let j = 0; j < this.vidas.length; j++)
+      {
+        this.vidas[j].destroy();
+      }
+      for(let i = 0; i < this.vida; i++)
+      {
+        this.vidas[i] = this.scene.add.image(31*i + 35, 280, 'vida').setDepth(1);
+
+      }
+    }
+  }
 
  /* create(){
     this.scene.anims.create({
@@ -54,11 +74,18 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.updateScore();
   }
   
+  
+
+
   hurt()
   {
-    this.vida--;
+    this.vida = this.vida - 0.1;
     console.log("Vida" + this.vida);
+
+    this.pintarVida();
   }
+
+  
   /**
    * Actualiza la UI con la puntuación actual
    */
