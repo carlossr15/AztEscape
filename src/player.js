@@ -18,8 +18,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.score = 0;
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
+
+    //Establecemos tamaño y hitbox
     this.setSize(16,16);
     this.setScale(0.2,0.2);
+    this.body.setSize(400,420);
+    this.body.setOffset(0,175);
 
     
     // Queremos que el jugador no se salga de los límites del mundo

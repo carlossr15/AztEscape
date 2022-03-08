@@ -16,7 +16,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('objetos', 'assets/tilesets/objetos.png', {frameWidth: 256, frameHeight: 256});
         this.load.tilemapTiledJSON('map', 'assets/maps/Level1.json');
         this.load.spritesheet('player', 'assets/sprites/MC-Spritesheet.png', {frameWidth: 600, frameHeight: 600});
-        this.load.image('enemy', 'assets/sprites/player.png');
+        this.load.image('enemy', 'assets/sprites/star.png');
     }
 
     create(){
@@ -31,8 +31,9 @@ export default class MyMap extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, 4800,400);
         this.physics.world.setBounds(0, 0, 4800,400);
-        this.player = new Player(this, 0, 250);
-        this.enemy = new Enemy(this, 2000, 100);
+        this.player = new Player(this, 0, 0);
+        
+        this.enemy = new Enemy(this, 100, 100);
         
         this.physics.add.collider(this.player, suelo);
         this.physics.add.collider(this.enemy, suelo);
