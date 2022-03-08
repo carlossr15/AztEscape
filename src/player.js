@@ -53,17 +53,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
       {
         this.vidas[i] = this.scene.add.image(31*i + 35, 30, 'vida').setDepth(1).setScrollFactor(0);
       }
+    }else{
+      this.scene.death();
     }
   }
-
- /* create(){
-    this.scene.anims.create({
-      key: 'walk',
-      frames: this.scene.anims.generateFrameNumbers('player', {frames: [0, 1, 2]}),
-      frameRate: 10,
-      repeat: -1
-    })
-  }*/
 
   /**
    * El jugador ha recogido una estrella por lo que este método añade un punto y
@@ -80,8 +73,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
   hurt()
   {
     this.vida = this.vida - 0.1;
-    console.log("Vida" + this.vida);
-
     this.pintarVida();
   }
 
@@ -136,17 +127,23 @@ export default class Player extends Phaser.GameObjects.Sprite {
     
     if (this.cursors.up.isDown && this.body.onFloor()) {
       this.body.setVelocityY(this.jumpSpeed);
+      this.play('jump', true);
     }
     if (this.cursors.left.isDown) {
       this.body.setVelocityX(-this.speed);
-      this.scene.add.sprite(600,600).play('walk');
+      if (this.body.onFloor()){
+        this.play('walk', true);
+      }
     }
     else if (this.cursors.right.isDown) {
       this.body.setVelocityX(this.speed);
-      this.scene.add.sprite(600,600).play('walk');
+      if (this.body.onFloor()){
+        this.play('walk', true);
+      }
     }
     else {
       this.body.setVelocityX(0);
+      this.play('stand', true);
     }
   }
   

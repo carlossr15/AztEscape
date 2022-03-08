@@ -40,8 +40,6 @@ export default class MyMap extends Phaser.Scene {
         
         this.enemy = new Enemy(this, 150, 500);
 
-
-        
         this.bandera = new Bandera(this, 500, 455);
 
         this.physics.add.collider(this.player, suelo);
@@ -54,9 +52,31 @@ export default class MyMap extends Phaser.Scene {
 
         suelo.setCollisionByExclusion(-1, true);
 
-        
+        this.anims.create({
+            key: 'walk',
+            frames: this.anims.generateFrameNames('player', {frames: [0, 1, 2]}),
+            frameRate: 10,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'stand',
+            frames: this.anims.generateFrameNames('player', {frames: [0]}),
+            frameRate: 10,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'jump',
+            frames: this.anims.generateFrameNames('player', {frames: [4]}),
+            frameRate: 10,
+            repeat: -1
+        })
+
     }
 
-
+    death(){
+        this.scene.start('menu');
+    }
 
 }
