@@ -32,6 +32,7 @@ export default class MyMap extends Phaser.Scene {
         const fondo = map.createLayer('Fondo', tilesetTemplo, 0, 0);
         const decoracion = map.createLayer('Decoracion', tilesetObjetos, 0, 0);
         const suelo = map.createLayer('Suelo', tilesetTemplo, 0, 0);
+        const pinchos = map.createFromObjects('Pinchos', tilesetObjetos)
 
         //var piedra = map.createFromObjects('PiedraObject', {gid: })
 
@@ -53,6 +54,7 @@ export default class MyMap extends Phaser.Scene {
         this.physics.add.collider(this.player, suelo);
         this.physics.add.collider(this.enemy, suelo);
         this.physics.add.collider(this.bandera, suelo);
+        //if(this.physics.add.overlap(this.pinchos, this.player)) this.player.hurt()
 
         this.physics.add.collider(this.batido, suelo);
 
@@ -64,8 +66,15 @@ export default class MyMap extends Phaser.Scene {
         suelo.setCollisionByExclusion(-1, true);
 
         this.anims.create({
-            key: 'walk',
+            key: 'walk-right',
             frames: this.anims.generateFrameNames('player', {frames: [0, 1, 2]}),
+            frameRate: 10,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'walk-left',
+            frames: this.anims.generateFrameNames('player', {frames: [10, 11, 12]}),
             frameRate: 10,
             repeat: -1
         })
@@ -78,11 +87,19 @@ export default class MyMap extends Phaser.Scene {
         })
 
         this.anims.create({
-            key: 'jump',
+            key: 'jump-right',
             frames: this.anims.generateFrameNames('player', {frames: [4]}),
             frameRate: 10,
             repeat: -1
         })
+
+        this.anims.create({
+            key: 'jump-left',
+            frames: this.anims.generateFrameNames('player', {frames: [13]}),
+            frameRate: 10,
+            repeat: -1
+        })
+
 
     }
 

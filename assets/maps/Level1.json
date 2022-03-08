@@ -37,9 +37,32 @@
          "width":300,
          "x":0,
          "y":0
+        }, 
+        {
+         "color":"#ff0000",
+         "draworder":"topdown",
+         "id":7,
+         "name":"Pinchos",
+         "objects":[
+                {
+                 "height":32,
+                 "id":6,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":669,
+                 "x":2161,
+                 "y":479
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":7,
- "nextobjectid":6,
+ "nextlayerid":8,
+ "nextobjectid":7,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.1",
