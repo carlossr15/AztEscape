@@ -36,9 +36,25 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.cursors = this.scene.input.keyboard.createCursorKeys();
     this.scene.add.layer(this);
     this.vida = 10;
-    
+    this.vidas = [];
+    //this.scene.add.image(0, 500, 'vida').setDepth(1);
+    //this.scene.add.image(200, 500, 'vida').setDepth(1);
   }
 
+  pintarVida()  {
+    if(this.vida >= 0)
+    {
+      for(let j = 0; j < this.vidas.length; j++)
+      {
+        this.vidas[j].destroy();
+      }
+      for(let i = 0; i < this.vida; i++)
+      {
+        this.vidas[i] = this.scene.add.image(31*i + 35, 280, 'vida').setDepth(1);
+
+      }
+    }
+  }
 
   create(){
     this.scene.anims.create({
@@ -58,11 +74,18 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.updateScore();
   }
   
+  
+
+
   hurt()
   {
     this.vida--;
     console.log("Vida" + this.vida);
+
+    this.pintarVida();
   }
+
+  
   /**
    * Actualiza la UI con la puntuación actual
    */

@@ -27,7 +27,8 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     // Esta label es la UI en la que pondremos la puntuación del jugador
     this.scene.add.layer(this);
     
-    
+
+
     this.dir = true;
 
     this.body.setVelocityX(this.speed);

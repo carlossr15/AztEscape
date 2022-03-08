@@ -19,6 +19,8 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('player', 'assets/sprites/MC-Spritesheet.png', {frameWidth: 600, frameHeight: 600});
         this.load.image('enemy', 'assets/sprites/araña.png');
         this.load.image('bandera','assets/sprites/bandera.png');
+        this.load.image('vida', 'assets/sprites/life.png' );
+        this.load.image('escalera', 'assets/sprites/escalera.png');
     }
 
     create(){
@@ -35,7 +37,8 @@ export default class MyMap extends Phaser.Scene {
         this.physics.world.setBounds(0, 0, 4800,800);
         
         this.player = new Player(this, 0, 450);
-        this.enemy = new Enemy(this, 100, 500);
+        this.player.pintarVida();
+        this.enemy = new Enemy(this, 150, 500);
         this.bandera = new Bandera(this, 500, 455);
 
         this.physics.add.collider(this.player, suelo);

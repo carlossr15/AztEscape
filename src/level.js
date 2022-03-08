@@ -28,6 +28,7 @@ export default class Level extends Phaser.Scene {
     new Escalera(this, this.player, this.bases, 500, 400);
 
     this.player = new Player(this, 200, 300);
+    this.player.pintarVida();
 
     new Platform(this, this.player, this.bases, 500, 450);
     new Platform(this, this.player, this.bases, 100, 100);
