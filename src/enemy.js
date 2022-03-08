@@ -19,6 +19,10 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.scene.physics.add.existing(this);
     // Queremos que el jugador no se salga de los límites del mundo
     this.body.setCollideWorldBounds();
+
+    //Establecemos tamaño y hitbox
+    this.body.setSize(52,28);
+
     this.speed = 100;
     // Esta label es la UI en la que pondremos la puntuación del jugador
     this.scene.add.layer(this);
