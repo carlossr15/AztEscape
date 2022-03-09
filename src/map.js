@@ -45,11 +45,14 @@ export default class MyMap extends Phaser.Scene {
         this.player = new Player(this, 0, 450);
         //this.player = new Player(this, 4550, 350);
         
+        
+
         this.enemy = new Enemy(this, 450, 500);
         this.enemy2 = new Enemy(this, 1500, 500);
         this.enemy3 = new Enemy(this, 4000, 500);
         this.enemy4 = new Enemy(this, 4300, 500);
         this.enemy5 = new Enemy(this, 3800, 500);
+
         this.spikes = new Spike(this, this.player, 2500, 500, 750, 30);
 
         
@@ -107,6 +110,20 @@ export default class MyMap extends Phaser.Scene {
         this.anims.create({
             key: 'jump-left',
             frames: this.anims.generateFrameNames('player', {frames: [13]}),
+            frameRate: 10,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'attack-right',
+            frames: this.anims.generateFrameNames('player', {frames: [15]}),
+            frameRate: 10,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'attack-left',
+            frames: this.anims.generateFrameNames('player', {frames: [16]}),
             frameRate: 10,
             repeat: -1
         })

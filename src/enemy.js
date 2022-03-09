@@ -24,6 +24,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.body.setSize(52,28);
 
     this.speed = 100;
+    this.vida = 1;
     // Esta label es la UI en la que pondremos la puntuación del jugador
     this.scene.add.layer(this);
     
@@ -50,6 +51,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
    */
    timerEvent()
    {
+     if(this.vida > 0){
         if(this.dir)
         {
             this.body.setVelocityX(-this.speed);
@@ -61,6 +63,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
             this.dir = true;
             console.log("der");
         }
+      }
    }
  
   checkGolpe()

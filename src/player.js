@@ -1,5 +1,6 @@
 
 import Star from './star.js';
+import Enemy from './enemy.js';
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.
  * También almacena la puntuación o número de estrellas que ha recogido hasta el momento.
@@ -87,6 +88,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   }
 
+ 
+
   
   /**
    * Actualiza la UI con la puntuación actual
@@ -160,6 +163,37 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.body.setVelocityX(0);
       this.play('stand', true);
     }
+
+    if(this.cursors.space.isDown){
+      console.log("ATACA");
+      if(this.cursors.left.isDown){
+        this.play('attack-left', true);
+        this.setSize(16,16);
+        this.setScale(0.2,0.2);
+        this.body.setSize(525,420);
+        this.body.setOffset(0,175);
+      }else {
+        this.play('attack-right', true);
+        this.setSize(16,16);
+        this.setScale(0.2,0.2);
+        this.body.setSize(525,420);
+        this.body.setOffset(0,175);
+      }
+      this.attack();
+    }else{
+      this.setSize(16,16);
+      this.setScale(0.2,0.2);
+      this.body.setSize(400,420);
+      this.body.setOffset(0,175);
+    }
+  }
+  
+  attack(){
+    if(this.scene.physics.overlap(this.scene.enemy, this)){
+      this.scene.enemy.vida -= 1; 
+      this.scene.enemy.destroy();
+    }
+
   }
   
 }
