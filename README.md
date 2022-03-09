@@ -14,6 +14,7 @@ PEGI info
 PEGI 12
 Audiencia Objetivo
 Estará enfocado principalmente a gente entre 12 y 25 años.
+
 2.- Lore y Contexto
 Nuestro juego empieza dentro de un templo azteca donde vemos que nuestro personaje principal consigue llegar hasta el tesoro dorado. Se trata de una historia basada en la actualidad, pero el escenario se trata de un templo antiguo. Ésto da lugar a que se puedan escuchar expresiones actuales, encontrarnos objetos modernos y diversos elementos que se encuentran en nuestro día a día. Nuestro personaje tiene que conseguir salir con vida del templo, para ello se va encontrando distintas salas o niveles en los que tiene que superar distintas pruebas o puzles, evitar trampas, eliminar enemigos, etc. En cada nivel se va encontrando distintos sombreros tirados por el suelo, que le permiten cambiar de forma y así poder tener diferentes habilidades especiales dependiendo de qué personaje se esté usando en un determinado momento.
 
@@ -24,6 +25,7 @@ Desafío: se trata del transcurso de los mapas, donde se deberán utilizar las d
 Recompensa: al final de cada nivel se mostrará una parte de historia, a su vez que se podrá desbloquear un personaje, el cuál tendrá nuevas habilidades para avanzar por los niveles.
 The sequence of top-level abstractions that will keep the players engaged:
 Prepare, challenge, reward
+
 4.- Mecánicas
 Andar:
 Saltar: 
@@ -72,10 +74,12 @@ Niño
 3
 3
 1
+
 Minero
 4
 3
 1
+
 Edgy
 5
 3
@@ -92,26 +96,32 @@ Esqueleto
 1
 3
 1
+
 Momia
 2
 2
 1
+
 Araña
 1
 5
 1
+
 Trampa (flecha)
 1
 X
 1
+
 Trampa (pinchos)
 -
 -
 1
+
 Boss Final
 10
 4
 2
+
 
 
 Diseños
