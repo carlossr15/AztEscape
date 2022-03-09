@@ -63,7 +63,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         }
    }
  
-   checkGolpe()
+  checkGolpe()
   {
     //this.onLadder = false;
     if(this.scene.physics.overlap(this.scene.player, this))

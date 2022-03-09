@@ -4,7 +4,7 @@ import Base from './base.js';
  * Cada plataforma es responsable de crear la base que aparece sobre ella y en la 
  * que, durante el juego, puede aparecer una estrella
  */
-export default class Platform extends Phaser.GameObjects.Sprite {
+ export default class Spike extends Phaser.GameObjects.Sprite {
   
   /**
    * Constructor de la Plataforma
@@ -14,20 +14,31 @@ export default class Platform extends Phaser.GameObjects.Sprite {
    * @param {number} x Coordenada x
    * @param {number} y Coordenada y
    */
-  constructor(scene, player, baseGroup, x, y) {
-    super(scene, x, y, 'platform');
+  constructor(scene, player, x, y, w, h){
+    super(scene, x, y, 'spike');
     this.setScale(1, 1);
+    this.alpha = 0;
     this.scene.add.existing(this);
-    this.scene.physics.add.existing(this);
-    this.body.setCollideWorldBounds(true);
-    this.removeAllListeners(100);
-    this.body.setDrag(5000, 0);
-    new Base(scene, this, x, y, baseGroup);
-    this.scene.physics.add.collider(this, player);   
+    this.scene.physics.add.existing(this, true);
+    this.body.setSize(w,h);
+  }
+  checkGolpe()
+  {
+    //this.onLadder = false;
+    if(this.scene.physics.overlap(this.scene.player, this))
+    {
+      this.scene.player.hurt();
+
+      console.log("PINCHOS");
+    }
   }
 
+  preUpdate() {
+    // IMPORTANTE: Si no ponemos esta instrucción y el sprite está animado
+    // no se podrá ejecutar la animación del sprite. 
 
 
-
-  
+    super.preUpdate();
+    this.checkGolpe();
+  }
 }

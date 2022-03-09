@@ -25,11 +25,20 @@ export default class Bandera extends Phaser.GameObjects.Sprite {
     this.body.setOffset(295,280);
   }
 
+  checkWin()
+  {
+    //this.onLadder = false;
+    if(this.scene.physics.overlap(this.scene.player, this)){
+      console.log("WIN");
+      this.scene.win();
+    }
+  }
   /**
    * Redefinición del preUpdate de Phaser
    * @override
    */
   preUpdate() {
     super.preUpdate();
+    this.checkWin()
   }
 }

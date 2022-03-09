@@ -12,11 +12,11 @@ export default class menu extends Phaser.Scene {
 
     preload(){}
 
-    create(){
+    create(text){
         this.input.keyboard.on('keyup', function (pointer) {
             this.scene.start('myMap');
         }, this);
 
-        this.add.text(300, 200, 'Pulsa cualquier tecla para empezar', {fontSize: '20px'});
+        this.add.text(0, 0, text, {fontSize: '20px'});
     }
 }

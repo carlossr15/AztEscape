@@ -14,23 +14,22 @@ export default class Player extends Phaser.GameObjects.Sprite {
    */
   constructor(scene, x, y) {
     super(scene, x, y, 'player');
-    
     this.score = 0;
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
-
+    
     //Establecemos tamaño y hitbox
     this.setSize(16,16);
     this.setScale(0.2,0.2);
     this.body.setSize(400,420);
     this.body.setOffset(0,175);
 
-    
     // Queremos que el jugador no se salga de los límites del mundo
     this.body.setCollideWorldBounds();
     this.speed = 300;
     this.jumpSpeed = -400;
     this.onLadder = false;
+    this.invencible = false;
     
     // Esta label es la UI en la que pondremos la puntuación del jugador
     this.cursors = this.scene.input.keyboard.createCursorKeys();
@@ -43,7 +42,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   pintarVida()  {
-    if(this.vida >= -0.5)
+    console.log(this.vida);
+    if(this.vida >= 1)
     {
       for(let j = 0; j < this.vidas.length; j++)
       {
@@ -66,20 +66,23 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.score++;
     this.updateScore();
   }
-  
-  
 
 
-  hurt()
-  {
-    this.vida = this.vida - 0.1;
-    this.pintarVida();
+  hurt(){
+    if(!this.invencible){
+      this.vida = this.vida - 1;
+      this.pintarVida();
+      this.invencible = true;
+
+      this.scene.time.delayedCall(500, function(){
+        this.invencible = false;
+      }, [], this);
+    }
   }
 
   eat(){
     this.vida = this.vida + 1;
     console.log("Vida" + this.vida);
-
     this.pintarVida();
 
   }

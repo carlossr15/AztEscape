@@ -2,7 +2,7 @@ import Enemy from './enemy.js';
 import Player from './player.js';
 import Bandera from './bandera.js';
 import Batido from './batido.js';
-
+import Spike from './Spike.js';
 /**
  * @extends Phaser.Scene
  */
@@ -40,16 +40,17 @@ export default class MyMap extends Phaser.Scene {
         this.cameras.main.zoom = 1;
         this.physics.world.setBounds(0, 0, 4800,1000);
         
-        this.player = new Player(this, 0, 450);
+
+        this.bandera = new Bandera(this, 4750, 455);
+        //this.player = new Player(this, 0, 450);
+        this.player = new Player(this, 4550, 350);
         
-        this.enemy = new Enemy(this, 150, 500);
+        this.enemy = new Enemy(this, 450, 500);
         this.enemy2 = new Enemy(this, 1500, 500);
         this.enemy3 = new Enemy(this, 4000, 500);
         this.enemy4 = new Enemy(this, 4300, 500);
         this.enemy5 = new Enemy(this, 3800, 500);
-
-        this.bandera = new Bandera(this, 500, 455);
-
+        this.spikes = new Spike(this, this.player, 2500, 500, 750, 30);
 
         
 
@@ -65,7 +66,6 @@ export default class MyMap extends Phaser.Scene {
 
 
         this.physics.add.collider(this.bandera, suelo);
-        //if(this.physics.add.overlap(this.pinchos, this.player)) this.player.hurt()
 
         this.physics.add.collider(this.batido, suelo);
 
@@ -122,8 +122,12 @@ export default class MyMap extends Phaser.Scene {
 
     }
 
+    win(){
+        this.scene.start('menu', "Has ganado, ¡Enhorabuena! Pulsa cualquier tecla para volver a jugar");
+    }
+
     death(){
-        this.scene.start('menu');
+        this.scene.start('menu', "Game Over! Pulsa cualquier tecla para continuar");
     }
 
 }
