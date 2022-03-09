@@ -41,9 +41,9 @@ export default class MyMap extends Phaser.Scene {
         this.physics.world.setBounds(0, 0, 4800,1000);
         
 
-        //this.bandera = new Bandera(this, 4750, 455);
+        this.bandera = new Bandera(this, 4750, 455);
         this.player = new Player(this, 0, 450);
-        this.player = new Player(this, 4550, 350);
+        //this.player = new Player(this, 4550, 350);
         
         this.enemy = new Enemy(this, 450, 500);
         this.enemy2 = new Enemy(this, 1500, 500);
