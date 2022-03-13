@@ -1,6 +1,7 @@
 
 import Star from './star.js';
 import Enemy from './enemy.js';
+import Escalera from './escalera.js';
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.
  * También almacena la puntuación o número de estrellas que ha recogido hasta el momento.
@@ -75,9 +76,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.pintarVida();
       this.invencible = true;
 
-      this.scene.time.delayedCall(500, function(){
+      this.scene.time.delayedCall(800, function(){
         this.invencible = false;
       }, [], this);
+      this.body.setVelocityX(-100);
+      this.body.setVelocityY(-100);
     }
   }
 
@@ -107,12 +110,14 @@ export default class Player extends Phaser.GameObjects.Sprite {
   preUpdate(t,dt) {
     super.preUpdate(t,dt);
 
-    if(this.onLadder)
-    {
+    if(this.onLadder){
       this.body.setAllowGravity(false);
       console.log("cayendo");
       this.body.setVelocityY(0);
-      //this.body.setVelocityY(0);
+      this.body.setVelocityX(0);
+      if(this.cursors.up.isDown || this.cursors.down.isDown) {
+        this.play('escalar', true);
+      }else this.play('escalar-izq', true);
     }
     else
     {
@@ -122,15 +127,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
     if(this.cursors.up.isDown && this.onLadder)
     {
       console.log("subiendo");
-
       this.body.setVelocityY(-300);
 
     }
-    else
-    {
-      /*console.log("cayyendo");
-      this.body.setVelocityY(100);*/
-    }
+    
     if(this.cursors.down.isDown && this.onLadder)
     {
       console.log("bajando");
@@ -146,6 +146,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.play('jump-left', true);
     else if(!this.body.onFloor() && this.cursors.right.isDown)
     this.play('jump-right', true);
+
+
     if (this.cursors.left.isDown) {
       this.body.setVelocityX(-this.speed);
       
@@ -159,7 +161,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.play('walk-right', true);
       }
     }
-    else {
+    else if(this.body.onFloor()){
       this.body.setVelocityX(0);
       this.play('stand', true);
     }
@@ -186,6 +188,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.body.setSize(400,420);
       this.body.setOffset(0,175);
     }
+
+    
   }
   
   attack(){

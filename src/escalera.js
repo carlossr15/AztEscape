@@ -14,13 +14,13 @@ export default class Escalera extends Phaser.GameObjects.Sprite {
    * @param {number} x Coordenada x
    * @param {number} y Coordenada y
    */
-  constructor(scene, player, baseGroup, x, y) {
+  constructor(scene, player, x, y, w, h){
     super(scene, x, y, 'escalera');
-    //this.setAngle(90);
+    this.setScale(1, 1);
+    this.alpha = 0;
     this.scene.add.existing(this);
-    
     this.scene.physics.add.existing(this, true);
-    new Base(scene, this, x, y, baseGroup);
+    this.body.setSize(w,h);
    
     //this.scene.physics.add.collider(this, player);    
     this.scene.physics.add.overlap(this, player);

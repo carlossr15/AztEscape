@@ -3,6 +3,7 @@ import Player from './player.js';
 import Bandera from './bandera.js';
 import Batido from './batido.js';
 import Spike from './Spike.js';
+import Escalera from './escalera.js';
 /**
  * @extends Phaser.Scene
  */
@@ -18,7 +19,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('objetos', 'assets/tilesets/objetos.png', {frameWidth: 256, frameHeight: 256});
         this.load.tilemapTiledJSON('map', 'assets/maps/Level1.json');
         this.load.spritesheet('player', 'assets/sprites/MC-Spritesheet.png', {frameWidth: 600, frameHeight: 600});
-        this.load.image('enemy', 'assets/sprites/araña.png');
+        this.load.spritesheet('enemy', 'assets/sprites/araña.png', {frameWidth: 64, frameHeight: 64});
         this.load.image('bandera','assets/sprites/bandera.png');
         this.load.image('vida', 'assets/sprites/life.png' );
         this.load.image('escalera', 'assets/sprites/escalera.png');
@@ -43,6 +44,7 @@ export default class MyMap extends Phaser.Scene {
 
         this.bandera = new Bandera(this, 4750, 455);
         this.player = new Player(this, 0, 450);
+        
         //this.player = new Player(this, 4550, 350);
         
         
@@ -53,11 +55,15 @@ export default class MyMap extends Phaser.Scene {
         this.enemy4 = new Enemy(this, 4300, 500);
         this.enemy5 = new Enemy(this, 3800, 500);
 
+        this.escalera2 = new Escalera(this, this.player, 4550, 450, 10, 150);
+        this.escalera = new Escalera(this, this.player, 1915, 450, 10, 150);
+
         this.spikes = new Spike(this, this.player, 2500, 500, 750, 30);
 
         
 
         this.batido = new Batido(this, 975, 260);
+        //this.batido2 = new Batido(this, 2200, 360);
 
         this.physics.add.collider(this.player, suelo);
         
@@ -129,8 +135,29 @@ export default class MyMap extends Phaser.Scene {
         })
 
         this.anims.create({
-            key: 'move',
-            frames: this.anims.generateFrameNames('enemy', {frames: [1, 2]}),
+            key: 'escalar',
+            frames: this.anims.generateFrameNames('player', {frames: [8, 9]}),
+            frameRate: 10,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'escalar-izq',
+            frames: this.anims.generateFrameNames('player', {frames: [8]}),
+            frameRate: 10,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'escalar-der',
+            frames: this.anims.generateFrameNames('player', {frames: [9]}),
+            frameRate: 10,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'move-enemy',
+            frames: this.anims.generateFrameNames('enemy', {frames: [0, 1]}),
             frameRate: 10,
             repeat: -1
         })

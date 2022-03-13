@@ -32,6 +32,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
 
     this.dir = true;
 
+    this.setFlip(true, false);
     this.body.setVelocityX(this.speed);
     this.triggerTimer = this.scene.time.addEvent({
         callback: this.timerEvent,
@@ -56,14 +57,20 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         {
             this.body.setVelocityX(-this.speed);
             this.dir = false;
+            this.setFlip(false, false);
+            //this.player.setFlip(true, false)
             console.log("izq");
         }
         else{
             this.body.setVelocityX(this.speed);
             this.dir = true;
+            this.setFlip(true, false);
+
             console.log("der");
         }
+        
       }
+      
    }
  
   checkGolpe()
@@ -81,8 +88,8 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     // IMPORTANTE: Si no ponemos esta instrucción y el sprite está animado
     // no se podrá ejecutar la animación del sprite. 
 
-
     super.preUpdate();
     this.checkGolpe();
+    this.anims.play('move-enemy', true);
   }
 }
