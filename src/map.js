@@ -31,18 +31,19 @@ export default class MyMap extends Phaser.Scene {
         const tilesetTemplo = map.addTilesetImage('TemploTiles', 'templo');
         const tilesetObjetos = map.addTilesetImage('ObjetosDecoracion', 'objetos');
         const fondo = map.createLayer('Fondo', tilesetTemplo, 0, 0);
+        const efectoSuelo = map.createLayer('EfectoSuelo', tilesetObjetos, 0, 0);
         const decoracion = map.createLayer('Decoracion', tilesetObjetos, 0, 0);
         const suelo = map.createLayer('Suelo', tilesetTemplo, 0, 0);
         const pinchos = map.createFromObjects('Pinchos', tilesetObjetos)
 
         //var piedra = map.createFromObjects('PiedraObject', {gid: })
 
-        this.cameras.main.setBounds(0, 0, 4800,1000);
+        this.cameras.main.setBounds(0, 0, 6800,1000);
         this.cameras.main.zoom = 1;
-        this.physics.world.setBounds(0, 0, 4800,1000);
+        this.physics.world.setBounds(0, 0, 6800,1000);
         
 
-        this.bandera = new Bandera(this, 4750, 455);
+        this.bandera = new Bandera(this, 6750, 455);
         this.player = new Player(this, 0, 450);
         
         //this.player = new Player(this, 4550, 350);
