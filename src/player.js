@@ -1,7 +1,11 @@
+<<<<<<< Updated upstream
 
 import Star from './star.js';
 import Enemy from './enemy.js';
 import Escalera from './escalera.js';
+=======
+import Bullets from './bullets.js';
+>>>>>>> Stashed changes
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.
  * También almacena la puntuación o número de estrellas que ha recogido hasta el momento.
@@ -38,6 +42,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.scene.add.layer(this);
     this.vida = 10;
     this.vidas = [];
+    this.bullets = new Bullets(this.scene);
     //this.scene.add.image(0, 500, 'vida').setDepth(1);
     //this.scene.add.image(200, 500, 'vida').setDepth(1);
     this.pintarVida()
@@ -138,6 +143,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.body.setVelocityY(250);
 
     }
+
+    this.scene.input.on('pointerdown', (pointer) =>{
+      this.bullets.fireBullet(this.x, this.y, pointer.x, pointer.y);
+    })
     
     if (this.cursors.up.isDown && this.body.onFloor()) {
       this.body.setVelocityY(this.jumpSpeed);
@@ -165,6 +174,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.body.setVelocityX(0);
       this.play('stand', true);
     }
+
 
     if(this.cursors.space.isDown){
       console.log("ATACA");
