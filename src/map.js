@@ -41,12 +41,7 @@ export default class MyMap extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, 6800,1000);
         this.cameras.main.zoom = 1;
-<<<<<<< Updated upstream
         this.physics.world.setBounds(0, 0, 6800,1000);
-        
-=======
-        this.physics.world.setBounds(0, 0, 4800,1000);
->>>>>>> Stashed changes
 
         this.bandera = new Bandera(this, 6750, 455);
         this.player = new Player(this, 0, 450);

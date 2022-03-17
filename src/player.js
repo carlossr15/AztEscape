@@ -1,11 +1,8 @@
-<<<<<<< Updated upstream
 
 import Star from './star.js';
 import Enemy from './enemy.js';
 import Escalera from './escalera.js';
-=======
 import Bullets from './bullets.js';
->>>>>>> Stashed changes
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.
  * También almacena la puntuación o número de estrellas que ha recogido hasta el momento.
