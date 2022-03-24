@@ -73,7 +73,7 @@ export default class MyMap extends Phaser.Scene {
         //this.player = new Player(this, 4550, 350);
 
 
-        //this.enemy = new Momia(this, 450, 500);
+        this.enemy = new Momia(this, 450, 500);
 
         //this.enemy = new Enemy(this, 450, 500);
         this.enemy2 = new Enemy(this, 1500, 500);
@@ -99,7 +99,7 @@ export default class MyMap extends Phaser.Scene {
         this.physics.add.collider(this.player, suelo);
         
 
-        //this.physics.add.collider(this.enemy, suelo);
+        this.physics.add.collider(this.enemy, suelo);
         this.physics.add.collider(this.enemy2, suelo);
         this.physics.add.collider(this.enemy3, suelo);
         this.physics.add.collider(this.enemy4, suelo);

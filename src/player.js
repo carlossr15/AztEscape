@@ -105,16 +105,13 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   pintarLlaves()  {
     console.log(this.llave);
-    if(this.llave >= 1)
+    for(let j = 0; j < this.llaves.length; j++)
     {
-      for(let j = 0; j < this.llaves.length; j++)
-      {
-        this.llaves[j].destroy();
-      }
-      for(let i = 0; i < this.llave; i++)
-      {
-        this.llaves[i] = this.scene.add.image(31*i + 35, 70, 'llave').setDepth(1).setScrollFactor(0);
-      }
+      this.llaves[j].destroy();
+    }
+    for(let i = 0; i < this.llave; i++)
+    {
+      this.llaves[i] = this.scene.add.image(31*i + 35, 70, 'llave').setDepth(1).setScrollFactor(0);
     }
   }
 
@@ -122,7 +119,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     if(this.llave > 0){
       if(this.scene.physics.overlap(this.scene.puerta, this)){ //agrupar puertas
         console.log("ABRIR-PUERTA");
-        this.llave--;
+        this.llave -= 1;
         this.pintarLlaves();
         this.scene.puerta.abrirPuerta();
       }
