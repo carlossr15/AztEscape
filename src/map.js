@@ -4,6 +4,7 @@ import Bandera from './bandera.js';
 import Batido from './batido.js';
 import Spike from './Spike.js';
 import Escalera from './escalera.js';
+import Momia from './momia.js';
 /**
  * @extends Phaser.Scene
  */
@@ -25,6 +26,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.image('escalera', 'assets/sprites/escalera.png');
         this.load.spritesheet('batido', 'assets/sprites/Batido.png', {frameWidth: 32, frameHeight: 32});
         this.load.image('bullet', 'assets/sprites/player.png');
+        this.load.image('momia', 'assets/sprites/player.png');
     }
 
     create(){
@@ -49,7 +51,11 @@ export default class MyMap extends Phaser.Scene {
         //this.player = new Player(this, 4550, 350);
 
 
-        this.enemy = new Enemy(this, 450, 500);
+        this.enemy = new Momia(this, 450, 500);
+
+
+
+        //this.enemy = new Enemy(this, 450, 500);
         this.enemy2 = new Enemy(this, 1500, 500);
         this.enemy3 = new Enemy(this, 4000, 500);
         this.enemy4 = new Enemy(this, 4300, 500);
