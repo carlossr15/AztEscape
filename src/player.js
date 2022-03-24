@@ -47,6 +47,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     //this.scene.add.image(200, 500, 'vida').setDepth(1);
     this.pintarVida();
     this.pintarLlaves();
+    this.texto = this.scene.add.image(500, 650, 'textBox').setSize(1000,300).setDepth(1).setScrollFactor(0);
   }
 
   pintarVida()  {
@@ -206,7 +207,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.play('stand', true);
     }
 
-
     if(this.cursors.space.isDown){
       console.log("ATACA");
       if(this.cursors.left.isDown){
@@ -222,7 +222,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.body.setSize(525,420);
         this.body.setOffset(0,175);
       }
-      this.attack();
     }else{
       this.setSize(16,16);
       this.setScale(0.2,0.2);
@@ -231,14 +230,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
     this.abrirPuerta();
     
-  }
-  
-  attack(){
-    if(this.scene.physics.overlap(this.scene.enemy, this)){
-      this.scene.enemy.vida -= 1; 
-      this.scene.enemy.destroy();
-    }
-
   }
   
 }

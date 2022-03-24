@@ -27,8 +27,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.vida = 1;
     // Esta label es la UI en la que pondremos la puntuación del jugador
     this.scene.add.layer(this);
-    
-
+    this.scene.enemies.add(this);
 
     this.dir = true;
 
@@ -40,6 +39,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         delay: 2500, // 1000 = 1 second
         loop: true
     });
+    this.scene.enemies.add(this);
 
   }
 
@@ -73,15 +73,18 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
       
    }
  
-  checkGolpe()
-  {
-    //this.onLadder = false;
-    if(this.scene.physics.overlap(this.scene.player, this))
-    {
+  attack(){
+    if(this.scene.player.cursors.space.isDown){
+      this.hurt();
+    }else{
       this.scene.player.hurt();
-
-      console.log("GOLPE");
     }
+      console.log("GOLPE");
+  }
+
+  hurt(){
+    this.vida -=1;
+    this.destroy();
   }
 
   preUpdate(t, d) {
@@ -89,7 +92,6 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     // no se podrá ejecutar la animación del sprite. 
 
     super.preUpdate(t, d);
-    this.checkGolpe();
     this.anims.play('move-enemy', true);
   }
 }
