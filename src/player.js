@@ -33,6 +33,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.jumpSpeed = -400;
     this.onLadder = false;
     this.invencible = false;
+    this.llave = 0;
+    this.llaves = [];
     
     // Esta label es la UI en la que pondremos la puntuación del jugador
     this.cursors = this.scene.input.keyboard.createCursorKeys();
@@ -40,9 +42,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.vida = 10;
     this.vidas = [];
     this.bullets = new Bullets(this.scene);
+    this.setDepth(1);
     //this.scene.add.image(0, 500, 'vida').setDepth(1);
     //this.scene.add.image(200, 500, 'vida').setDepth(1);
-    this.pintarVida()
+    this.pintarVida();
+    this.pintarLlaves();
   }
 
   pintarVida()  {
@@ -93,6 +97,36 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   }
 
+  getTheKey(){
+    this.llave += 1;
+    this.pintarLlaves();
+  }
+
+  pintarLlaves()  {
+    console.log(this.llave);
+    if(this.llave >= 1)
+    {
+      for(let j = 0; j < this.llaves.length; j++)
+      {
+        this.llaves[j].destroy();
+      }
+      for(let i = 0; i < this.llave; i++)
+      {
+        this.llaves[i] = this.scene.add.image(31*i + 35, 70, 'llave').setDepth(1).setScrollFactor(0);
+      }
+    }
+  }
+
+  abrirPuerta(){
+    if(this.llave > 0){
+      if(this.scene.physics.overlap(this.scene.puerta, this)){ //agrupar puertas
+        console.log("ABRIR-PUERTA");
+        this.llave--;
+        this.pintarLlaves();
+        this.scene.puerta.abrirPuerta();
+      }
+    }
+  }
  
 
   
@@ -151,7 +185,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     if(!this.body.onFloor() && this.cursors.left.isDown) 
       this.play('jump-left', true);
     else if(!this.body.onFloor() && this.cursors.right.isDown)
-    this.play('jump-right', true);
+      this.play('jump-right', true);
 
 
     if (this.cursors.left.isDown) {
@@ -195,7 +229,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.body.setSize(400,420);
       this.body.setOffset(0,175);
     }
-
+    this.abrirPuerta();
     
   }
   

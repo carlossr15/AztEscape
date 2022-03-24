@@ -5,6 +5,9 @@ import Batido from './batido.js';
 import Spike from './Spike.js';
 import Escalera from './escalera.js';
 import Momia from './momia.js';
+import Llave from './llave.js';
+import Puerta from './puerta.js';
+
 /**
  * @extends Phaser.Scene
  */
@@ -23,10 +26,16 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('enemy', 'assets/sprites/araña.png', {frameWidth: 64, frameHeight: 64});
         this.load.image('bandera','assets/sprites/bandera.png');
         this.load.image('vida', 'assets/sprites/life.png' );
+        this.load.image('llave', 'assets/sprites/Llave.png' );
         this.load.image('escalera', 'assets/sprites/escalera.png');
         this.load.spritesheet('batido', 'assets/sprites/Batido.png', {frameWidth: 32, frameHeight: 32});
         this.load.image('bullet', 'assets/sprites/player.png');
         this.load.image('momia', 'assets/sprites/player.png');
+        this.load.spritesheet('puerta', 'assets/sprites/Puerta Abierta y Cerrada.png', {frameWidth: 104, frameHeight: 127});
+        this.load.spritesheet('mediaPuerta', 'assets/sprites/mediaPuerta.png', {frameWidth: 128, frameHeight: 128});
+
+        //this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128});
+       
     }
 
     create(){
@@ -44,14 +53,21 @@ export default class MyMap extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 6800,1000);
         this.cameras.main.zoom = 1;
         this.physics.world.setBounds(0, 0, 6800,1000);
+        
+
 
         this.bandera = new Bandera(this, 6750, 455);
+        this.puerta = new Puerta(this, this.player, 450, 450);
         this.player = new Player(this, 0, 450);
+        // this.puerta.depth = 1;
+        // this.player.depth = 0;
+
+        //this.piedraMovil = new (this, 450, 550);
         
         //this.player = new Player(this, 4550, 350);
 
 
-        this.enemy = new Momia(this, 450, 500);
+        //this.enemy = new Momia(this, 450, 500);
 
 
 
@@ -69,16 +85,23 @@ export default class MyMap extends Phaser.Scene {
         
 
         this.batido = new Batido(this, 975, 260);
-        //this.batido2 = new Batido(this, 2200, 360);
 
+        this.llave = new Llave(this, 300, 360);
+
+        //this.puerta = this.physics.add.image(450, 450, 'puerta').setImmovable();
+        
         this.physics.add.collider(this.player, suelo);
         
-        this.physics.add.collider(this.enemy, suelo);
+        //this.physics.add.collider(this.enemy, suelo);
         this.physics.add.collider(this.enemy2, suelo);
         this.physics.add.collider(this.enemy3, suelo);
         this.physics.add.collider(this.enemy4, suelo);
         this.physics.add.collider(this.enemy5, suelo);
 
+        this.physics.add.collider(this.puerta, suelo);
+        //this.physics.add.collider(this.piedraMovil, suelo);
+
+        //this.add.image(553, 450, "mediaPuerta").set
 
         this.physics.add.collider(this.bandera, suelo);
 
@@ -164,8 +187,15 @@ export default class MyMap extends Phaser.Scene {
         this.anims.create({
             key: 'move-enemy',
             frames: this.anims.generateFrameNames('enemy', {frames: [0, 1]}),
-            frameRate: 10,
+            frameRate: 7,
             repeat: -1
+        })
+
+        this.anims.create({
+            key: 'abrir-puerta',
+            frames: this.anims.generateFrameNames('puerta', {frames: [0, 1, 2]}),
+            frameRate: 7,
+            repeat: 0
         })
 
 
