@@ -4,7 +4,7 @@ import Base from './base.js';
  * Cada plataforma es responsable de crear la base que aparece sobre ella y en la 
  * que, durante el juego, puede aparecer una estrella
  */
-export default class Escalera extends Phaser.GameObjects.Sprite {
+ export default class Invisible extends Phaser.GameObjects.Sprite {
   
   /**
    * Constructor de la Plataforma
@@ -14,38 +14,15 @@ export default class Escalera extends Phaser.GameObjects.Sprite {
    * @param {number} x Coordenada x
    * @param {number} y Coordenada y
    */
-  constructor(scene, x, y, w, h){
-    super(scene, x, y, 'escalera');
+  constructor(scene, player, x, y, w, h){
+    super(scene, x, y, 'invisible');
     this.setScale(1, 1);
     this.alpha = 0;
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this, true);
     this.body.setSize(w,h);
-    this.scene.escaleras.add(this);
-
+    this.scene.physics.add.collider(this, player);
   }
 
-  checkLadder()
-  {
-    //this.onLadder = false;
-    if(this.scene.physics.overlap(this.scene.player, this)){
-      this.scene.player.onLadder = true;
-
-      console.log("escalera");
-    }
-    else {
-      this.scene.player.onLadder = false;
-    }
-  }
-
-  preUpdate() {
-    // IMPORTANTE: Si no ponemos esta instrucción y el sprite está animado
-    // no se podrá ejecutar la animación del sprite. 
-    
-    super.preUpdate();
-    this.scene.time.delayedCall(1000, function(){
-      this.checkLadder();
-    }, [], this);
-  }
 
 }

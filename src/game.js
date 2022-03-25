@@ -12,7 +12,7 @@ import winMenu from './winMenu.js';
 let config = {
     type: Phaser.CANVAS,
     width: 1000,
-    height: 800,
+    height: 850,
     scale: {
         // mode: Phaser.Scale.FIT,      
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY

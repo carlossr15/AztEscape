@@ -19,27 +19,26 @@ export default class Puerta extends Phaser.GameObjects.Sprite {
     this.setScale(1, 1);
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this, true);
-    
     this.setDepth(0);
+    //this.scene.physics.add.collider(this.mediaPuerta, this.player, 44, 44);
+    //this.scene.physics.add.collider(this, this.player);
     
-
   }
 
-
-  // preUpdate(t, d) {
-  //   // IMPORTANTE: Si no ponemos esta instrucción y el sprite está animado
-  //   // no se podrá ejecutar la animación del sprite. 
-
-  //   super.preUpdate(t, d);
-  // }
-  
 
   abrirPuerta(){
     this.play('abrir-puerta');
     console.log("PUERTA-ABIERTA");
     this.scene.time.delayedCall(650, function(){
-      this.scene.add.image(474, 451.5, 'mediaPuerta').setDepth(1);
+      this.scene.add.image(this.x + 24, this.y + 1.5, 'mediaPuerta').setDepth(1);
     }, [], this);
+
+
+    this.scene.time.delayedCall(1000, function(){
+      if(this.scene.physics.overlap(this.scene.player, this)){
+        console.log("WIN");
+        this.scene.win();
+      }    }, [], this);
 
     //this.scene.physics.add.collider(mediaPuerta, this.player);
     

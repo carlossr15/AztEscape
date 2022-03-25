@@ -47,7 +47,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     //this.scene.add.image(200, 500, 'vida').setDepth(1);
     this.pintarVida();
     this.pintarLlaves();
-    this.texto = this.scene.add.image(500, 650, 'textBox').setSize(1000,300).setDepth(1).setScrollFactor(0);
+    this.texto = this.scene.add.image(500, 750, 'textBox').setSize(1000,300).setDepth(1).setScrollFactor(0);
   }
 
   pintarVida()  {
@@ -143,7 +143,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
    */
   preUpdate(t,dt) {
     super.preUpdate(t,dt);
-
+    //console.log(this.onLadder);
     if(this.onLadder){
       this.body.setAllowGravity(false);
       console.log("cayendo");
