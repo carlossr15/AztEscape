@@ -9,16 +9,19 @@ import Llave from './llave.js';
 import Puerta from './puerta.js';
 import Invisible from './invisible.js';
 import Bullets from './bullets.js';
+import Idolo from './idolo.js';
 
 /**
  * @extends Phaser.Scene
  */
+
 export default class MyMap extends Phaser.Scene {
 
 
     constructor() {
         super({ key: 'myMap' });
     }
+
 
     preload() {
         this.load.spritesheet('templo', 'assets/tilesets/tile_temple.png', { frameWidth: 544, frameHeight: 256 });
@@ -36,6 +39,8 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('puerta', 'assets/sprites/Puerta Abierta y Cerrada.png', {frameWidth: 104, frameHeight: 127});
         this.load.spritesheet('mediaPuerta', 'assets/sprites/mediaPuerta.png', {frameWidth: 128, frameHeight: 128});
         this.load.spritesheet('momia', 'assets/sprites/momiaSpritesheet.png', {frameWidth: 24, frameHeight: 32});
+        this.load.spritesheet('idolo', 'assets/sprites/idolo.png', {frameWidth: 32, frameHeight: 32});
+        this.load.image('cartel', 'assets/sprites/cartel.png'/*, {frameWidth: 32, frameHeight: 32}*/);
 
         //this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128});
        
@@ -95,8 +100,8 @@ export default class MyMap extends Phaser.Scene {
         this.spikes1 = new Spike(this, this.player, 3025, 720, 950, 30);      
         this.spikes2 = new Spike(this, this.player, 7100, 500, 900, 30);
 
-        this.escalera1 = new Escalera(this, 4520, 500, 10, 500); //x = 4520
-        this.escalera2 = new Escalera(this, 6200, 375, 10, 170);
+        this.escalera1 = new Escalera(this, 4530, 500, 10, 500); //x = 4530
+        this.escalera2 = new Escalera(this, 6160, 375, 10, 170);
         this.escalera3 = new Escalera(this, 6865, 225, 10, 310);
         this.escalera4 = new Escalera(this, 7120, 225, 10, 310);
         this.escalera5 = new Escalera(this, 7375, 225, 10, 310);
@@ -108,8 +113,12 @@ export default class MyMap extends Phaser.Scene {
         
         this.llave = new Llave(this, 8965, 1300);
 
-        this.inv = new Invisible(this, this.player, 15880, 1150, 10, 100)
-        
+        this.inv = new Invisible(this, this.player, 15880, 1150, 10, 100);
+
+        this.idolo = new Idolo(this, 174, 682);
+
+        this.cartel = this.physics.add.image(9000, 700, 'cartel');    
+
         //this.inv = new Invisible(this, this.player, 5360, 450, 10, 150);
         //this.physics.add.collider(this.player, this.inv);
 
@@ -157,12 +166,12 @@ export default class MyMap extends Phaser.Scene {
         this.physics.add.collider(this.momia1, suelo);
         this.physics.add.collider(this.araña7, suelo);
 
-
+        this.physics.add.collider(this.cartel, suelo);
+        
         //this.physics.add.collider(this.enemy3, suelo);
         //this.physics.add.collider(this.enemy4, suelo);
         //this.physics.add.collider(this.enemy5, suelo);
 
-       // this.physics.add.collider(this.puerta, suelo);
         //this.physics.add.collider(this.piedraMovil, suelo);
 
         //this.add.image(553, 450, "mediaPuerta").set
