@@ -27,6 +27,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.body.setSize(400,420);
     this.body.setOffset(0,175);
 
+
+    this.puedeGolpear = true;
+    this.atacando = false;
+
     // Queremos que el jugador no se salga de los límites del mundo
     this.body.setCollideWorldBounds();
     this.speed = 300;
@@ -48,7 +52,23 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.pintarVida();
     this.pintarLlaves();
     this.texto = this.scene.add.image(500, 750, 'textBox').setSize(1000,300).setDepth(1).setScrollFactor(0);
+
+
+    this.triggerTimer = this.scene.time.addEvent({
+      callback: this.timerEventGolpe,
+      callbackScope: this,
+      delay: 2500, // 1000 = 1 second
+      loop: true
+  });
+
+    
   }
+
+  timerEventGolpe()
+  {
+    //this.puedeGolpear = true;
+  }
+
 
   pintarVida()  {
     console.log(this.vida);
@@ -126,7 +146,19 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
   }
  
+  atacar()
+  {
+    this.puedeGolpear = false;
+    this.atacando = true;
+    this.scene.time.delayedCall(250, function(){
+      //this.puedeGolpear = true;
+      this.atacando = false;
+    }, [], this);
 
+    this.scene.time.delayedCall(500, function(){
+      this.puedeGolpear = true;
+    }, [], this);
+  }
   
   /**
    * Actualiza la UI con la puntuación actual
@@ -204,9 +236,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.play('stand', true);
     }
 
-    if(this.cursors.space.isDown){
+    if(this.cursors.space.isDown && this.puedeGolpear){
       console.log("ATACA");
-      if(this.cursors.left.isDown){
+      
+      this.atacar();
+      /*if(this.cursors.left.isDown){
         this.play('attack-left', true);
         this.setSize(16,16);
         this.setScale(0.2,0.2);
@@ -218,13 +252,38 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.setScale(0.2,0.2);
         this.body.setSize(525,420);
         this.body.setOffset(0,175);
-      }
+      }*/
     }else{
       this.setSize(16,16);
       this.setScale(0.2,0.2);
       this.body.setSize(400,420);
       this.body.setOffset(0,175);
     }
+    
+    if(this.atacando){
+      
+      if(this.cursors.left.isDown){
+      this.play('attack-left', true);
+      this.setSize(16,16);
+      this.setScale(0.2,0.2);
+      this.body.setSize(525,420);
+      this.body.setOffset(0,175);
+      }else {
+      this.play('attack-right', true);
+      this.setSize(16,16);
+      this.setScale(0.2,0.2);
+      this.body.setSize(525,420);
+      this.body.setOffset(0,175);
+      }
+    }
+    else{
+      this.setSize(16,16);
+      this.setScale(0.2,0.2);
+      this.body.setSize(400,420);
+      this.body.setOffset(0,175);
+    }
+  
+    //this.atacando = false;
     this.abrirPuerta();
     
   }
