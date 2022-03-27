@@ -32,9 +32,10 @@ export default class MyMap extends Phaser.Scene {
         this.load.image('escalera', 'assets/sprites/escalera.png');
         this.load.spritesheet('batido', 'assets/sprites/Batido.png', { frameWidth: 32, frameHeight: 32 });
         this.load.image('bullet', 'assets/sprites/player.png');
-        this.load.image('momia', 'assets/sprites/player.png');
+        //this.load.image('momia', 'assets/sprites/player.png');
         this.load.spritesheet('puerta', 'assets/sprites/Puerta Abierta y Cerrada.png', {frameWidth: 104, frameHeight: 127});
         this.load.spritesheet('mediaPuerta', 'assets/sprites/mediaPuerta.png', {frameWidth: 128, frameHeight: 128});
+        this.load.spritesheet('momia', 'assets/sprites/momiaSpritesheet.png', {frameWidth: 24, frameHeight: 32});
 
         //this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128});
        
@@ -77,6 +78,10 @@ export default class MyMap extends Phaser.Scene {
         this.araña6 = new Enemy(this, 11200, 920);
         this.araña7 = new Enemy(this, 9200, 1300);
 
+        //////////////////////////////
+        this.momiaPruebas = new Momia(this, 0, 0);
+        this.physics.add.collider(this.momiaPruebas, suelo);
+        //////////////////////////////
         this.momia1 = new Momia(this, 9000, 1300);
 
         this.spikes1 = new Spike(this, this.player, 3025, 720, 950, 30);      
@@ -165,6 +170,9 @@ export default class MyMap extends Phaser.Scene {
 
         suelo.setCollisionByExclusion(-1, true);
 
+
+
+        //Animaciones jugador
         this.anims.create({
             key: 'walk-right',
             frames: this.anims.generateFrameNames('player', { frames: [0, 1, 2] }),
@@ -235,6 +243,7 @@ export default class MyMap extends Phaser.Scene {
             repeat: -1
         });
 
+        //Animaciones araña
         this.anims.create({
             key: 'move-enemy',
             frames: this.anims.generateFrameNames('enemy', {frames: [0, 1]}),
@@ -249,6 +258,20 @@ export default class MyMap extends Phaser.Scene {
             repeat: 0
         })
 
+        //Animaciones momia
+        this.anims.create({
+            key: 'move-right-momia',
+            frames: this.anims.generateFrameNames('momia', { frames: [3, 4, 5] }),
+            frameRate: 3,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'move-left-momia',
+            frames: this.anims.generateFrameNames('momia', { frames: [9, 10, 11] }),
+            frameRate: 3,
+            repeat: -1
+        });
 
 
         // this.physics.add.overlap(this.player, this.enemies, this.golpe, this); 

@@ -24,13 +24,15 @@ export default class Momia extends Phaser.GameObjects.Sprite {
     this.body.setCollideWorldBounds();
 
     //Establecemos tamaño y hitbox
-    this.body.setSize(52,28);
+    //this.body.setSize(52,28);
 
     this.speed = 175;
     this.vida = 1;
     // Esta label es la UI en la que pondremos la puntuación del jugador
     this.scene.add.layer(this);
     
+    this.setSize(32,24);
+    this.setScale(4,4);
 
 
     this.dir = true;
@@ -39,7 +41,11 @@ export default class Momia extends Phaser.GameObjects.Sprite {
 
   }
 
- 
+ hurt()
+ {
+  this.vida -=1;
+  this.destroy();
+ }
   checkGolpe()
   {
     //this.onLadder = false;
@@ -65,10 +71,15 @@ export default class Momia extends Phaser.GameObjects.Sprite {
     if(this.x < this.scene.player.x) //Jugador a la derecha
     {
         this.body.setVelocityX(this.speed);
+        this.play('move-left-momia', true);
+        
     }
     else //Jugador a la izquierda
     {
         this.body.setVelocityX(-this.speed);
+        this.play('move-right-momia', true);
+
+
     }
 
   }
@@ -82,6 +93,7 @@ export default class Momia extends Phaser.GameObjects.Sprite {
     this.seguir()
 
     this.checkGolpe();
-    this.anims.play('move-enemy', true);
+    this.attack();
+    //this.anims.play('move-enemy', true);
   }
 }
