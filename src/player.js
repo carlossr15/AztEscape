@@ -1,7 +1,3 @@
-
-import Star from './star.js';
-import Enemy from './enemy.js';
-import Escalera from './escalera.js';
 import Bullets from './bullets.js';
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.
@@ -206,7 +202,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
 
     this.scene.input.on('pointerdown', (pointer) =>{
-      this.bullets.fireBullet(this.x, this.y, pointer.x, pointer.y);
+      let p = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
+      this.bullets.fireBullet(this.x, this.y, p.x, p.y);
     })
     
     if (this.cursors.up.isDown && this.body.onFloor()) {

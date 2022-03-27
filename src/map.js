@@ -7,8 +7,8 @@ import Escalera from './escalera.js';
 import Momia from './momia.js';
 import Llave from './llave.js';
 import Puerta from './puerta.js';
-import Platform from './platform.js';
 import Invisible from './invisible.js';
+import Bullets from './bullets.js';
 
 /**
  * @extends Phaser.Scene
@@ -30,9 +30,9 @@ export default class MyMap extends Phaser.Scene {
         this.load.image('vida', 'assets/sprites/life.png' );
         this.load.image('llave', 'assets/sprites/Llave.png' );
         this.load.image('escalera', 'assets/sprites/escalera.png');
-        this.load.spritesheet('batido', 'assets/sprites/Batido.png', { frameWidth: 32, frameHeight: 32 });
-        this.load.image('bullet', 'assets/sprites/player.png');
-        //this.load.image('momia', 'assets/sprites/player.png');
+        this.load.spritesheet('batido', 'assets/sprites/Batido.png', {frameWidth: 32, frameHeight: 32});
+        this.load.image('cursor', 'assets/sprites/player.png');
+        this.load.image('bullet', 'assets/sprites/Roca.png');
         this.load.spritesheet('puerta', 'assets/sprites/Puerta Abierta y Cerrada.png', {frameWidth: 104, frameHeight: 127});
         this.load.spritesheet('mediaPuerta', 'assets/sprites/mediaPuerta.png', {frameWidth: 128, frameHeight: 128});
         this.load.spritesheet('momia', 'assets/sprites/momiaSpritesheet.png', {frameWidth: 24, frameHeight: 32});
@@ -77,6 +77,14 @@ export default class MyMap extends Phaser.Scene {
         this.araña5 = new Enemy(this, 10900, 920);
         this.araña6 = new Enemy(this, 11200, 920);
         this.araña7 = new Enemy(this, 9200, 1300);
+        this.enemies.add(this.araña1);
+        this.enemies.add(this.araña2);
+        this.enemies.add(this.araña3);
+        this.enemies.add(this.araña4);
+        this.enemies.add(this.araña5);
+        this.enemies.add(this.araña6);
+        this.enemies.add(this.araña7);
+        this.enemies.setActive(true);
 
         //////////////////////////////
         this.momiaPruebas = new Momia(this, 0, 0);

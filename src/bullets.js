@@ -1,7 +1,7 @@
-
 export default class Bullets extends Phaser.Physics.Arcade.Group{
     constructor(scene){
         super(scene.physics.world, scene);
+        
 
         this.createMultiple({
             classType: Bullet,
@@ -30,26 +30,34 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
     }
 
     fire(x, y, pointerX, pointerY){
+        var raton = this.scene.add.image(0,0,'cursor').setVisible(false);
+        raton.setPosition(pointerX, pointerY);
         this.body.reset(x, y);
         this.setActive(true);
         this.setVisible(true);
-        if (pointerX > x){
-            this.setVelocityX(500);
-        }else{
-            this.setVelocityX(-500);
-        }
-        if (pointerY > y){
-            this.setVelocityY(500);
-        }else{
-            this.setVelocityY(-500);
-        }
+        this.scene.physics.moveToObject(this, raton, 650);
     }
 
     preUpdate(time, delta){
         super.preUpdate(time, delta);
-        if (this.y > 500){
+        this.hurtEnemy();
+        if (this.x <= 0){
             this.setActive(false);
             this.setVisible(false);
+        }
+        if (this.y >  1500){
+            this.setActive(false);
+            this.setVisible(false);
+        }
+    }
+
+    hurtEnemy(){
+        var allEnemies = this.scene.enemies.getChildren();
+        for (var i = 0; i < this.scene.enemies.getLength(); i++){
+            if (this.scene.physics.overlap(this, allEnemies[i])){
+                allEnemies[i].hurt();
+                console.log("PEDRADA");
+            }
         }
     }
 }
