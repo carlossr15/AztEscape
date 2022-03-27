@@ -76,10 +76,20 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
   attack(){
     if(this.scene.player.cursors.space.isDown && this.scene.player.atacando){
       this.hurt();
-    }else{
+    }/*else{
       this.scene.player.hurt();
-    }
+    }*/
       console.log("GOLPE");
+  }
+
+  checkGolpe()
+  {
+    if(this.scene.physics.overlap(this.scene.player, this))
+    {
+      this.scene.player.hurt();
+
+      console.log("GOLPE Araña");
+    }
   }
 
   hurt(){
@@ -90,6 +100,8 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
   preUpdate(t, d) {
     // IMPORTANTE: Si no ponemos esta instrucción y el sprite está animado
     // no se podrá ejecutar la animación del sprite. 
+
+    this.checkGolpe();
 
     super.preUpdate(t, d);
     this.anims.play('move-enemy', true);
