@@ -51,6 +51,15 @@ export default class Momia extends Phaser.GameObjects.Sprite {
     }
   }
 
+  attack(){
+    if(this.scene.player.cursors.space.isDown && this.scene.player.atacando){
+      this.hurt();
+    }/*else{
+      this.scene.player.hurt();
+    }*/
+      console.log("GOLPE");
+  }
+
   seguir()
   {
     if(this.x < this.scene.player.x) //Jugador a la derecha
