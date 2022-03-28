@@ -25,6 +25,8 @@ export default class MyMap extends Phaser.Scene {
 
 
     preload() {
+        this.load.audio('musicaFondo', 'assets/music/8bit Dungeon Level.mp3');
+
         this.load.spritesheet('templo', 'assets/tilesets/tile_temple.png', { frameWidth: 544, frameHeight: 256 });
         this.load.spritesheet('objetos', 'assets/tilesets/objetos.png', { frameWidth: 256, frameHeight: 256 });
         this.load.tilemapTiledJSON('map', 'assets/maps/Lvl1.json');
@@ -51,6 +53,11 @@ export default class MyMap extends Phaser.Scene {
     }
 
     create() {
+
+        this.musica = this.sound.add('musicaFondo');
+        this.musica.loop = true;
+        this.musica.play();
+    
         const map = this.make.tilemap({ key: 'map' });
         const tilesetTemplo = map.addTilesetImage('Templo', 'templo');
         const tilesetObjetos = map.addTilesetImage('Objetos', 'objetos');

@@ -63,7 +63,7 @@ export default class Momia extends Phaser.GameObjects.Sprite {
     }/*else{
       this.scene.player.hurt();
     }*/
-      console.log("GOLPE");
+      //console.log("GOLPE");
   }
 
   seguir()
