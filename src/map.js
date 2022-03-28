@@ -10,6 +10,7 @@ import Puerta from './puerta.js';
 import Invisible from './invisible.js';
 import Bullets from './bullets.js';
 import Idolo from './idolo.js';
+import TextEvent from './textEvent.js';
 
 /**
  * @extends Phaser.Scene
@@ -45,6 +46,8 @@ export default class MyMap extends Phaser.Scene {
         //this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128});
        
         this.load.image('textBox', 'assets/tilesets/TextBox.png');
+        this.load.image('bgtextBox', 'assets/tilesets/BGTextBox.png');
+        this.load.image('MCtextBox', 'assets/tilesets/MCTextBox.png');
     }
 
     create() {
@@ -68,12 +71,15 @@ export default class MyMap extends Phaser.Scene {
 
         this.enemies = this.add.group();
         this.escaleras = this.add.group();
+        this.dialogos = this.add.group();
 
         //this.bandera = new Bandera(this, 6750, 455);
         
         this.puerta = new Puerta(this, this.player, 15820, 1150);
-
         this.player = new Player(this, 0, 600);
+        
+        this.dialogos.add(new TextEvent(this, 175, 682, 25, 25, ["Con este ídolo dorado por fin podré llegar a fin de mes.", "¿Por qué decidí vivir en el centro de Madrid?"]));
+        this.dialogos.add(new TextEvent(this, 900, 500, 100, 300, ["¡Una araña! Iugh que asco. Me gustaría que desapareciese.", "Si alguien me estuviese controlando, pulsando la tecla [Espacio] conseguría que soltase un puñetazo"]));
 
         this.araña1 = new Enemy(this, 1200, 700);
         this.araña2 = new Enemy(this, 4200, 700);
@@ -91,10 +97,10 @@ export default class MyMap extends Phaser.Scene {
         this.enemies.add(this.araña7);
         this.enemies.setActive(true);
 
-        //////////////////////////////
+        /*
         this.momiaPruebas = new Momia(this, 0, 0);
         this.physics.add.collider(this.momiaPruebas, suelo);
-        //////////////////////////////
+        */
         this.momia1 = new Momia(this, 9000, 1300);
 
         this.spikes1 = new Spike(this, this.player, 3025, 720, 950, 30);      
@@ -298,8 +304,11 @@ export default class MyMap extends Phaser.Scene {
 
         this.physics.add.overlap(this.player, this.escaleras, (player, escalera) => {
             escalera.checkLadder();
-    });
+        });
 
+        this.physics.add.overlap(this.player, this.dialogos, (player, dialogo) => {
+            dialogo.mostrar();
+        });
     }
 
     // golpe(player, enemy) {

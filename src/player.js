@@ -47,17 +47,33 @@ export default class Player extends Phaser.GameObjects.Sprite {
     //this.scene.add.image(200, 500, 'vida').setDepth(1);
     this.pintarVida();
     this.pintarLlaves();
-    this.texto = this.scene.add.image(500, 750, 'textBox').setSize(1000,300).setDepth(1).setScrollFactor(0);
 
+    //TextBox
+    this.texto = this.scene.add.image(700, 600, 'textBox').setScale(0.8,0.8).setDepth(3).setScrollFactor(0);
+    this.bgtexto = this.scene.add.image(445,600, 'bgtextBox').setScale(8,6.5).setSize(200,200).setDepth(1).setScrollFactor(0);
+    this.MCtexto = this.scene.add.image(445,600, 'MCtextBox').setScale(0.55,0.55).setDepth(2).setScrollFactor(0);
+
+    this.hideDialog();
 
     this.triggerTimer = this.scene.time.addEvent({
       callback: this.timerEventGolpe,
       callbackScope: this,
       delay: 2500, // 1000 = 1 second
       loop: true
-  });
+    });
+  }
 
-    
+  
+  showDialog(){
+    this.texto.setAlpha(1);
+    this.bgtexto.setAlpha(1);
+    this.MCtexto.setAlpha(1);
+  }
+
+  hideDialog(){
+    this.texto.setAlpha(0);
+    this.bgtexto.setAlpha(0);
+    this.MCtexto.setAlpha(0);
   }
 
   timerEventGolpe()
