@@ -31,7 +31,7 @@ export default class Escalera extends Phaser.GameObjects.Sprite {
     //this.onLadder = false;
     if(this.scene.physics.overlap(this.scene.player, this)){
       this.scene.player.onLadder = true;
-      if(!this.cursors.up.isDown && !this.cursors.left.isDown && !this.cursors.right.isDown) this.scene.player.x = this.x + 20;
+      if(!this.cursors.left.isDown && !this.cursors.right.isDown) this.scene.player.x = this.x + 20;
       console.log("escalera");
     }
     else {

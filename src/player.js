@@ -65,6 +65,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     this.salto = this.scene.sound.add('jump', {volume: 0.5});
     this.daño = this.scene.sound.add('daño', {volume: 1});
+    this.extraLife = this.scene.sound.add('extraLife', {volume: 1});
 
   }
 
@@ -133,7 +134,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.vida = this.vida + 1;
     console.log("Vida" + this.vida);
     this.pintarVida();
-
+    this.extraLife.play();
   }
 
   getTheKey(){

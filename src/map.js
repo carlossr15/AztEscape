@@ -30,6 +30,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.audio('daño', 'assets/music/daño.wav');
         this.load.audio('escritura', 'assets/music/escritura.wav');
         this.load.audio('texto', 'assets/music/texto.wav');
+        this.load.audio('extraLife', 'assets/music/extraLife.wav');
 
         this.load.spritesheet('templo', 'assets/tilesets/tile_temple.png', { frameWidth: 544, frameHeight: 256 });
         this.load.spritesheet('objetos', 'assets/tilesets/objetos.png', { frameWidth: 256, frameHeight: 256 });
@@ -112,7 +113,7 @@ export default class MyMap extends Phaser.Scene {
         this.momiaPruebas = new Momia(this, 0, 0);
         this.physics.add.collider(this.momiaPruebas, suelo);
         */
-        this.momia1 = new Momia(this, 9000, 1300);
+        this.momia1 = new Momia(this, 9000, 1250);
 
         this.spikes1 = new Spike(this, this.player, 3025, 720, 950, 30);      
         this.spikes2 = new Spike(this, this.player, 7100, 500, 900, 30);

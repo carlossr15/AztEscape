@@ -84,11 +84,11 @@ export default class Momia extends Phaser.GameObjects.Sprite {
 
   }
 
-  preUpdate() {
+  preUpdate(t, d) {
     // IMPORTANTE: Si no ponemos esta instrucción y el sprite está animado
     // no se podrá ejecutar la animación del sprite. 
     
-    super.preUpdate();
+    super.preUpdate(t, d);
 
     this.seguir()
 
