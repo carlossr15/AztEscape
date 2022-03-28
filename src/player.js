@@ -61,6 +61,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
       delay: 2500, // 1000 = 1 second
       loop: true
     });
+
+
+    this.salto = this.scene.sound.add('jump', {volume: 0.5});
+    this.daño = this.scene.sound.add('daño', {volume: 1});
+
   }
 
   
@@ -112,6 +117,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
   hurt(){
     if(!this.invencible){
       this.vida = this.vida - 1;
+      this.daño.play();
       this.pintarVida();
       this.invencible = true;
 
@@ -224,6 +230,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     
     if (this.cursors.up.isDown && this.body.onFloor()) {
       this.body.setVelocityY(this.jumpSpeed);
+      this.salto.play();
     }
     if(!this.body.onFloor() && this.cursors.left.isDown) 
       this.play('jump-left', true);
