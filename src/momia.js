@@ -32,12 +32,15 @@ export default class Momia extends Phaser.GameObjects.Sprite {
     this.scene.add.layer(this);
     
     this.setSize(32,24);
-    this.setScale(4,4);
+    this.setScale(3,3);
+    this.body.setSize(12,25);
+    this.body.setOffset(5,7);
 
 
     this.dir = true;
 
     this.setFlip(true, false);
+    this.puñetazo = this.scene.sound.add('puñetazo', {volume: 1});
 
   }
 
@@ -46,7 +49,8 @@ export default class Momia extends Phaser.GameObjects.Sprite {
   this.vida -=1;
   this.destroy();
  }
-  checkGolpe()
+  
+ checkGolpe()
   {
     //this.onLadder = false;
     if(this.scene.physics.overlap(this.scene.player, this))
@@ -60,6 +64,7 @@ export default class Momia extends Phaser.GameObjects.Sprite {
   attack(){
     if(this.scene.player.cursors.space.isDown && this.scene.player.atacando){
       this.hurt();
+      this.puñetazo.play();
     }/*else{
       this.scene.player.hurt();
     }*/
@@ -93,7 +98,7 @@ export default class Momia extends Phaser.GameObjects.Sprite {
     this.seguir()
 
     this.checkGolpe();
-    this.attack();
+    //this.attack();
     //this.anims.play('move-enemy', true);
   }
 }
