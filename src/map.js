@@ -28,6 +28,8 @@ export default class MyMap extends Phaser.Scene {
         this.load.audio('musicaFondo', 'assets/music/8bit Dungeon Level.mp3');
         this.load.audio('jump', 'assets/music/jump.wav');
         this.load.audio('daño', 'assets/music/daño.wav');
+        this.load.audio('escritura', 'assets/music/escritura.wav');
+        this.load.audio('texto', 'assets/music/texto.wav');
 
         this.load.spritesheet('templo', 'assets/tilesets/tile_temple.png', { frameWidth: 544, frameHeight: 256 });
         this.load.spritesheet('objetos', 'assets/tilesets/objetos.png', { frameWidth: 256, frameHeight: 256 });
