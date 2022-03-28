@@ -37,18 +37,18 @@ export default class MyMap extends Phaser.Scene {
         this.load.tilemapTiledJSON('map', 'assets/maps/Lvl1.json');
         this.load.spritesheet('player', 'assets/sprites/MC-Spritesheet.png', {frameWidth: 600, frameHeight: 600});
         this.load.spritesheet('enemy', 'assets/sprites/araña.png', {frameWidth: 64, frameHeight: 64});
-        this.load.image('bandera','assets/sprites/bandera.png');
+        this.load.image('bandera','assets/sprites/Bandera.png');
         this.load.image('vida', 'assets/sprites/life.png' );
         this.load.image('llave', 'assets/sprites/Llave.png' );
         this.load.image('escalera', 'assets/sprites/escalera.png');
         this.load.spritesheet('batido', 'assets/sprites/Batido.png', {frameWidth: 32, frameHeight: 32});
         this.load.image('cursor', 'assets/sprites/player.png');
-        this.load.image('bullet', 'assets/sprites/Roca.png');
+        this.load.image('bullet', 'assets/sprites/roca.png');
         this.load.spritesheet('puerta', 'assets/sprites/Puerta Abierta y Cerrada.png', {frameWidth: 104, frameHeight: 127});
         this.load.spritesheet('mediaPuerta', 'assets/sprites/mediaPuerta.png', {frameWidth: 128, frameHeight: 128});
         this.load.spritesheet('momia', 'assets/sprites/momiaSpritesheet.png', {frameWidth: 24, frameHeight: 32});
-        this.load.spritesheet('idolo', 'assets/sprites/idolo.png', {frameWidth: 32, frameHeight: 32});
-        this.load.image('cartel', 'assets/sprites/cartel.png'/*, {frameWidth: 32, frameHeight: 32}*/);
+        this.load.spritesheet('idolo', 'assets/sprites/Idolo.png', {frameWidth: 32, frameHeight: 32});
+        this.load.image('cartel', 'assets/sprites/Cartel.png'/*, {frameWidth: 32, frameHeight: 32}*/);
 
         //this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128});
        
