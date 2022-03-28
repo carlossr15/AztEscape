@@ -11,6 +11,7 @@ import Invisible from './invisible.js';
 import Bullets from './bullets.js';
 import Idolo from './idolo.js';
 import TextEvent from './textEvent.js';
+//import PiedraMovil from './piedraMovil.js';
 
 /**
  * @extends Phaser.Scene
@@ -31,6 +32,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.audio('escritura', 'assets/music/escritura.wav');
         this.load.audio('texto', 'assets/music/texto.wav');
         this.load.audio('extraLife', 'assets/music/extraLife.wav');
+        this.load.audio('puñetazo', 'assets/music/puñetazo.wav');
 
         this.load.spritesheet('templo', 'assets/tilesets/tile_temple.png', { frameWidth: 544, frameHeight: 256 });
         this.load.spritesheet('objetos', 'assets/tilesets/objetos.png', { frameWidth: 256, frameHeight: 256 });
@@ -49,7 +51,6 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('momia', 'assets/sprites/momiaSpritesheet.png', {frameWidth: 24, frameHeight: 32});
         this.load.spritesheet('idolo', 'assets/sprites/Idolo.png', {frameWidth: 32, frameHeight: 32});
         this.load.image('cartel', 'assets/sprites/Cartel.png'/*, {frameWidth: 32, frameHeight: 32}*/);
-
         //this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128});
        
         this.load.image('textBox', 'assets/tilesets/TextBox.png');
@@ -87,7 +88,7 @@ export default class MyMap extends Phaser.Scene {
 
         //this.bandera = new Bandera(this, 6750, 455);
         
-        this.puerta = new Puerta(this, this.player, 15820, 1150);
+        this.puerta = new Puerta(this, 15820, 1150);
         this.player = new Player(this, 0, 600);
         
         this.dialogos.add(new TextEvent(this, 175, 682, 25, 25, ["Con este ídolo dorado por fin podré llegar a fin de mes.", "¿Por qué decidí vivir en el centro de Madrid?"]));
@@ -137,6 +138,9 @@ export default class MyMap extends Phaser.Scene {
 
         this.cartel = this.physics.add.image(9000, 700, 'cartel');    
 
+       /* this.piedraMovil = new PiedraMovil(this, this.player, 500, 500);
+        this.physics.add.collider(this.player, this.piedraMovil); */
+
         //this.inv = new Invisible(this, this.player, 5360, 450, 10, 150);
         //this.physics.add.collider(this.player, this.inv);
 
@@ -185,6 +189,8 @@ export default class MyMap extends Phaser.Scene {
         this.physics.add.collider(this.araña7, suelo);
 
         this.physics.add.collider(this.cartel, suelo);
+
+        //this.physics.add.collider(this.piedraMovil, suelo);
         
         //this.physics.add.collider(this.enemy3, suelo);
         //this.physics.add.collider(this.enemy4, suelo);

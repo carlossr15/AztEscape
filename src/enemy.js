@@ -38,6 +38,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         loop: true
     });
     this.scene.enemies.add(this);
+    this.puñetazo = this.scene.sound.add('puñetazo', {volume: 1});
 
   }
 
@@ -74,6 +75,8 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
   attack(){
     if(this.scene.player.cursors.space.isDown && this.scene.player.atacando){
       this.hurt();
+      
+      this.puñetazo.play();
     }/*else{
       this.scene.player.hurt();
     }*/
@@ -84,6 +87,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
   {
     if(this.scene.physics.overlap(this.scene.player, this))
     {
+      
       this.scene.player.hurt();
 
       console.log("GOLPE Araña");
