@@ -17,7 +17,7 @@ export default class TextEvent extends Phaser.GameObjects.Zone {
         this.body.setAllowGravity(false);
         this.body.moves = false;
         this.textoAMostrar = texto;
-        this.textoPantalla = this.scene.add.text(x+420, y-175, '', { font: "18px Arial", fill: "#000000" }).setDepth(5).setScrollFactor(0);
+        this.textoPantalla = this.scene.add.text(590, 505, '', { font: "18px Arial", fill: "#000000" }).setDepth(100).setScrollFactor(0);
 
         this.line = [];
 
@@ -38,14 +38,13 @@ export default class TextEvent extends Phaser.GameObjects.Zone {
         if (this.lineIndex === this.textoAMostrar.length)
         {
             this.scene.time.addEvent({
-                delay: this.lineDelay*5,
+                delay: this.lineDelay*3,
                 callback: this.clearText,
                 callbackScope: this,
                 repeat: 0
             });
             return;
         }
-    
         //  Split the current line on spaces, so one word per array element
         this.line = this.textoAMostrar[this.lineIndex].split('');
     
@@ -80,9 +79,6 @@ export default class TextEvent extends Phaser.GameObjects.Zone {
         //  Last word?
         if (this.wordIndex === this.line.length)
         {
-            //  Add a carriage return
-            this.textoPantalla.text = this.textoPantalla.text.concat('\n');
-
             //  Get the next line after the lineDelay amount of ms has elapsed
             //this.scene.time.events.add(this.lineDelay, this.nextLine, this);
             this.scene.time.addEvent({
@@ -98,6 +94,7 @@ export default class TextEvent extends Phaser.GameObjects.Zone {
     clearText(){
         this.scene.player.hideDialog();
         this.textoPantalla.text = "";
+        this.destroy();
     }
 
     preUpdate() {}

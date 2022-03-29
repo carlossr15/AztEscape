@@ -85,39 +85,46 @@ export default class MyMap extends Phaser.Scene {
         this.enemies = this.add.group();
         this.escaleras = this.add.group();
         this.dialogos = this.add.group();
+        this.physics.add.collider(this.enemies, suelo);
 
         //this.bandera = new Bandera(this, 6750, 455);
         
         this.puerta = new Puerta(this, 15820, 1150);
-        this.player = new Player(this, 0, 600);
+        this.cartel = this.physics.add.image(9000, 700, 'cartel');    
+        //this.player = new Player(this, 0, 600);
+        this.player = new Player(this, 12951, 485);
+        this.physics.add.collider(this.player, suelo);
         
-        this.dialogos.add(new TextEvent(this, 175, 682, 25, 25, ["Con este ídolo dorado por fin podré llegar a fin de mes.", "¿Por qué decidí vivir en el centro de Madrid?"]));
-        this.dialogos.add(new TextEvent(this, 900, 500, 100, 300, ["¡Una araña! Iugh que asco. Me gustaría que desapareciese.", "Si alguien me estuviese controlando, pulsando la tecla [Espacio] conseguría que soltase un puñetazo"]));
+        this.dialogos.add(new TextEvent(this, 175, 682, 25, 25, ["Con este ídolo dorado por fin podré llegar a fin de mes.\n", "¿Por qué decidí vivir en el centro de Madrid?\n", "Bueno, ahora toca salir de aquí pero... Ehm... ¿Cómo se \nsaltaba? ", "Si esto fuese un videojuego seguro que con [W]."]));
+        this.dialogos.add(new TextEvent(this, 900, 500, 100, 300, ["¡Una araña! Iugh que asco. ", "Me gustaría que desapareciese.\n", "Si alguien me estuviese controlando seguro que pulsando\n la tecla [Espacio] conseguiría que soltase un puñetazo."]));
+        this.dialogos.add(new TextEvent(this, 2478, 453, 100, 300, ["¿¡Y ahora pinchos!? ", "Venga sí, ¿Y qué más? ¿Momias?.\n", "Bueno, mejor intento no caerme mientras salto a esas... \n¿Plataformas flotantes? Creo que no he fumado nada \ndesde aquella vez que me desperté desnudo en una \nfiesta para niños"]));
+        this.dialogos.add(new TextEvent(this, 4076, 517, 100, 300, ["¿Y ahora estoy en un instituto estadounidense?\n", "Nunca hubiese imaginado que subir por una cuerda fuese a \nservir realmente para algo...\n", "En fin, la vida es una lenteja, vamos a ello."]));
+        this.dialogos.add(new TextEvent(this, 4683, 389, 100, 300, ["¿Eso es un Fresisuis? ", "Que bien entraba uno despues \nde hacer un poco de ejercicio, la verdad. ", "Seguro que es... \nREVITALIZANTE"]));
+        this.dialogos.add(new TextEvent(this, 5965, 389, 100, 300, ["No, en serio, ¿dónde se sujeta esa cuerda?"]));
+        this.dialogos.add(new TextEvent(this, 6650, 165, 100, 300, ["Quien me mandaría entrar a un templo azteca perdido de la\n mano de Dios... ", "No tenía suficiente con una cuerda que \nahora encima son 3 y tengo que saltar de una a otra.\n", "Y espera... ¿Cuando he entrado al templo?"]));
+        this.dialogos.add(new TextEvent(this, 7340, 220, 100, 300, ["Anda mira, la momia de la que hablaba antes, que ilusión...\n", "Al menos parece tonta."]));
+        this.dialogos.add(new TextEvent(this, 8665, 581, 100, 300, ["Un cartel sospechoso cuanto menos.\n", "Seguro que el que diseñó este templo era un despistado y \nno se acordaba de dónde tenía que dejar las llaves."]));
+        this.dialogos.add(new TextEvent(this, 13051, 485, 100, 300, ["Oye, amigo que está en mi cabeza, ¿no estaré siendo \nmuy pesado no? ", "Voy a intentar estar más callado a partir \nde ahora ¿Vale?"]));
+        this.dialogos.add(new TextEvent(this, 14514, 901, 100, 300, ["Podrías responder de vez en cuando..."]));
+        
 
-        this.araña1 = new Enemy(this, 1200, 700);
-        this.araña2 = new Enemy(this, 4200, 700);
-        this.araña3 = new Enemy(this, 10250, 920);
-        this.araña4 = new Enemy(this, 10500, 920);
-        this.araña5 = new Enemy(this, 10900, 920);
-        this.araña6 = new Enemy(this, 11200, 920);
-        this.araña7 = new Enemy(this, 9200, 1300);
-        this.enemies.add(this.araña1);
-        this.enemies.add(this.araña2);
-        this.enemies.add(this.araña3);
-        this.enemies.add(this.araña4);
-        this.enemies.add(this.araña5);
-        this.enemies.add(this.araña6);
-        this.enemies.add(this.araña7);
+        
+        
+        this.enemies.add(new Enemy(this, 1200, 700));
+        this.enemies.add(new Enemy(this, 4200, 700));
+        this.enemies.add(new Enemy(this, 10250, 920));
+        this.enemies.add(new Enemy(this, 10500, 920));
+        this.enemies.add(new Enemy(this, 10900, 920));
+        this.enemies.add(new Enemy(this, 11200, 920));
+        this.enemies.add(new Enemy(this, 9200, 1300));
         this.enemies.setActive(true);
 
         /*
         this.momiaPruebas = new Momia(this, 0, 0);
         this.physics.add.collider(this.momiaPruebas, suelo);
         */
-        this.momia1 = new Momia(this, 8200, 500);
-        this.momia2 = new Momia(this, 9000, 1250);
-        this.enemies.add(this.momia1);
-        this.enemies.add(this.momia2);
+        this.enemies.add(new Momia(this, 8200, 500));
+        this.enemies.add(new Momia(this, 9000, 1250));
 
         this.spikes1 = new Spike(this, this.player, 3025, 720, 950, 30);      
         this.spikes2 = new Spike(this, this.player, 7100, 500, 900, 30);
@@ -139,7 +146,6 @@ export default class MyMap extends Phaser.Scene {
 
         this.idolo = new Idolo(this, 174, 682);
 
-        this.cartel = this.physics.add.image(9000, 700, 'cartel');    
 
        /* this.piedraMovil = new PiedraMovil(this, this.player, 500, 500);
         this.physics.add.collider(this.player, this.piedraMovil); */
@@ -179,19 +185,6 @@ export default class MyMap extends Phaser.Scene {
 
         //this.puerta = this.physics.add.image(450, 450, 'puerta').setImmovable();
         
-        this.physics.add.collider(this.player, suelo);
-        
-
-        this.physics.add.collider(this.araña1, suelo);
-        this.physics.add.collider(this.araña2, suelo);
-        this.physics.add.collider(this.araña3, suelo);
-        this.physics.add.collider(this.araña4, suelo);
-        this.physics.add.collider(this.araña5, suelo);
-        this.physics.add.collider(this.araña6, suelo);
-        this.physics.add.collider(this.araña7, suelo);
-        
-        this.physics.add.collider(this.momia1, suelo);
-        this.physics.add.collider(this.momia2, suelo);
 
         this.physics.add.collider(this.cartel, suelo);
 
@@ -332,6 +325,7 @@ export default class MyMap extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.dialogos, (player, dialogo) => {
             dialogo.mostrar();
         });
+        
     }
 
     // golpe(player, enemy) {

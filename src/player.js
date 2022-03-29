@@ -259,7 +259,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     if(this.cursors.space.isDown && this.puedeGolpear){
       console.log("ATACA");
-      
+      console.log(this.x + " " + this.y);
       this.atacar();
       /*if(this.cursors.left.isDown){
         this.play('attack-left', true);

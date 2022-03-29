@@ -40,6 +40,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.scene.enemies.add(this);
     this.puñetazo = this.scene.sound.add('puñetazo', {volume: 1});
 
+    this.scene.physics.add.collider(this, this.scene.suelo);
   }
 
 

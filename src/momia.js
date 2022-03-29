@@ -42,6 +42,8 @@ export default class Momia extends Phaser.GameObjects.Sprite {
     this.setFlip(true, false);
     this.puñetazo = this.scene.sound.add('puñetazo', {volume: 1});
 
+    //this.scene.physics.add.collider(this, this.scene.suelo);
+
   }
 
  hurt()
