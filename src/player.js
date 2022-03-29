@@ -40,7 +40,15 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.llaves = [];
     
     // Esta label es la UI en la que pondremos la puntuación del jugador
-    this.cursors = this.scene.input.keyboard.createCursorKeys();
+    //this.cursors = this.scene.input.keyboard.createCursorKeys();
+    this.cursors = this.scene.input.keyboard.addKeys({
+      up:Phaser.Input.Keyboard.KeyCodes.W,
+      down:Phaser.Input.Keyboard.KeyCodes.S,
+      left:Phaser.Input.Keyboard.KeyCodes.A,
+      right:Phaser.Input.Keyboard.KeyCodes.D,
+      space:Phaser.Input.Keyboard.KeyCodes.SPACE
+    });
+    
     this.scene.add.layer(this);
     this.vida = 10;
     this.vidas = [];
@@ -72,6 +80,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
 
     this.puñetazo = this.scene.sound.add('puñoaire', {volume: 1.5});
+    
   }
 
   
