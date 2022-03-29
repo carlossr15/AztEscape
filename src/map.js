@@ -11,6 +11,7 @@ import Invisible from './invisible.js';
 import Bullets from './bullets.js';
 import Idolo from './idolo.js';
 import TextEvent from './textEvent.js';
+import Diana from './diana.js';
 //import PiedraMovil from './piedraMovil.js';
 
 /**
@@ -45,7 +46,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.image('llave', 'assets/sprites/Llave.png' );
         this.load.image('escalera', 'assets/sprites/escalera.png');
         this.load.spritesheet('batido', 'assets/sprites/Batido.png', {frameWidth: 32, frameHeight: 32});
-        this.load.image('cursor', 'assets/sprites/player.png');
+        //this.load.image('cursor', 'assets/sprites/player.png');
         this.load.image('bullet', 'assets/sprites/roca.png');
         this.load.spritesheet('puerta', 'assets/sprites/Puerta Abierta y Cerrada.png', {frameWidth: 104, frameHeight: 127});
         this.load.spritesheet('mediaPuerta', 'assets/sprites/mediaPuerta.png', {frameWidth: 128, frameHeight: 128});
@@ -53,7 +54,8 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('idolo', 'assets/sprites/Idolo.png', {frameWidth: 32, frameHeight: 32});
         this.load.image('cartel', 'assets/sprites/Cartel.png'/*, {frameWidth: 32, frameHeight: 32}*/);
         //this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128});
-       
+        this.load.image('diana', 'assets/sprites/diana.png');
+
         this.load.image('textBox', 'assets/tilesets/TextBox.png');
         this.load.image('bgtextBox', 'assets/tilesets/BGTextBox.png');
         this.load.image('MCtextBox', 'assets/tilesets/MCTextBox.png');
@@ -91,9 +93,10 @@ export default class MyMap extends Phaser.Scene {
         //this.bandera = new Bandera(this, 6750, 455);
         
         this.puerta = new Puerta(this, 15820, 1150);
+        this.diana = new Diana(this, 15820, 1000);
         this.cartel = this.physics.add.image(9000, 700, 'cartel');    
-        //this.player = new Player(this, 0, 600);
-        this.player = new Player(this, 12951, 485);
+        this.player = new Player(this, 0, 600);
+        //this.player = new Player(this, 12951, 485);
         this.physics.add.collider(this.player, suelo);
         
         this.dialogos.add(new TextEvent(this, 175, 682, 25, 25, ["Con este ídolo dorado por fin podré llegar a fin de mes.\n", "¿Por qué decidí vivir en el centro de Madrid?\n", "Bueno, ahora toca salir de aquí pero... Ehm... ¿Cómo se \nsaltaba? ", "Si esto fuese un videojuego seguro que con [W]."]));
@@ -107,7 +110,6 @@ export default class MyMap extends Phaser.Scene {
         this.dialogos.add(new TextEvent(this, 8665, 581, 100, 300, ["Un cartel sospechoso cuanto menos.\n", "Seguro que el que diseñó este templo era un despistado y \nno se acordaba de dónde tenía que dejar las llaves."]));
         this.dialogos.add(new TextEvent(this, 13051, 485, 100, 300, ["Oye, amigo que está en mi cabeza, ¿no estaré siendo \nmuy pesado no? ", "Voy a intentar estar más callado a partir \nde ahora ¿Vale?"]));
         this.dialogos.add(new TextEvent(this, 14514, 901, 100, 300, ["Podrías responder de vez en cuando..."]));
-        
 
         
         

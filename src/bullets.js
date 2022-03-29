@@ -27,20 +27,20 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
 
     constructor(scene,x,y){
         super(scene, x, y, 'bullet');
+
     }
 
     fire(x, y, pointerX, pointerY){
-        var raton = this.scene.add.image(0,0,'cursor').setVisible(false);
-        raton.setPosition(pointerX, pointerY);
         this.body.reset(x, y);
         this.setActive(true);
         this.setVisible(true);
-        this.scene.physics.moveToObject(this, raton, 650);
+        this.scene.physics.moveTo(this, pointerX, pointerY, 650);
     }
 
     preUpdate(time, delta){
         super.preUpdate(time, delta);
         this.hurtEnemy();
+        this.hitDiana();
         if (this.x <= 0){
             this.setActive(false);
             this.setVisible(false);
@@ -57,6 +57,15 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
             if (this.scene.physics.overlap(this, allEnemies[i])){
                 allEnemies[i].hurt();
                 console.log("PEDRADA");
+            }
+        }
+    }
+
+    hitDiana(){
+        var diana = this.scene.diana;
+        if (this.scene.physics.overlap(this, diana)){
+            if (diana.meHanDado == false){
+                diana.destruir();
             }
         }
     }
