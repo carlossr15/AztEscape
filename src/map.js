@@ -33,6 +33,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.audio('texto', 'assets/music/texto.wav');
         this.load.audio('extraLife', 'assets/music/extraLife.wav');
         this.load.audio('puñetazo', 'assets/music/puñetazo.wav');
+        this.load.audio('puñoaire', 'assets/music/puñoaire.wav');
 
         this.load.spritesheet('templo', 'assets/tilesets/tile_temple.png', { frameWidth: 544, frameHeight: 256 });
         this.load.spritesheet('objetos', 'assets/tilesets/objetos.png', { frameWidth: 256, frameHeight: 256 });
@@ -227,8 +228,15 @@ export default class MyMap extends Phaser.Scene {
         });
 
         this.anims.create({
-            key: 'stand',
+            key: 'stand-right',
             frames: this.anims.generateFrameNames('player', { frames: [0] }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'stand-left',
+            frames: this.anims.generateFrameNames('player', { frames: [10] }),
             frameRate: 10,
             repeat: -1
         });

@@ -23,6 +23,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.body.setSize(400,420);
     this.body.setOffset(0,175);
 
+    //Dirección a la que esta mirando
+    this.lado = 'der';
+    this.caminando = false;
 
     this.puedeGolpear = true;
     this.atacando = false;
@@ -67,6 +70,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.daño = this.scene.sound.add('daño', {volume: 1});
     this.extraLife = this.scene.sound.add('extraLife', {volume: 1});
 
+
+    this.puñetazo = this.scene.sound.add('puñoaire', {volume: 1.5});
   }
 
   
@@ -169,6 +174,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
   {
     this.puedeGolpear = false;
     this.atacando = true;
+    this.puñetazo.play();
     this.scene.time.delayedCall(250, function(){
       //this.puedeGolpear = true;
       this.atacando = false;
@@ -212,6 +218,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     if(this.cursors.up.isDown && this.onLadder)
     {
       console.log("subiendo");
+      this.play('escalar', true);
       this.body.setVelocityY(-300);
 
     }
@@ -219,7 +226,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     if(this.cursors.down.isDown && this.onLadder)
     {
       console.log("bajando");
-
+      this.play('escalar', true);
       this.body.setVelocityY(250);
 
     }
@@ -233,29 +240,51 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.body.setVelocityY(this.jumpSpeed);
       this.salto.play();
     }
-    if(!this.body.onFloor() && this.cursors.left.isDown) 
+    if(!this.body.onFloor() && this.lado == 'izq' && !this.onLadder) 
       this.play('jump-left', true);
-    else if(!this.body.onFloor() && this.cursors.right.isDown)
+    else if(!this.body.onFloor() && this.lado == 'der' && !this.onLadder)
       this.play('jump-right', true);
 
 
     if (this.cursors.left.isDown) {
+      this.lado = 'izq';
       this.body.setVelocityX(-this.speed);
-      
-      if (this.body.onFloor()){
-        this.play('walk-left', true);
-      }
+      this.caminando = true;
     }
     else if (this.cursors.right.isDown) {
+      this.lado = 'der';
       this.body.setVelocityX(this.speed);
-      if (this.body.onFloor()){
-        this.play('walk-right', true);
-      }
+      this.caminando = true;
     }
     else if(this.body.onFloor()){
       this.body.setVelocityX(0);
-      this.play('stand', true);
+      this.caminando = false;
+      //this.play('stand', true);
     }
+
+    if(this.caminando && !this.onLadder)
+    {
+      if (this.body.onFloor() && this.lado == 'izq')
+      {
+        this.play('walk-left', true);
+      }
+      else if(this.body.onFloor() && this.lado == 'der')
+      {
+        this.play('walk-right', true);
+      }
+    }
+    else
+    {
+      if (this.body.onFloor() && this.lado == 'izq')
+      {
+        this.play('stand-left', true);
+      }
+      else if(this.body.onFloor() && this.lado == 'der')
+      {
+        this.play('stand-right', true);
+      }
+    }
+    
 
     if(this.cursors.space.isDown && this.puedeGolpear){
       console.log("ATACA");
@@ -283,7 +312,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     
     if(this.atacando){
       
-      if(this.cursors.left.isDown){
+      if(this.lado == 'izq'){
       this.play('attack-left', true);
       this.setSize(16,16);
       this.setScale(0.2,0.2);
