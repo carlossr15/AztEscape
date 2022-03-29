@@ -22,7 +22,13 @@ export default class Escalera extends Phaser.GameObjects.Sprite {
     this.scene.physics.add.existing(this, true);
     this.body.setSize(w,h);
     this.scene.escaleras.add(this);
-    this.cursors = this.scene.input.keyboard.createCursorKeys();
+    this.cursors = this.scene.input.keyboard.addKeys({
+      up:Phaser.Input.Keyboard.KeyCodes.W,
+      down:Phaser.Input.Keyboard.KeyCodes.S,
+      left:Phaser.Input.Keyboard.KeyCodes.A,
+      right:Phaser.Input.Keyboard.KeyCodes.D,
+      space:Phaser.Input.Keyboard.KeyCodes.SPACE
+    });
 
   }
 
