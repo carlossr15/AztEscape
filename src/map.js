@@ -95,8 +95,8 @@ export default class MyMap extends Phaser.Scene {
         this.puerta = new Puerta(this, 15820, 1150);
         this.diana = new Diana(this, 15820, 1000);
         this.cartel = this.physics.add.image(9000, 700, 'cartel');    
-        this.player = new Player(this, 0, 600);
-        //this.player = new Player(this, 12951, 485);
+        //this.player = new Player(this, 0, 600);
+        this.player = new Player(this, 12951, 485);
         this.physics.add.collider(this.player, suelo);
         
         this.dialogos.add(new TextEvent(this, 175, 682, 25, 25, ["Con este ídolo dorado por fin podré llegar a fin de mes.\n", "¿Por qué decidí vivir en el centro de Madrid?\n", "Bueno, ahora toca salir de aquí pero... Ehm... ¿Cómo se \nsaltaba? ", "Si esto fuese un videojuego seguro que con [W]."]));
@@ -110,7 +110,7 @@ export default class MyMap extends Phaser.Scene {
         this.dialogos.add(new TextEvent(this, 8665, 581, 100, 300, ["Un cartel sospechoso cuanto menos.\n", "Seguro que el que diseñó este templo era un despistado y \nno se acordaba de dónde tenía que dejar las llaves."]));
         this.dialogos.add(new TextEvent(this, 13051, 485, 100, 300, ["Oye, amigo que está en mi cabeza, ¿no estaré siendo \nmuy pesado no? ", "Voy a intentar estar más callado a partir \nde ahora ¿Vale?"]));
         this.dialogos.add(new TextEvent(this, 14514, 901, 100, 300, ["Podrías responder de vez en cuando..."]));
-
+        this.dialogos.add(new TextEvent(this, 15500, 1100, 200, 200, ["Anda una diana, a lo mejor apuntando y haciendo clic \npuedo romperla de una pedrada."]));
         
         
         this.enemies.add(new Enemy(this, 1200, 700));
