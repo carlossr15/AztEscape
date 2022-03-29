@@ -42,7 +42,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     // Esta label es la UI en la que pondremos la puntuación del jugador
     this.cursors = this.scene.input.keyboard.createCursorKeys();
     this.scene.add.layer(this);
-    this.vida = 1;
+    this.vida = 10;
     this.vidas = [];
     this.bullets = new Bullets(this.scene);
     this.setDepth(1);
