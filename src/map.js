@@ -51,7 +51,13 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('mediaPuerta', 'assets/sprites/mediaPuerta.png', {frameWidth: 128, frameHeight: 128});
         this.load.spritesheet('momia', 'assets/sprites/momiaSpritesheet.png', {frameWidth: 24, frameHeight: 32});
         this.load.spritesheet('idolo', 'assets/sprites/Idolo.png', {frameWidth: 32, frameHeight: 32});
-        this.load.image('cartel', 'assets/sprites/Cartel.png'/*, {frameWidth: 32, frameHeight: 32}*/);
+        this.load.image('cartel', 'assets/sprites/Cartel.png');
+        this.load.spritesheet('restartButton', 'assets/sprites/restartButton.png', {frameWidth: 480, frameHeight: 170});
+        this.load.spritesheet('mapsButton', 'assets/sprites/mapsButton.png', {frameWidth: 480, frameHeight: 170});
+        this.load.image('congratulations', 'assets/sprites/congratulations.png');
+        this.load.image('hasPerdido', 'assets/sprites/hasPerdido.png');
+        this.load.image('background', 'assets/sprites/background.jpg');
+
         //this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128});
        
         this.load.image('textBox', 'assets/tilesets/TextBox.png');
@@ -70,7 +76,6 @@ export default class MyMap extends Phaser.Scene {
         const tilesetObjetos = map.addTilesetImage('Objetos', 'objetos');
         const fondo = map.createLayer('Fondo', tilesetTemplo, 0, 0);
         const efectoSuelo = map.createLayer('EfectoSuelo', tilesetObjetos, 0, 0);
-        //const decoracion2 = map.createLayer('DecoracionTemplo', tilesetObjetos2, 0, 0);
         const decoracion = map.createLayer('Decoracion', tilesetObjetos, 0, 0);
         const suelo = map.createLayer('Suelo', tilesetTemplo, 0, 0);
         const objetosUtiles = map.createLayer('ObjetosUtiles', tilesetObjetos, 0, 0);
@@ -92,8 +97,8 @@ export default class MyMap extends Phaser.Scene {
         
         this.puerta = new Puerta(this, 15820, 1150);
         this.cartel = this.physics.add.image(9000, 700, 'cartel');    
-        //this.player = new Player(this, 0, 600);
-        this.player = new Player(this, 12951, 485);
+        this.player = new Player(this, 0, 600);
+        //this.player = new Player(this, 12951, 485);
         this.physics.add.collider(this.player, suelo);
         
         this.dialogos.add(new TextEvent(this, 175, 682, 25, 25, ["Con este ídolo dorado por fin podré llegar a fin de mes.\n", "¿Por qué decidí vivir en el centro de Madrid?\n", "Bueno, ahora toca salir de aquí pero... Ehm... ¿Cómo se \nsaltaba? ", "Si esto fuese un videojuego seguro que con [W]."]));
@@ -342,10 +347,12 @@ export default class MyMap extends Phaser.Scene {
 
     win() {
         this.scene.start('menu', "Has ganado, ¡Enhorabuena! Pulsa cualquier tecla para volver a jugar");
+        this.musica.stop();
     }
 
     death() {
-        this.scene.start('menu', "Game Over! Pulsa cualquier tecla para continuar");
+        this.scene.start('lose');
+        this.musica.stop();
     }
 
 }

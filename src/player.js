@@ -42,7 +42,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     // Esta label es la UI en la que pondremos la puntuación del jugador
     this.cursors = this.scene.input.keyboard.createCursorKeys();
     this.scene.add.layer(this);
-    this.vida = 10;
+    this.vida = 1;
     this.vidas = [];
     this.bullets = new Bullets(this.scene);
     this.setDepth(1);
@@ -110,7 +110,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
   }
 
-  /**
+   /**
    * El jugador ha recogido una estrella por lo que este método añade un punto y
    * actualiza la UI con la puntuación actual.
    */
@@ -172,6 +172,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
  
   atacar()
   {
+    
     this.puedeGolpear = false;
     this.atacando = true;
     this.puñetazo.play();
@@ -183,6 +184,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.scene.time.delayedCall(500, function(){
       this.puedeGolpear = true;
     }, [], this);
+
   }
   
   /**
@@ -335,7 +337,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
   
     //this.atacando = false;
     this.abrirPuerta();
-    
   }
   
 }
