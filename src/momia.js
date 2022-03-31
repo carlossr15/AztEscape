@@ -73,6 +73,19 @@ export default class Momia extends Phaser.GameObjects.Sprite {
       //console.log("GOLPE");
   }
 
+  
+  //Detectar dirección en la que esta mirando 
+  //Si el ugador esta a X bloques en esa dirección, empezar a seguirle
+  //tambien puede seguirle en otra dirección Y (Y<X) bloques
+  
+  /*
+    Container con hitbox
+    Mayor HB por delante que por la espalda
+    Si el jugador toca la hitbox, seguirle hasta que se salga de la HB
+    Si no detecta al jugador, patrullar de izquierda a derecha 
+  
+  
+  */
   seguir()
   {
     if(this.x < this.scene.player.x && math.abs(this.x, this.scene.player.x) < 100) //Jugador a la derecha
