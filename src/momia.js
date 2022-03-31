@@ -1,7 +1,7 @@
 
 import Star from './star.js';
 import Enemy from './enemy.js';
-import * from 'mathjs'
+//import * from 'mathjs'
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.
  * También almacena la puntuación o número de estrellas que ha recogido hasta el momento.
@@ -89,13 +89,15 @@ export default class Momia extends Phaser.GameObjects.Sprite {
   */
   seguir()
   {
-    if(this.x < this.scene.player.x && math.abs(this.x, this.scene.player.x) < 100) //Jugador a la derecha
+    //if(this.x < this.scene.player.x && math.abs(this.x, this.scene.player.x) < 100) //Jugador a la derecha
+    if(this.x < this.scene.player.x) //Jugador a la derecha
     {
         this.body.setVelocityX(this.speed);
         this.play('move-left-momia', true);
         
     }
-    else if(this.x > this.scene.player.x && math.abs(this.x, this.scene.player.x) < 100) //Jugador a la izquierda
+    //else if(this.x > this.scene.player.x && math.abs(this.x, this.scene.player.x) < 100) //Jugador a la izquierda
+    else if(this.x > this.scene.player.x) //Jugador a la izquierda
     {
         this.body.setVelocityX(-this.speed);
         this.play('move-right-momia', true);
