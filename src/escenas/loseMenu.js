@@ -1,5 +1,3 @@
-import Enemy from './enemy.js';
-import Player from './player.js';
 import { RestartButton } from './components/restartButton.js';
 import { MapsButton } from './components/mapsButton.js';
 

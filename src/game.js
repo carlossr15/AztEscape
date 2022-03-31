@@ -1,10 +1,9 @@
 import Boot from './boot.js';
-import End from './end.js';
-import Level from './level.js';
-import MyMap from './map.js';
-import menu from './menu.js';
-import winMenu from './winMenu.js';
-import loseMenu from './loseMenu.js';
+import End from './escenas/end.js';
+import MyMap from './escenas/map.js';
+import menu from './escenas/menu.js';
+import winMenu from './escenas/winMenu.js';
+import loseMenu from './escenas/loseMenu.js';
 
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos
