@@ -218,7 +218,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.body.setVelocityY(0);
       this.body.setVelocityX(0);
       if(this.cursors.up.isDown || this.cursors.down.isDown) {
-        this.play('escalar', true);
+        //this.play('escalar', true);
       }else this.play('escalar-izq', true);
     }
     else
