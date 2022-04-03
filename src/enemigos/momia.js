@@ -72,18 +72,30 @@ export default class Momia extends Phaser.GameObjects.Sprite {
 
   seguir()
   {
-    if(this.x < this.scene.player.x) //Jugador a la derecha
+    //console.log(Math.round(Math.abs(this.x - this.scene.player.x)));
+    if(Math.round(Math.abs(this.x - this.scene.player.x) < 1500))
     {
+      if(this.x < this.scene.player.x) //Jugador a la derecha
+      {
         this.body.setVelocityX(this.speed);
         this.play('move-left-momia', true);
-        
-    }
-    else //Jugador a la izquierda
-    {
+        console.log("momia sigue a la derecha");
+      }
+      else//Jugador a la izquierda
+      {
         this.body.setVelocityX(-this.speed);
         this.play('move-right-momia', true);
+        console.log("momia sigue a la izquierda");
 
 
+      }
+    }
+    else{
+      console.log("momia parada");
+      this.body.setVelocityX(0);
+     
+      //console.log(this.x );
+      //console.log(this.scene.player.x);
     }
 
   }
