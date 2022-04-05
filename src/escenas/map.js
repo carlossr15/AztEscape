@@ -20,7 +20,7 @@ export default class MyMap extends Phaser.Scene {
 
 
     constructor() {
-        super({ key: 'myMap' });
+        super({ key: 'Map1' });
     }
 
 
@@ -346,8 +346,9 @@ export default class MyMap extends Phaser.Scene {
     // }
 
     win() {
-        this.scene.start('menu', "Has ganado, ¡Enhorabuena! Pulsa cualquier tecla para volver a jugar");
+        // this.scene.start('menu', "Has ganado, ¡Enhorabuena! Pulsa cualquier tecla para volver a jugar");
         this.musica.stop();
+        this.scene.start('Map2');
     }
 
     death() {
