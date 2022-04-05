@@ -10,6 +10,9 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
    * @param {number} x Coordenada X
    * @param {number} y Coordenada Y
    */
+
+   
+
   constructor(scene, x, y) {
     super(scene, x, y, 'enemy');
     this.setDepth(0);
@@ -34,7 +37,8 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.triggerTimer = this.scene.time.addEvent({
         callback: this.timerEvent,
         callbackScope: this,
-        delay: 2500, // 1000 = 1 second
+        //delay: 2000,// + getRandom(0, 1000), // 1000 = 1 second
+        delay: this.getRandom(2000, 3000),
         loop: true
     });
     this.scene.enemies.add(this);
@@ -43,7 +47,9 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.scene.physics.add.collider(this, this.scene.suelo);
   }
 
-
+  getRandom(min, max) {
+    return Math.random() * (max - min) + min;
+  }
   /**
    * Métodos preUpdate de Phaser. En este caso solo se encarga del movimiento del jugador.
    * Como se puede ver, no se tratan las colisiones con las estrellas, ya que estas colisiones 
