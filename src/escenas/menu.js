@@ -11,7 +11,7 @@ export default class menu extends Phaser.Scene {
 
     create(text){
         this.input.keyboard.on('keyup', function (pointer) {
-            this.scene.start('myMap');
+            this.scene.start('Map1');
         }, this);
 
         this.add.text(0, 0, text, {fontSize: '20px'});

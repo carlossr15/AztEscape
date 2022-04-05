@@ -35,8 +35,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.speed = 300;
     this.jumpSpeed = -400;
     this.onLadder = false;
+    this.onWallDoor= false;
     this.invencible = false;
-    this.llave = 0;
+    this.llave = 1;
     this.llaves = [];
     
     // Esta label es la UI en la que pondremos la puntuación del jugador
@@ -170,7 +171,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   abrirPuerta(){
     if(this.llave > 0){
-      if(this.scene.physics.overlap(this.scene.puerta, this)){ //agrupar puertas
+      if(this.scene.physics.overlap(this.scene.puerta, this)){
         console.log("ABRIR-PUERTA");
         this.llave -= 1;
         this.pintarLlaves();
