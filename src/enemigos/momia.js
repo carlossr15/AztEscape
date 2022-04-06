@@ -73,7 +73,7 @@ export default class Momia extends Phaser.GameObjects.Sprite {
   seguir()
   {
     //console.log(Math.round(Math.abs(this.x - this.scene.player.x)));
-    if(Math.round(Math.abs(this.x - this.scene.player.x) < 1500))
+    if(Math.round(Math.abs(this.x - this.scene.player.x) < 1500) && Math.round(Math.abs(this.x - this.scene.player.x) > 50))
     {
       if(this.x < this.scene.player.x) //Jugador a la derecha
       {
