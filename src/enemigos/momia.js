@@ -11,17 +11,13 @@ export default class Momia extends Phaser.GameObjects.Sprite {
    * @param {number} y Coordenada Y
    */
 
-   //super(scene, x, y, 'momia');
   constructor(scene, x, y) {
     super(scene, x, y, 'momia');
     this.setDepth(0);
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
-    // Queremos que el jugador no se salga de los límites del mundo
     this.body.setCollideWorldBounds();
 
-    //Establecemos tamaño y hitbox
-    //this.body.setSize(52,28);
 
     this.speed = 175;
     this.vida = 1;
@@ -39,8 +35,6 @@ export default class Momia extends Phaser.GameObjects.Sprite {
     this.setFlip(true, false);
     this.puñetazo = this.scene.sound.add('puñetazo', {volume: 1});
 
-    //this.scene.physics.add.collider(this, this.scene.suelo);
-
   }
 
  hurt()
@@ -51,7 +45,6 @@ export default class Momia extends Phaser.GameObjects.Sprite {
   
  checkGolpe()
   {
-    //this.onLadder = false;
     if(this.scene.physics.overlap(this.scene.player, this))
     {
       this.scene.player.hurt();
@@ -64,38 +57,26 @@ export default class Momia extends Phaser.GameObjects.Sprite {
     if(this.scene.player.cursors.space.isDown && this.scene.player.atacando){
       this.hurt();
       this.puñetazo.play();
-    }/*else{
-      this.scene.player.hurt();
-    }*/
-      //console.log("GOLPE");
+    }
   }
 
   seguir()
   {
-    //console.log(Math.round(Math.abs(this.x - this.scene.player.x)));
-    if(Math.round(Math.abs(this.x - this.scene.player.x) < 1500))
+    if(Math.round(Math.abs(this.x - this.scene.player.x) < 1500) && Math.round(Math.abs(this.x - this.scene.player.x) > 50))
     {
       if(this.x < this.scene.player.x) //Jugador a la derecha
       {
         this.body.setVelocityX(this.speed);
         this.play('move-left-momia', true);
-        //console.log("momia sigue a la derecha");
       }
       else//Jugador a la izquierda
       {
         this.body.setVelocityX(-this.speed);
         this.play('move-right-momia', true);
-        //console.log("momia sigue a la izquierda");
-
-
       }
     }
     else{
-      //console.log("momia parada");
       this.body.setVelocityX(0);
-     
-      //console.log(this.x );
-      //console.log(this.scene.player.x);
     }
 
   }
@@ -109,7 +90,5 @@ export default class Momia extends Phaser.GameObjects.Sprite {
     this.seguir()
 
     this.checkGolpe();
-    //this.attack();
-    //this.anims.play('move-enemy', true);
   }
 }
