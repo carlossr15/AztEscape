@@ -103,10 +103,12 @@ export default class MyMap extends Phaser.Scene {
         //this.bandera = new Bandera(this, 6750, 455);
         
         this.puerta = new Puerta(this, 15820, 1150);
-        //this.diana = new Diana(this, 300, 600);
+        this.diana = new Diana(this, 300, 1000);       
+        this.botonMecanismo = new BotonMecanismo(this, 12180, 1650)/*.setRotation(3.14/2)*/;
+
         //this.cartel = this.physics.add.image(9000, 700, 'cartel'); 
 
-        this.player = new Player(this, 0, 1100);
+        this.player = new Player(this, 12000, 1500);
         //this.player = new Player(this, 12951, 485);
 
         this.physics.add.collider(this.player, suelo);
@@ -165,7 +167,7 @@ export default class MyMap extends Phaser.Scene {
         this.puertaPared1 = new PuertaPared(this, 6190, 1220);
         this.puertaPared2 = new PuertaPared(this, 9583, 1375);
 
-        this.botonMecanismo = new BotonMecanismo(this, 700, 650);
+        this.enemies.add(new Enemy(this, 12700, 1500));
 
 
        /* this.piedraMovil = new PiedraMovil(this, this.player, 500, 500);

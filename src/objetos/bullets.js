@@ -41,6 +41,7 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
         super.preUpdate(time, delta);
         this.hurtEnemy();
         this.hitDiana();
+        this.hitBoton();
         if (this.x <= 0){
             this.setActive(false);
             this.setVisible(false);
@@ -69,4 +70,15 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
             }
         }
     }
+
+    hitBoton(){
+        var botonMecanismo = this.scene.botonMecanismo;
+        console.log("ergereee");
+        if (this.scene.physics.overlap(this, botonMecanismo)){
+            console.log("pihpphjip");
+            botonMecanismo.pulsar();
+            //botonMecanismo.destruir();
+        }
+    }
+
 }
