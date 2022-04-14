@@ -56,6 +56,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.image('congratulations', 'assets/sprites/congratulations.png');
         this.load.image('hasPerdido', 'assets/sprites/hasPerdido.png');
         this.load.image('background', 'assets/sprites/background.jpg');
+        this.load.atlas('heal', 'assets/sprites/heal.png','assets/sprites/heal.json');
 
         //this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128});
         this.load.image('diana', 'assets/sprites/diana.png');
@@ -66,7 +67,6 @@ export default class MyMap extends Phaser.Scene {
     }
 
     create() {
-
         this.musica = this.sound.add('musicaFondo',{volume: 0.5});
         this.musica.loop = true;
         this.musica.play();
@@ -91,6 +91,8 @@ export default class MyMap extends Phaser.Scene {
         this.enemies = this.add.group();
         this.escaleras = this.add.group();
         this.dialogos = this.add.group();
+        this.consumibles = this.add.group();
+
         this.physics.add.collider(this.enemies, suelo);
 
         //this.bandera = new Bandera(this, 6750, 455);
@@ -98,7 +100,10 @@ export default class MyMap extends Phaser.Scene {
         this.puerta = new Puerta(this, 15820, 1150);
         this.diana = new Diana(this, 15820, 1000);
         this.cartel = this.physics.add.image(9000, 700, 'cartel');    
-        this.player = new Player(this, 0, 600);
+        this.player = new Player(this, 0, 682);
+        
+        this.consumibles.add(new Batido(this, 150, 682));
+
         //this.player = new Player(this, 12951, 485);
         this.physics.add.collider(this.player, suelo);
         
@@ -143,8 +148,8 @@ export default class MyMap extends Phaser.Scene {
         this.escalera6 = new Escalera(this, 9170, 850, 10, 750);
 
 
-        this.batido1 = new Batido(this, 5025, 235);
-        this.batido2 = new Batido(this, 9375, 1300);
+        this.consumibles.add(new Batido(this, 5025, 235));
+        this.consumibles.add(new Batido(this, 9375, 1300));
         
         this.llave = new Llave(this, 8965, 1300);
 
@@ -216,6 +221,16 @@ export default class MyMap extends Phaser.Scene {
         suelo.setCollisionByExclusion(-1, true);
 
 
+        this.particles = this.add.particles('heal');
+        this.cura = this.particles.createEmitter({
+            frame: 'healparticle',
+            lifespan: 1000,
+            gravityY: 0,
+            scale: { start: 0, end: 1, ease: 'Quad.easeOut' },
+            alpha: { start: 1, end: 0, ease: 'Quad.easeIn' },
+            on:false,
+            follow: this.player.body
+        });
 
         //Animaciones jugador
         this.anims.create({
@@ -339,6 +354,10 @@ export default class MyMap extends Phaser.Scene {
             dialogo.mostrar();
         });
         
+        this.physics.add.overlap(this.player, this.consumibles, (player, consumible) => {
+            consumible.curar();
+            player.healing();
+        });
     }
 
     // golpe(player, enemy) {

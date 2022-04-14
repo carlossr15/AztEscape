@@ -22,7 +22,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.setScale(0.2,0.2);
     this.body.setSize(400,420);
     this.body.setOffset(0,175);
-
+    this.body.updateFromGameObject(); 
     //Dirección a la que esta mirando
     this.lado = 'der';
     this.caminando = false;
@@ -81,6 +81,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
 
     this.puñetazo = this.scene.sound.add('puñoaire', {volume: 1.5});
+
     
   }
 
@@ -210,6 +211,14 @@ export default class Player extends Phaser.GameObjects.Sprite {
    * ya son gestionadas por la estrella (no gestionar las colisiones dos veces)
    * @override
    */
+  healing(){
+    console.log(this.scene.cura);
+    this.scene.cura.start();
+    this.scene.time.delayedCall(1000, function(){
+      this.scene.cura.stop();
+    }, [], this);
+  }
+
   preUpdate(t,dt) {
     super.preUpdate(t,dt);
     //console.log(this.onLadder);

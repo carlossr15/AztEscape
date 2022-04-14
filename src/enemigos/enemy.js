@@ -65,14 +65,11 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
             this.dir = false;
             this.setFlip(false, false);
             //this.player.setFlip(true, false)
-            console.log("izq");
         }
         else{
             this.body.setVelocityX(this.speed);
             this.dir = true;
             this.setFlip(true, false);
-
-            console.log("der");
         }
         
       }

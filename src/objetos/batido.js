@@ -18,20 +18,24 @@
       this.scene.add.existing(this);
       this.scene.physics.add.existing(this, true);
       
+      
       //Establecemos tamaño y hitbox
-    this.body.setSize(25,25);
+      this.body.setSize(25,25);
     }
 
-    checkCons()
-  {
-    //this.onLadder = false;
-    if(this.scene.physics.overlap(this.scene.player, this))
-    {
-      this.scene.player.eat();
-      console.log("COME");
-      this.destroy();
+    curar(){
+      //this.onLadder = false;
+        this.scene.player.eat();
+        this.body.destroy();
+        this.scene.tweens.add({
+          targets: this,
+          y: this.y - 50,
+          alpha: { start: 1, to: 0 },
+          ease: "Cubic", 
+          duration: 1000,
+          repeat: 0,
+        });
     }
-  }
   
     /**
      * Redefinición del preUpdate de Phaser
@@ -39,7 +43,6 @@
      */
     preUpdate() {
       super.preUpdate();
-      this.checkCons(); //el jugador coge el consumible
      
     }
   }
