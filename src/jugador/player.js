@@ -47,7 +47,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
       down:Phaser.Input.Keyboard.KeyCodes.S,
       left:Phaser.Input.Keyboard.KeyCodes.A,
       right:Phaser.Input.Keyboard.KeyCodes.D,
-      space:Phaser.Input.Keyboard.KeyCodes.SPACE
+      space:Phaser.Input.Keyboard.KeyCodes.SPACE,
+      fullscreen:Phaser.Input.Keyboard.KeyCodes.F
     });
     
     this.scene.add.layer(this);
@@ -221,6 +222,13 @@ export default class Player extends Phaser.GameObjects.Sprite {
   preUpdate(t,dt) {
     super.preUpdate(t,dt);
     //console.log(this.onLadder);
+    if(this.cursors.fullscreen.isDown){
+      console.log("full");
+        if (this.scene.game.scale.isFullscreen)
+            this.scene.game.scale.stopFullscreen();
+        else
+            this.scene.game.scale.startFullscreen();
+    }
     if(this.onLadder){
       this.body.setAllowGravity(false);
       console.log("cayendo");
