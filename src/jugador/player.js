@@ -212,7 +212,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
    * @override
    */
   healing(){
-    console.log(this.scene.cura);
     this.scene.cura.start();
     this.scene.time.delayedCall(1000, function(){
       this.scene.cura.stop();

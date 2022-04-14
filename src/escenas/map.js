@@ -101,7 +101,7 @@ export default class MyMap extends Phaser.Scene {
         this.diana = new Diana(this, 15820, 1000);
         this.cartel = this.physics.add.image(9000, 700, 'cartel');    
         this.player = new Player(this, 0, 682);
-        
+        var jugador = this.player;
         this.consumibles.add(new Batido(this, 150, 682));
 
         //this.player = new Player(this, 12951, 485);
@@ -220,16 +220,27 @@ export default class MyMap extends Phaser.Scene {
 
         suelo.setCollisionByExclusion(-1, true);
 
-
+    
         this.particles = this.add.particles('heal');
+
+        this.playerSource = {
+            getRandomPoint: function (vec)
+            {
+                var x = Phaser.Math.Between(0, jugador.body.width - 1);
+                var y = Phaser.Math.Between(0, jugador.body.height - 1);
+                return vec.setTo(x + jugador.body.x, y + jugador.body.y);
+            }
+        };
+        
         this.cura = this.particles.createEmitter({
             frame: 'healparticle',
-            lifespan: 1000,
+            lifespan: 500,
             gravityY: 0,
             scale: { start: 0, end: 1, ease: 'Quad.easeOut' },
             alpha: { start: 1, end: 0, ease: 'Quad.easeIn' },
             on:false,
-            follow: this.player.body
+            emitZone: { type: 'random', source: this.playerSource }
+            //follow: this.player.body
         });
 
         //Animaciones jugador
