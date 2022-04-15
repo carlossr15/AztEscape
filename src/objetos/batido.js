@@ -16,11 +16,14 @@
     constructor(scene, x, y) {
       super(scene, x, y, 'batido');
       this.scene.add.existing(this);
-      this.scene.physics.add.existing(this, true);
-      
+      this.scene.physics.add.existing(this);
+      this.body.allowGravity = false;
       
       //Establecemos tamaño y hitbox
       this.body.setSize(25,25);
+      this.body.setVelocityY(10);
+      this.ogX = x;
+      this.ogY = y;
     }
 
     curar(){
@@ -43,7 +46,9 @@
      */
     preUpdate() {
       super.preUpdate();
-     
+      if(this.y>this.ogY + 5 || this.y < this.ogY-5){
+        this.body.setVelocityY(-this.body.velocity.y);
+      }
     }
   }
   

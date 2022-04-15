@@ -40,7 +40,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('player', 'assets/sprites/MC-Spritesheet.png', {frameWidth: 600, frameHeight: 600});
         this.load.spritesheet('enemy', 'assets/sprites/araña.png', {frameWidth: 64, frameHeight: 64});
         this.load.image('bandera','assets/sprites/Bandera.png');
-        this.load.image('vida', 'assets/sprites/life.png' );
+        this.load.spritesheet('vida', 'assets/sprites/health.png', {frameWidth: 32, frameHeight: 32});
         this.load.image('llave', 'assets/sprites/Llave.png' );
         this.load.image('escalera', 'assets/sprites/escalera.png');
         this.load.spritesheet('batido', 'assets/sprites/Batido.png', {frameWidth: 32, frameHeight: 32});
@@ -83,6 +83,7 @@ export default class MyMap extends Phaser.Scene {
         //const pinchos = map.createFromObjects('Pinchos', tilesetObjetos)
 
         //var piedra = map.createFromObjects('PiedraObject', {gid: })
+
 
         this.cameras.main.setBounds(0, 0, 16000, 3000); //Y = 250
         this.cameras.main.zoom = 1;
@@ -350,8 +351,24 @@ export default class MyMap extends Phaser.Scene {
             frameRate: 3,
             repeat: -1
         });
-
-
+        this.anims.create({ 
+            key: 'full', 
+            frames: this.anims.generateFrameNames('vida', { frames: [0, 1, 2, 3, 4] }), 
+            frameRate: 7,
+            repeat: -1 
+        });
+        this.anims.create({ 
+            key: 'half', 
+            frames: this.anims.generateFrameNames('vida', { frames: [1, 4] }), 
+            frameRate: 7,
+            repeat: -1 
+        });
+        this.anims.create({ 
+            key: 'zero', 
+            frames: this.anims.generateFrameNames('vida', { frames: [2] }), 
+            frameRate: 5,
+            repeat: -1 
+        });
         // this.physics.add.overlap(this.player, this.enemies, this.golpe, this); 
         this.physics.add.overlap(this.player, this.enemies, (player, enemigo) => {
                 enemigo.attack();

@@ -1,4 +1,5 @@
 import Bullets from '../objetos/bullets.js';
+import Vida from '../objetos/vida.js';
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.
  * También almacena la puntuación o número de estrellas que ha recogido hasta el momento.
@@ -52,8 +53,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
     });
     
     this.scene.add.layer(this);
-    this.vida = 10;
-    this.vidas = [];
+    this.maxVida = 6;
+    this.vida = 6;
+    this.vidas = this.scene.add.group();
     this.bullets = new Bullets(this.scene);
     this.setDepth(1);
     //this.scene.add.image(0, 500, 'vida').setDepth(1);
@@ -107,18 +109,27 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   pintarVida()  {
     console.log(this.vida);
+    let beatRate = this.vida*50;
+    let i = 0;
     if(this.vida >= 1)
     {
-      for(let j = 0; j < this.vidas.length; j++)
+      this.vidas.clear(true, true);
+      while(i <parseInt(this.vida/2))
       {
-        this.vidas[j].destroy();
+        console.log("vida: "+this.vida/2 + " i: " + i + " bucle 1");
+        this.vidas.add(new Vida(this.scene, 31*i + 35, 30, 2, beatRate));
+        i++;
       }
-      for(let i = 0; i < this.vida; i++)
+      if(this.vida%2){
+        this.vidas.add(new Vida(this.scene,31*i+35, 30, 1, beatRate));
+        i++;
+      }
+      while(i < this.maxVida/2)
       {
-        this.vidas[i] = this.scene.add.image(31*i + 35, 30, 'vida').setDepth(1).setScrollFactor(0);
+        console.log("vida: "+this.vida/2 + " i: " + i + " bucle 2");
+        this.vidas.add(new Vida(this.scene, 31*i + 35, 30, 0, beatRate));
+        i++;
       }
-    }else{
-      this.scene.death();
     }
   }
 
@@ -134,24 +145,30 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   hurt(){
     if(!this.invencible){
-      this.vida = this.vida - 1;
+      this.vida -= 1;
       this.daño.play();
-      this.pintarVida();
+      //this.pintarVida();
+      (this.vidas.getChildren())[parseInt(this.vida/2)].reduce();
       this.invencible = true;
 
       this.scene.time.delayedCall(800, function(){
         this.invencible = false;
       }, [], this);
-      this.body.setVelocityX(-100);
+      this.body.setVelocityX(this.lado === "der" ? -100 : 100);
       this.body.setVelocityY(-100);
+    }
+    if(this.vida === 0){
+      this.scene.death();
     }
   }
 
   eat(){
-    this.vida = this.vida + 1;
-    console.log("Vida" + this.vida);
-    this.pintarVida();
-    this.extraLife.play();
+    if(this.vida < this.maxVida){
+      this.vida = this.vida + 1;
+      console.log("Vida" + this.vida);
+      this.pintarVida();
+      this.extraLife.play();
+    }
   }
 
   getTheKey(){
@@ -214,7 +231,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
    */
   healing(){
     this.scene.cura.start();
-    this.scene.time.delayedCall(1000, function(){
+    this.scene.time.delayedCall(750, function(){
       this.scene.cura.stop();
     }, [], this);
   }
