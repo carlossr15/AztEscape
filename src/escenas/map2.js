@@ -27,6 +27,37 @@ export default class MyMap extends Phaser.Scene {
 
 
     preload() {
+        this.load.tilemapTiledJSON('map2', 'assets/maps/Lvl2.json');
+
+        this.load.image('diana', 'assets/sprites/diana.png');
+        this.load.image('textBox', 'assets/tilesets/TextBox.png');
+        this.load.image('bgtextBox', 'assets/tilesets/BGTextBox.png');
+        this.load.image('MCtextBox', 'assets/tilesets/MCTextBox.png');
+        this.load.image('bandera','assets/sprites/Bandera.png');
+        this.load.image('llave', 'assets/sprites/Llave.png' );
+        this.load.image('escalera', 'assets/sprites/escalera.png');
+        this.load.image('bullet', 'assets/sprites/roca.png');
+        this.load.image('cartel', 'assets/sprites/Cartel.png');
+        this.load.image('congratulations', 'assets/sprites/congratulations.png');
+        this.load.image('hasPerdido', 'assets/sprites/hasPerdido.png');
+        this.load.image('background', 'assets/sprites/background.jpg');
+        this.load.image('puertaPared', 'assets/sprites/puertaPared.png');
+        //this.load.image('cursor', 'assets/sprites/player.png');
+
+        this.load.spritesheet('templo', 'assets/tilesets/tile_temple.png', { frameWidth: 544, frameHeight: 256 });
+        this.load.spritesheet('objetos', 'assets/tilesets/objetos.png', { frameWidth: 256, frameHeight: 256 });
+        this.load.spritesheet('player', 'assets/sprites/MC-Spritesheet.png', {frameWidth: 600, frameHeight: 600});
+        this.load.spritesheet('enemy', 'assets/sprites/araña.png', {frameWidth: 64, frameHeight: 64});
+        this.load.spritesheet('batido', 'assets/sprites/Batido.png', {frameWidth: 32, frameHeight: 32});
+        this.load.spritesheet('puerta', 'assets/sprites/Puerta Abierta y Cerrada.png', {frameWidth: 104, frameHeight: 127});
+        this.load.spritesheet('mediaPuerta', 'assets/sprites/mediaPuerta.png', {frameWidth: 128, frameHeight: 128});
+        this.load.spritesheet('momia', 'assets/sprites/momiaSpritesheet.png', {frameWidth: 24, frameHeight: 32});
+        this.load.spritesheet('idolo', 'assets/sprites/Idolo.png', {frameWidth: 32, frameHeight: 32});
+        this.load.spritesheet('restartButton', 'assets/sprites/restartButton.png', {frameWidth: 480, frameHeight: 170});
+        this.load.spritesheet('mapsButton', 'assets/sprites/mapsButton.png', {frameWidth: 480, frameHeight: 170});
+        this.load.spritesheet('botonMecanismo', 'assets/sprites/Boton.png', {frameWidth: 32, frameHeight: 32});
+        //this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128});
+        
         this.load.audio('musicaFondo', 'assets/music/8bit Dungeon Level.mp3');
         this.load.audio('jump', 'assets/music/jump.wav');
         this.load.audio('daño', 'assets/music/daño.wav');
@@ -35,46 +66,9 @@ export default class MyMap extends Phaser.Scene {
         this.load.audio('extraLife', 'assets/music/extraLife.wav');
         this.load.audio('puñetazo', 'assets/music/puñetazo.wav');
         this.load.audio('puñoaire', 'assets/music/puñoaire.wav');
-
-        this.load.spritesheet('templo', 'assets/tilesets/tile_temple.png', { frameWidth: 544, frameHeight: 256 });
-        this.load.spritesheet('objetos', 'assets/tilesets/objetos.png', { frameWidth: 256, frameHeight: 256 });
-        this.load.tilemapTiledJSON('map2', 'assets/maps/Lvl2.json');
-        this.load.spritesheet('player', 'assets/sprites/MC-Spritesheet.png', {frameWidth: 600, frameHeight: 600});
-        this.load.spritesheet('enemy', 'assets/sprites/araña.png', {frameWidth: 64, frameHeight: 64});
-        this.load.image('bandera','assets/sprites/Bandera.png');
-        this.load.image('vida', 'assets/sprites/life.png' );
-        this.load.image('llave', 'assets/sprites/Llave.png' );
-        this.load.image('escalera', 'assets/sprites/escalera.png');
-        this.load.spritesheet('batido', 'assets/sprites/Batido.png', {frameWidth: 32, frameHeight: 32});
-        //this.load.image('cursor', 'assets/sprites/player.png');
-        this.load.image('bullet', 'assets/sprites/roca.png');
-        this.load.spritesheet('puerta', 'assets/sprites/Puerta Abierta y Cerrada.png', {frameWidth: 104, frameHeight: 127});
-        this.load.spritesheet('mediaPuerta', 'assets/sprites/mediaPuerta.png', {frameWidth: 128, frameHeight: 128});
-        this.load.spritesheet('momia', 'assets/sprites/momiaSpritesheet.png', {frameWidth: 24, frameHeight: 32});
-        this.load.spritesheet('idolo', 'assets/sprites/Idolo.png', {frameWidth: 32, frameHeight: 32});
-        this.load.image('cartel', 'assets/sprites/Cartel.png');
-        this.load.image('puertaPared', 'assets/sprites/puertaPared.png');
-
-        this.load.spritesheet('restartButton', 'assets/sprites/restartButton.png', {frameWidth: 480, frameHeight: 170});
-        this.load.spritesheet('mapsButton', 'assets/sprites/mapsButton.png', {frameWidth: 480, frameHeight: 170});
-        this.load.image('congratulations', 'assets/sprites/congratulations.png');
-        this.load.image('hasPerdido', 'assets/sprites/hasPerdido.png');
-        this.load.image('background', 'assets/sprites/background.jpg');
-
-        //this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128});
-        this.load.image('diana', 'assets/sprites/diana.png');
-        this.load.spritesheet('botonMecanismo', 'assets/sprites/Boton.png', {frameWidth: 32, frameHeight: 32});
-
-        this.load.image('textBox', 'assets/tilesets/TextBox.png');
-        this.load.image('bgtextBox', 'assets/tilesets/BGTextBox.png');
-        this.load.image('MCtextBox', 'assets/tilesets/MCTextBox.png');
     }
 
     create() {
-
-        this.musica = this.sound.add('musicaFondo',{volume: 0.5});
-        this.musica.loop = true;
-        this.musica.play();
     
         const map = this.make.tilemap({ key: 'map2' });
         const tilesetTemplo = map.addTilesetImage('Templo', 'templo');
@@ -87,11 +81,11 @@ export default class MyMap extends Phaser.Scene {
 
         //const pinchos = map.createFromObjects('Pinchos', tilesetObjetos)
 
-        //var piedra = map.createFromObjects('PiedraObject', {gid: })
-
-        this.cameras.main.setBounds(0, 0, 16000, 3000); //Y = 250
-        this.cameras.main.zoom = 1;
+        //Configuracion mundo
         this.physics.world.setBounds(0, 0, 16000, 3000);
+        suelo.setCollisionByExclusion(-1, true);
+
+        //var piedra = map.createFromObjects('PiedraObject', {gid: })
 
         this.enemies = this.add.group();
         this.escaleras = this.add.group();
@@ -226,133 +220,60 @@ export default class MyMap extends Phaser.Scene {
         //this.physics.add.collider(this.batido, suelo);
 
 
-        this.cameras.main.startFollow(this.player, false, 0.05, 0.5);
-        this.cameras.main.fadeIn(1000);
-
-
-        suelo.setCollisionByExclusion(-1, true);
-
-
-        //Animaciones jugador
-        this.anims.create({
-            key: 'walk-right',
-            frames: this.anims.generateFrameNames('player', { frames: [0, 1, 2] }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'walk-left',
-            frames: this.anims.generateFrameNames('player', { frames: [10, 11, 12] }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'stand-right',
-            frames: this.anims.generateFrameNames('player', { frames: [0] }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'stand-left',
-            frames: this.anims.generateFrameNames('player', { frames: [10] }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'jump-right',
-            frames: this.anims.generateFrameNames('player', { frames: [4] }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'jump-left',
-            frames: this.anims.generateFrameNames('player', { frames: [13] }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'attack-right',
-            frames: this.anims.generateFrameNames('player', { frames: [15] }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'attack-left',
-            frames: this.anims.generateFrameNames('player', { frames: [16] }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'escalar',
-            frames: this.anims.generateFrameNames('player', { frames: [8, 9] }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'escalar-izq',
-            frames: this.anims.generateFrameNames('player', { frames: [8] }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'escalar-der',
-            frames: this.anims.generateFrameNames('player', { frames: [9] }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        //Animaciones araña
-        this.anims.create({
-            key: 'move-enemy',
-            frames: this.anims.generateFrameNames('enemy', {frames: [0, 1]}),
-            frameRate: 7,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: 'abrir-puerta',
-            frames: this.anims.generateFrameNames('puerta', {frames: [0, 1, 2]}),
-            frameRate: 7,
-            repeat: 0
-        })
-
-        //Animaciones momia
-        this.anims.create({
-            key: 'move-right-momia',
-            frames: this.anims.generateFrameNames('momia', { frames: [3, 4, 5] }),
-            frameRate: 3,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'move-left-momia',
-            frames: this.anims.generateFrameNames('momia', { frames: [9, 10, 11] }),
-            frameRate: 3,
-            repeat: -1
-        });
-
-        //Animaciones botonMecansimo
+        //Animaciones botonMecansimo HAY QUE MOVERLO AL OBJETO DEL MECANISMO
         this.anims.create({
             key: 'pulsar-boton',
             frames: this.anims.generateFrameNames('botonMecanismo', { frames: [0, 1] }),
             frameRate: 3,
             repeat: 0
         });
+        
+        //Config Camara
+        this.cameras.main.setBounds(0, 0, 16000, 3000); //Y = 250
+        this.cameras.main.zoom = 1;
+        this.cameras.main.startFollow(this.player, false, 0.05, 0.5);
+        this.cameras.main.fadeIn(1000);
 
+        //Particulas curacion
+        this.cargaParticulas();
 
-        // this.physics.add.overlap(this.player, this.enemies, this.golpe, this); 
+        //Colisiones
+        this.physics.add.collider(this.enemies, suelo);
+        this.physics.add.collider(this.player, suelo);
+        this.cargaColisiones();
+        
+        //Musica
+        this.musica = this.sound.add('musicaFondo',{volume: 0.2});
+        this.musica.loop = true;
+        this.musica.play();
+    }
+
+    cargaParticulas(){
+        var jugador = this.player; //Necesario para los efectos
+
+        this.particles = this.add.particles('heal');
+        this.playerSource = {
+            getRandomPoint: function (vec)
+            {
+                var x = Phaser.Math.Between(0, jugador.body.width - 1);
+                var y = Phaser.Math.Between(0, jugador.body.height - 1);
+                return vec.setTo(x + jugador.body.x, y + jugador.body.y);
+            }
+        };
+        this.cura = this.particles.createEmitter({
+            frame: 'healparticle',
+            lifespan: 500,
+            gravityY: 0,
+            scale: { start: 0, end: 1, ease: 'Quad.easeOut' },
+            alpha: { start: 1, end: 0, ease: 'Quad.easeIn' },
+            on:false,
+            emitZone: { type: 'random', source: this.playerSource }
+        });
+    }
+    
+    cargaColisiones(){
         this.physics.add.overlap(this.player, this.enemies, (player, enemigo) => {
-                enemigo.attack();
+            enemigo.attack();
         });
 
         this.physics.add.overlap(this.player, this.escaleras, (player, escalera) => {
@@ -363,11 +284,11 @@ export default class MyMap extends Phaser.Scene {
             dialogo.mostrar();
         });
         
+        this.physics.add.overlap(this.player, this.consumibles, (player, consumible) => {
+            consumible.curar();
+            player.healing();
+        });
     }
-
-    // golpe(player, enemy) {
-    //     this.enemy.attack();
-    // }
 
     win() {
         this.scene.start('menu', "Has ganado, ¡Enhorabuena! Pulsa cualquier tecla para volver a jugar");

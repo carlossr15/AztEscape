@@ -85,9 +85,88 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     this.puñetazo = this.scene.sound.add('puñoaire', {volume: 1.5});
 
-    
+    this.cargarAnimaciones();
   }
 
+  cargarAnimaciones(){
+    this.scene.anims.create({
+      key: 'walk-right',
+      frames: this.scene.anims.generateFrameNames('player', { frames: [0, 1, 2] }),
+      frameRate: 10,
+      repeat: -1
+  });
+
+  this.scene.anims.create({
+      key: 'walk-left',
+      frames: this.scene.anims.generateFrameNames('player', { frames: [10, 11, 12] }),
+      frameRate: 10,
+      repeat: -1
+  });
+
+  this.scene.anims.create({
+      key: 'stand-right',
+      frames: this.scene.anims.generateFrameNames('player', { frames: [0] }),
+      frameRate: 10,
+      repeat: -1
+  });
+
+  this.scene.anims.create({
+      key: 'stand-left',
+      frames: this.scene.anims.generateFrameNames('player', { frames: [10] }),
+      frameRate: 10,
+      repeat: -1
+  });
+
+  this.scene.anims.create({
+      key: 'jump-right',
+      frames: this.scene.anims.generateFrameNames('player', { frames: [4] }),
+      frameRate: 10,
+      repeat: -1
+  });
+
+  this.scene.anims.create({
+      key: 'jump-left',
+      frames: this.scene.anims.generateFrameNames('player', { frames: [13] }),
+      frameRate: 10,
+      repeat: -1
+  });
+
+  this.scene.anims.create({
+      key: 'attack-right',
+      frames: this.scene.anims.generateFrameNames('player', { frames: [15] }),
+      frameRate: 10,
+      repeat: -1
+  });
+
+  this.scene.anims.create({
+      key: 'attack-left',
+      frames: this.scene.anims.generateFrameNames('player', { frames: [16] }),
+      frameRate: 10,
+      repeat: -1
+  });
+
+  this.scene.anims.create({
+      key: 'escalar',
+      frames: this.scene.anims.generateFrameNames('player', { frames: [8, 9] }),
+      frameRate: 10,
+      repeat: -1
+  });
+
+  this.scene.anims.create({
+      key: 'escalar-izq',
+      frames: this.scene.anims.generateFrameNames('player', { frames: [8] }),
+      frameRate: 10,
+      repeat: -1
+  });
+
+  this.scene.anims.create({
+      key: 'escalar-der',
+      frames: this.scene.anims.generateFrameNames('player', { frames: [9] }),
+      frameRate: 10,
+      repeat: -1
+  });
+
+  }
   
   showDialog(){
     this.texto.setAlpha(1);

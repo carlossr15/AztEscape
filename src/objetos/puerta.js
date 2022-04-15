@@ -20,6 +20,13 @@ export default class Puerta extends Phaser.GameObjects.Sprite {
     //this.scene.physics.add.collider(this.mediaPuerta, this.player, 44, 44);
     //this.scene.physics.add.collider(this, this.player);
     
+
+    this.scene.anims.create({
+      key: 'abrir-puerta',
+      frames: this.scene.anims.generateFrameNames('puerta', {frames: [0, 1, 2]}),
+      frameRate: 7,
+      repeat: 0
+    })
   }
 
 

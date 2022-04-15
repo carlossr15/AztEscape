@@ -45,6 +45,13 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.puñetazo = this.scene.sound.add('puñetazo', {volume: 1});
 
     this.scene.physics.add.collider(this, this.scene.suelo);
+    
+    this.scene.anims.create({
+      key: 'move-enemy',
+      frames: this.scene.anims.generateFrameNames('enemy', {frames: [0, 1]}),
+      frameRate: 7,
+      repeat: -1
+    })
   }
 
   getRandom(min, max) {

@@ -8,7 +8,7 @@ export default class TextEvent extends Phaser.GameObjects.Zone {
      * @param {number} x Coordenada x
      * @param {number} y Coordenada y
      */
-    constructor(scene, x, y, w, h, texto){
+    constructor(scene, x, y, w, h, texto, parar){
         super(scene, x, y);
         this.setScale(1, 1);
         this.setSize(w,h);

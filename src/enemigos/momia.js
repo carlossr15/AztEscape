@@ -35,6 +35,20 @@ export default class Momia extends Phaser.GameObjects.Sprite {
     this.setFlip(true, false);
     this.puñetazo = this.scene.sound.add('puñetazo', {volume: 1});
 
+    //Animaciones momia
+    this.scene.anims.create({
+      key: 'move-right-momia',
+      frames: this.scene.anims.generateFrameNames('momia', { frames: [3, 4, 5] }),
+      frameRate: 3,
+      repeat: -1
+    });
+
+    this.scene.anims.create({
+      key: 'move-left-momia',
+      frames: this.scene.anims.generateFrameNames('momia', { frames: [9, 10, 11] }),
+      frameRate: 3,
+      repeat: -1
+    });
   }
 
  hurt()
