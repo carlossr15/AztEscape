@@ -12,6 +12,7 @@ import TextEvent from '../dialogos/textEvent.js';
 import Diana from '../objetos/diana.js';
 import PuertaPared from '../objetos/puertaPared.js';
 import BotonMecanismo from '../objetos/botonMecansimo.js';
+import Nota from '../objetos/nota.js';
 //import PiedraMovil from './piedraMovil.js';
 
 /**
@@ -66,6 +67,9 @@ export default class MyMap extends Phaser.Scene {
         this.load.audio('extraLife', 'assets/music/extraLife.wav');
         this.load.audio('puñetazo', 'assets/music/puñetazo.wav');
         this.load.audio('puñoaire', 'assets/music/puñoaire.wav');
+
+        this.load.image('nota', 'assets/sprites/nota.png')
+        this.load.image('notaText', 'assets/tilesets/notaText.png');
     }
 
     create() {
@@ -91,19 +95,23 @@ export default class MyMap extends Phaser.Scene {
         this.escaleras = this.add.group();
         this.dialogos = this.add.group();
         this.physics.add.collider(this.enemies, suelo);
+        this.dianas = this.add.group();
 
         this.puertasPared = this.add.group();
 
         //this.bandera = new Bandera(this, 6750, 455);
         
         this.puerta = new Puerta(this, 15820, 1150);
-        this.diana = new Diana(this, 300, 1000);       
-        this.botonMecanismo = new BotonMecanismo(this, 12180, 1650)/*.setRotation(3.14/2)*/;
+        this.dianas.add(new Diana(this, 300, 1000));      
+        this.botonMecanismo = new BotonMecanismo(this, 12180, 1650)/*.setRotation(Math.PI/2)*/;
 
         //this.cartel = this.physics.add.image(9000, 700, 'cartel'); 
 
         this.player = new Player(this, 12000, 1500);
         //this.player = new Player(this, 12951, 485);
+
+        this.nota = new Nota(this, 12300, 1800, '123456');
+
 
         this.physics.add.collider(this.player, suelo);
         
@@ -162,6 +170,7 @@ export default class MyMap extends Phaser.Scene {
         this.puertaPared2 = new PuertaPared(this, 9583, 1375);
 
         this.enemies.add(new Enemy(this, 12700, 1500));
+
 
 
        /* this.piedraMovil = new PiedraMovil(this, this.player, 500, 500);

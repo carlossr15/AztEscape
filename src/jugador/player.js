@@ -38,8 +38,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.onLadder = false;
     this.onWallDoor= false;
     this.invencible = false;
-    this.llave = 1;
+    this.llave = 0;
     this.llaves = [];
+
+    this.nota = 1;
+    this.notas = [];
     
     // Esta label es la UI en la que pondremos la puntuación del jugador
     //this.cursors = this.scene.input.keyboard.createCursorKeys();
@@ -49,7 +52,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
       left:Phaser.Input.Keyboard.KeyCodes.A,
       right:Phaser.Input.Keyboard.KeyCodes.D,
       space:Phaser.Input.Keyboard.KeyCodes.SPACE,
-      fullscreen:Phaser.Input.Keyboard.KeyCodes.F
+      fullscreen:Phaser.Input.Keyboard.KeyCodes.F,
+      E:Phaser.Input.Keyboard.KeyCodes.E
     });
     
     this.scene.add.layer(this);
@@ -63,12 +67,17 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.pintarVida();
     this.pintarLlaves();
 
+    this.pintarNotas();
+
     //TextBox
     this.texto = this.scene.add.image(700, 600, 'textBox').setScale(0.8,0.8).setDepth(3).setScrollFactor(0);
     this.bgtexto = this.scene.add.image(445,600, 'bgtextBox').setScale(8,6.5).setSize(200,200).setDepth(1).setScrollFactor(0);
     this.MCtexto = this.scene.add.image(445,600, 'MCtextBox').setScale(0.55,0.55).setDepth(2).setScrollFactor(0);
 
     this.hideDialog();
+
+    this.notaText = this.scene.add.image(600, 350, 'notaText').setScrollFactor(0);
+    this.hideNote();
 
     this.triggerTimer = this.scene.time.addEvent({
       callback: this.timerEventGolpe,
@@ -179,6 +188,36 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.bgtexto.setAlpha(0);
     this.MCtexto.setAlpha(0);
   }
+
+  /********************/
+
+  showNote(){
+    this.notaText.setAlpha(1);
+    this.scene.nota.leerNota();
+    this.body.setVelocityX(0);
+  }
+
+  hideNote(){
+    this.notaText.setAlpha(0);
+  }
+
+  getNotes(){
+    this.nota += 1;
+    this.pintarNotas();
+  }
+
+  pintarNotas()  {
+    for(let j = 0; j < this.notas.length; j++)
+    {
+      this.notas[j].destroy();
+    }
+    for(let i = 0; i < this.nota; i++) {
+      this.notas[i] = this.scene.add.image(1240 - 31*i, 30, 'nota').setDepth(1).setScrollFactor(0);
+    }
+  }
+
+  /********************/
+
 
   timerEventGolpe()
   {
@@ -456,7 +495,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.body.setSize(400,420);
       this.body.setOffset(0,175);
     }
-  
+    /****************/
+    if(this.cursors.E.isDown && this.nota >= 1) this.showNote();
+    else this.hideNote();
+    /****************/
+
     //this.atacando = false;
     this.abrirPuerta();
   }

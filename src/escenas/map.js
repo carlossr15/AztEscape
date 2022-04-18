@@ -10,6 +10,7 @@ import Invisible from '../objetos/invisible.js';
 import Idolo from '../objetos/idolo.js';
 import TextEvent from '../dialogos/textEvent.js';
 import Diana from '../objetos/diana.js';
+import BotonMecanismo from '../objetos/botonMecansimo.js';
 //import PiedraMovil from './piedraMovil.js';
 
 /**
@@ -53,6 +54,8 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('restartButton', 'assets/sprites/restartButton.png', {frameWidth: 480, frameHeight: 170});
         this.load.spritesheet('mapsButton', 'assets/sprites/mapsButton.png', {frameWidth: 480, frameHeight: 170});
         //this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128});
+        this.load.image('diana', 'assets/sprites/diana.png');
+        this.load.spritesheet('botonMecanismo', 'assets/sprites/Boton.png', {frameWidth: 32, frameHeight: 32});
 
         this.load.atlas('heal', 'assets/sprites/heal.png','assets/sprites/heal.json');
         
@@ -90,12 +93,13 @@ export default class MyMap extends Phaser.Scene {
         this.escaleras = this.add.group();
         this.dialogos = this.add.group();
         this.consumibles = this.add.group();
+        this.dianas = this.add.group();
 
         //Creacion de objetos relevantes
 
         this.puerta = new Puerta(this, 15820, 1150);
 
-        this.diana = new Diana(this, 15820, 1000);
+        this.dianas.add(new Diana(this, 300, 1000));      
           
         this.enemies.add(new Enemy(this, 1200, 700));
         this.enemies.add(new Enemy(this, 4200, 700));

@@ -8,10 +8,4 @@ export default class Diana extends Phaser.GameObjects.Sprite{
         this.scene.physics.add.existing(this,true);
         this.body.setSize(32,32);
     }
-
-    destruir(){
-        this.meHanDado = true;
-        this.destroy();
-    }
-
 }
