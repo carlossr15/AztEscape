@@ -90,12 +90,13 @@ export default class MyMap extends Phaser.Scene {
         this.escaleras = this.add.group();
         this.dialogos = this.add.group();
         this.consumibles = this.add.group();
+        this.dianas = this.add.group();
 
         //Creacion de objetos relevantes
 
         this.puerta = new Puerta(this, 15820, 1150);
 
-        this.diana = new Diana(this, 15820, 1000);
+        this.dianas.add(new Diana(this, 15820, 1000));
           
         this.enemies.add(new Enemy(this, 1200, 700));
         this.enemies.add(new Enemy(this, 4200, 700));

@@ -46,7 +46,7 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
             this.setActive(false);
             this.setVisible(false);
         }
-        if (this.y >  1500){
+        if (this.y > 2000){
             this.setActive(false);
             this.setVisible(false);
         }
@@ -63,17 +63,17 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
     }
 
     hitDiana(){
-        var diana = this.scene.diana;
-        if (this.scene.physics.overlap(this, diana)){
-            if (diana.meHanDado == false){
-                diana.destruir();
+        var allDianas = this.scene.dianas.getChildren()
+        for (var i = 0; i < this.scene.dianas.getLength(); i++){
+            if (this.scene.physics.overlap(this, allDianas[i])){
+                allDianas[i].destroy();
+                console.log("DIANA");
             }
         }
     }
 
     hitBoton(){
         var botonMecanismo = this.scene.botonMecanismo;
-        console.log("ergereee");
         if (this.scene.physics.overlap(this, botonMecanismo)){
             console.log("pihpphjip");
             botonMecanismo.pulsar();
