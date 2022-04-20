@@ -13,6 +13,7 @@ import Diana from '../objetos/diana.js';
 import PuertaPared from '../objetos/puertaPared.js';
 import BotonMecanismo from '../objetos/botonMecansimo.js';
 import Nota from '../objetos/nota.js';
+import Puente from '../objetos/puente.js';
 //import PiedraMovil from './piedraMovil.js';
 
 /**
@@ -43,12 +44,14 @@ export default class MyMap extends Phaser.Scene {
         this.load.image('hasPerdido', 'assets/sprites/hasPerdido.png');
         this.load.image('background', 'assets/sprites/background.jpg');
         this.load.image('puertaPared', 'assets/sprites/puertaPared.png');
+        this.load.image('puente', 'assets/sprites/Puente.png');
         //this.load.image('cursor', 'assets/sprites/player.png');
 
         this.load.spritesheet('templo', 'assets/tilesets/tile_temple.png', { frameWidth: 544, frameHeight: 256 });
         this.load.spritesheet('objetos', 'assets/tilesets/objetos.png', { frameWidth: 256, frameHeight: 256 });
         this.load.spritesheet('player', 'assets/sprites/MC-Spritesheet.png', {frameWidth: 600, frameHeight: 600});
-        this.load.spritesheet('enemy', 'assets/sprites/araña.png', {frameWidth: 64, frameHeight: 64});
+        this.load.spritesheet('enemy', 'assets/sprites/araña.png', {frameWidth: 64, frameHeight: 64});        
+        this.load.spritesheet('vida', 'assets/sprites/health.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('batido', 'assets/sprites/Batido.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('puerta', 'assets/sprites/Puerta Abierta y Cerrada.png', {frameWidth: 104, frameHeight: 127});
         this.load.spritesheet('mediaPuerta', 'assets/sprites/mediaPuerta.png', {frameWidth: 128, frameHeight: 128});
@@ -56,7 +59,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('idolo', 'assets/sprites/Idolo.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('restartButton', 'assets/sprites/restartButton.png', {frameWidth: 480, frameHeight: 170});
         this.load.spritesheet('mapsButton', 'assets/sprites/mapsButton.png', {frameWidth: 480, frameHeight: 170});
-        this.load.spritesheet('botonMecanismo', 'assets/sprites/Boton.png', {frameWidth: 32, frameHeight: 32});
+        this.load.spritesheet('botonMecanismo', 'assets/sprites/Boton.png', {frameWidth: 50, frameHeight: 50});
         //this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128});
         
         this.load.audio('musicaFondo', 'assets/music/8bit Dungeon Level.mp3');
@@ -86,7 +89,7 @@ export default class MyMap extends Phaser.Scene {
         //const pinchos = map.createFromObjects('Pinchos', tilesetObjetos)
 
         //Configuracion mundo
-        this.physics.world.setBounds(0, 0, 16000, 3000);
+        this.physics.world.setBounds(0, 0, 18000, 3000);
         suelo.setCollisionByExclusion(-1, true);
 
         //var piedra = map.createFromObjects('PiedraObject', {gid: })
@@ -96,18 +99,20 @@ export default class MyMap extends Phaser.Scene {
         this.dialogos = this.add.group();
         this.physics.add.collider(this.enemies, suelo);
         this.dianas = this.add.group();
-
+        this.botones = this.add.group();
         this.puertasPared = this.add.group();
 
         //this.bandera = new Bandera(this, 6750, 455);
         
         this.puerta = new Puerta(this, 15820, 1150);
         this.dianas.add(new Diana(this, 300, 1000));      
-        this.botonMecanismo = new BotonMecanismo(this, 12180, 1650)/*.setRotation(Math.PI/2)*/;
+        this.botones.add(new BotonMecanismo(this, 12180, 1650, 'B1', 3, false));
+        this.botones.add(new BotonMecanismo(this, 12180, 1730, 'B2', 3, false));
+        this.botones.add(new BotonMecanismo(this, 12180, 1810, 'B3', 3, false));
 
         //this.cartel = this.physics.add.image(9000, 700, 'cartel'); 
 
-        this.player = new Player(this, 12000, 1500);
+        this.player = new Player(this, 12000, 1000);
         //this.player = new Player(this, 12951, 485);
 
         this.nota = new Nota(this, 12300, 1800, '123456');
@@ -127,48 +132,19 @@ export default class MyMap extends Phaser.Scene {
         this.dialogos.add(new TextEvent(this, 13051, 485, 100, 300, ["Oye, amigo que está en mi cabeza, ¿no estaré siendo \nmuy pesado no? ", "Voy a intentar estar más callado a partir \nde ahora ¿Vale?"]));
         this.dialogos.add(new TextEvent(this, 14514, 901, 100, 300, ["Podrías responder de vez en cuando..."]));
         this.dialogos.add(new TextEvent(this, 15500, 1100, 200, 200, ["Anda una diana, a lo mejor apuntando y haciendo clic \npuedo romperla de una pedrada."]));
-        
-        
-        this.enemies.add(new Enemy(this, 1200, 700));
-        this.enemies.add(new Enemy(this, 4200, 700));
-        this.enemies.add(new Enemy(this, 10250, 920));
-        this.enemies.add(new Enemy(this, 10500, 920));
-        this.enemies.add(new Enemy(this, 10900, 920));
-        this.enemies.add(new Enemy(this, 11200, 920));
-        this.enemies.add(new Enemy(this, 9200, 1300));
-        this.enemies.setActive(true);
-*/
-        /*
-        this.momiaPruebas = new Momia(this, 0, 0);
-        this.physics.add.collider(this.momiaPruebas, suelo);
         */
-        /*this.enemies.add(new Momia(this, 8200, 500));
-        this.enemies.add(new Momia(this, 9000, 1250));
-*/
-       // this.spikes1 = new Spike(this, this.player, 3025, 720, 950, 30);      
-       // this.spikes2 = new Spike(this, this.player, 7100, 500, 900, 30);
 
         this.escalera1 = new Escalera(this, 2064, 1005, 10, 485); //x = 4530
         this.escalera2 = new Escalera(this, 5492, 1007, 10, 460);
         this.escalera3 = new Escalera(this, 7410, 1560, 10, 250);
         this.escalera4 = new Escalera(this, 10965, 1685, 10, 140);
-       // this.escalera4 = new Escalera(this, 7120, 225, 10, 310);
-       // this.escalera5 = new Escalera(this, 7375, 225, 10, 310);
-       // this.escalera6 = new Escalera(this, 9170, 850, 10, 750);
-
-/*
-        this.batido1 = new Batido(this, 5025, 235);
-        this.batido2 = new Batido(this, 9375, 1300);
-        
-        this.llave = new Llave(this, 8965, 1300);
-
-        this.inv = new Invisible(this, this.player, 15880, 1150, 10, 100);
-
-        this.idolo = new Idolo(this, 174, 682);
-*/
-        this.puertaPared1 = new PuertaPared(this, 6190, 1220);
+    
+        this.puertasPared.add(new PuertaPared(this, 6190, 1220));
         this.puertaPared2 = new PuertaPared(this, 9583, 1375);
 
+        this.puente = new Puente(this, 12920, 1730);
+        this.puente.setRotation(3*Math.PI/2);
+        
         this.enemies.add(new Enemy(this, 12700, 1500));
 
 
@@ -229,20 +205,12 @@ export default class MyMap extends Phaser.Scene {
         //this.physics.add.collider(this.batido, suelo);
 
 
-        //Animaciones botonMecansimo HAY QUE MOVERLO AL OBJETO DEL MECANISMO
-        this.anims.create({
-            key: 'pulsar-boton',
-            frames: this.anims.generateFrameNames('botonMecanismo', { frames: [0, 1] }),
-            frameRate: 3,
-            repeat: 0
-        });
-        
         //Config Camara
         this.cameras.main.setBounds(0, 0, 16000, 3000); //Y = 250
         this.cameras.main.zoom = 1;
         this.cameras.main.startFollow(this.player, false, 0.05, 0.5);
         this.cameras.main.fadeIn(1000);
-
+        
         //Particulas curacion
         this.cargaParticulas();
 
@@ -307,6 +275,10 @@ export default class MyMap extends Phaser.Scene {
     death() {
         this.scene.start('lose');
         this.musica.stop();
+    }
+    
+    getCombination(){
+        return 'B1B3B2'; //combinacion para el mecanismo de botones
     }
 
 }

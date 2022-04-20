@@ -6,7 +6,7 @@ export class RestartButton extends Button {
   }
 
   doClick() {
-    this.relatedScene.scene.start('myMap');
+    this.relatedScene.scene.start('Map2'); //Cambiar a que vaya al mapa en el que esté
   }
 
 }

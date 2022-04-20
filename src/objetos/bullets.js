@@ -27,7 +27,8 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
 
     constructor(scene,x,y){
         super(scene, x, y, 'bullet');
-
+        this.combination = this.scene.getCombination();
+        this.newCombination = '';
     }
 
     fire(x, y, pointerX, pointerY){
@@ -73,11 +74,27 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
     }
 
     hitBoton(){
-        var boton = this.scene.botonMecanismo;
-        if(this.scene.physics.overlap(this, boton)){
-            console.log("Boton-pulsado");
-            boton.pulsar();
-            //botonMecanismo.destruir();
+        var allbuttons = this.scene.botones.getChildren();
+        for (var i = 0; i < this.scene.botones.getLength(); i++){
+            if(this.scene.physics.overlap(this, allbuttons[i]) && !allbuttons[i].getPulsado()){
+                allbuttons[i].pulsado = true;
+                console.log("Boton-pulsado");
+                allbuttons[i].pulsar();
+                this.newCombination += allbuttons[i].getNombre();
+                console.log("Combination: " + this.newCombination);
+                if(this.newCombination == this.combination)
+                    this.scene.puertaPared2.abrirPuerta();  
+                else if(this.newCombination.length / 2 == allbuttons[i].getNumero()){
+                    this.newCombination = '';
+                    this.scene.time.delayedCall(200, function(){
+                        for(var j = 0; j < this.scene.botones.getLength(); j++){
+                            allbuttons[j].pulsado = false;
+                            allbuttons[j].sacar();
+                        }   
+                    }, [], this);
+                    
+                }
+            }
         }
         
     }

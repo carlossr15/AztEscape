@@ -319,7 +319,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
  
   atacar()
   {
-    
+   // this.scene.puente.bajarPuente();
     this.puedeGolpear = false;
     this.atacando = true;
     this.puñetazo.play();
@@ -504,4 +504,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.abrirPuerta();
   }
   
+
 }
+
+

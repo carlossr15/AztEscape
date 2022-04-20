@@ -220,4 +220,5 @@ export default class MyMap extends Phaser.Scene {
         this.musica.stop();
     }
 
+
 }

@@ -28,7 +28,10 @@
   
   
     abrirPuerta(){
-       // this.y = 570;
+      // this.y = 570;
+      this.scene.cameras.main.centerOn(9583, 1300);
+      this.scene.cameras.main.stopFollow();
+      this.scene.time.delayedCall(250, function(){
         var aux = this.y - 100;
         while(this.y > aux){
           this.y -= 1;
@@ -37,46 +40,33 @@
         this.abriendoCerrando = false;
         this.abierta = true;
         this.scene.cameras.main.shake(500, 0.01); //provoca un shake de la camara al abrir la puerta
+      }, [], this);
       
+      this.scene.time.delayedCall(2000, function(){
+        this.scene.cameras.main.startFollow(this.scene.player, false, 0.05, 0.5);
+      }, [], this);
+    
     }
 
     cerrarPuerta(){
       // this.y = 570;
-       var aux = this.y + 100;
-       while(this.y < aux){
-         this.y += 1;
-       }
-       this.scene.player.onWallDoor = false;
-       this.abriendoCerrando = false;
-       this.abierta = false;     
+      var aux = this.y + 100;
+      while(this.y < aux){
+        this.y += 1;
+      }
+      this.scene.player.onWallDoor = false;
+      this.abriendoCerrando = false;
+      this.abierta = false;     
    }
 
 
-    checkWallDoor()
-    {
-      //this.onLadder = false;
-      if(this.scene.physics.overlap(this.scene.player, this)){
-        this.scene.player.onWallDoor = true;
-        console.log("puertaPared");
-        if(!this.abriendoCerrando)
-          this.abrirPuerta();
-        this.abriendoCerrando = true;
-      }
-      else {
-        this.scene.player.onWallDoor = false;
-        if(this.abierta)
-          this.cerrarPuerta();
-      }
-    }
+    
 
     preUpdate() {
       // IMPORTANTE: Si no ponemos esta instrucción y el sprite está animado
       // no se podrá ejecutar la animación del sprite. 
       
       super.preUpdate();
-      this.scene.time.delayedCall(1000, function(){
-        this.checkWallDoor();
-      }, [], this);
     }
   
   
