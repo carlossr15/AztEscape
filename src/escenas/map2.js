@@ -14,6 +14,7 @@ import PuertaPared from '../objetos/puertaPared.js';
 import BotonMecanismo from '../objetos/botonMecansimo.js';
 import Nota from '../objetos/nota.js';
 import Puente from '../objetos/puente.js';
+import PiedraMovil from '../objetos/piedraMovil.js';
 //import PiedraMovil from './piedraMovil.js';
 
 /**
@@ -60,7 +61,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('restartButton', 'assets/sprites/restartButton.png', {frameWidth: 480, frameHeight: 170});
         this.load.spritesheet('mapsButton', 'assets/sprites/mapsButton.png', {frameWidth: 480, frameHeight: 170});
         this.load.spritesheet('botonMecanismo', 'assets/sprites/Boton.png', {frameWidth: 50, frameHeight: 50});
-        //this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128});
+        this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128});
         
         this.load.audio('musicaFondo', 'assets/music/8bit Dungeon Level.mp3');
         this.load.audio('jump', 'assets/music/jump.wav');
@@ -114,7 +115,8 @@ export default class MyMap extends Phaser.Scene {
 
         this.player = new Player(this, 12000, 1000);
         //this.player = new Player(this, 12951, 485);
-
+        
+        this.piedra1 = new PiedraMovil(this, 12100, 1000);
         this.nota = new Nota(this, 12300, 1800, '123456');
 
 
@@ -217,6 +219,7 @@ export default class MyMap extends Phaser.Scene {
         //Colisiones
         this.physics.add.collider(this.enemies, suelo);
         this.physics.add.collider(this.player, suelo);
+        this.physics.add.collider(this.piedra1, suelo);
         this.cargaColisiones();
         
         //Musica

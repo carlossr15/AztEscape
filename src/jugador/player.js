@@ -272,8 +272,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.scene.time.delayedCall(800, function(){
         this.invencible = false;
       }, [], this);
-      this.body.setVelocityX(this.lado === "der" ? -100 : 100);
-      this.body.setVelocityY(-100);
+      this.body.setVelocityX(this.lado === "der" ? -300 : 300);
+      this.body.setVelocityY(-150);
     }
     if(this.vida === 0){
       this.scene.death();
