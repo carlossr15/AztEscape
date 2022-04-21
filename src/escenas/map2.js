@@ -71,6 +71,9 @@ export default class MyMap extends Phaser.Scene {
         this.load.audio('extraLife', 'assets/music/extraLife.wav');
         this.load.audio('puñetazo', 'assets/music/puñetazo.wav');
         this.load.audio('puñoaire', 'assets/music/puñoaire.wav');
+        this.load.audio('pulsaBoton', 'assets/music/boton-efecto-de-sonido.wav');
+        this.load.audio('combinacionIncorrecta', 'assets/music/incorrectaCombinacion.wav');
+        this.load.audio('abrirPuertaPared', 'assets/music/abrirPuertaPared.wav');
 
         this.load.image('nota', 'assets/sprites/nota.png')
         this.load.image('notaText', 'assets/tilesets/notaText.png');
@@ -144,7 +147,7 @@ export default class MyMap extends Phaser.Scene {
         this.puertasPared.add(new PuertaPared(this, 6190, 1220));
         this.puertaPared2 = new PuertaPared(this, 9583, 1375);
 
-        this.puente = new Puente(this, 12920, 1730);
+        this.puente = new Puente(this, 12920, 1863);
         this.puente.setRotation(3*Math.PI/2);
         
         this.enemies.add(new Enemy(this, 12700, 1500));

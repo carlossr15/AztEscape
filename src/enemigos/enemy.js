@@ -110,7 +110,8 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.setFlip(false, true);
     this.body.setVelocityX(0);
     this.anims.stop();
-    this.setTint(0xff0000);
+    this.body.enable = false;
+    this.setTintFill(0xff00ff, 0xffff00, 0x0000ff, 0xff0000);
     this.scene.time.delayedCall(800, function(){
       this.destroy();
     }, [], this);

@@ -23,7 +23,7 @@
         
         this.scene.anims.create({ 
             key: 'full', 
-            frames: this.scene.anims.generateFrameNames('vida', { frames: [0, 1, 2, 3, 4] }), 
+            frames: this.scene.anims.generateFrameNames('vida', { frames: [0, 3] }), 
             frameRate: 7,
             repeat: -1 
         });
@@ -45,8 +45,8 @@
         this.cantidad -=1;
     }
 
-    preUpdate() {
-      super.preUpdate();
+    preUpdate(t, d) {
+      super.preUpdate(t, d);
       // NO FUNCIONA
         if(this.cantidad === 2)
             this.anims.play('full', true);

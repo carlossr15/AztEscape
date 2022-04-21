@@ -11,10 +11,14 @@ export default class BotonMecanismo extends Phaser.GameObjects.Sprite{
         this.scene.physics.add.existing(this,true);
         this.body.setSize(32,32);
         this.cargarAnimaciones();
+
+        this.pulsaBoton = this.scene.sound.add('pulsaBoton', {volume: 1});
+
     }
 
     pulsar(){
         this.play('pulsar-boton');
+        this.pulsaBoton.play();
     }
 
     sacar(){ //animacion de que salga el boton hacia fuera

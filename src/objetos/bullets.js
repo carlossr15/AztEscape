@@ -29,6 +29,8 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
         super(scene, x, y, 'bullet');
         this.combination = this.scene.getCombination();
         this.newCombination = '';
+        this.combIncorrecta = this.scene.sound.add('combinacionIncorrecta', {volume: 1});
+        this.abrirPuertaPared = this.scene.sound.add('abrirPuertaPared', {volume: 1});
     }
 
     fire(x, y, pointerX, pointerY){
@@ -82,9 +84,12 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
                 allbuttons[i].pulsar();
                 this.newCombination += allbuttons[i].getNombre();
                 console.log("Combination: " + this.newCombination);
-                if(this.newCombination == this.combination)
-                    this.scene.puertaPared2.abrirPuerta();  
+                if(this.newCombination == this.combination) {
+                    this.scene.puertaPared2.abrirPuerta(); 
+                    this.abrirPuertaPared.play();
+                } 
                 else if(this.newCombination.length / 2 == allbuttons[i].getNumero()){
+                    this.combIncorrecta.play();
                     this.newCombination = '';
                     this.scene.time.delayedCall(200, function(){
                         for(var j = 0; j < this.scene.botones.getLength(); j++){

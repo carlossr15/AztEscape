@@ -13,25 +13,35 @@
      */
     constructor(scene, x, y){
       super(scene, x, y, 'puente');
-      this.setScale(1, 1);
+      this.setScale(1.2, 1.2);
       this.scene.add.existing(this);
       this.scene.physics.add.existing(this, true);
       this.setDepth(0);
-      
+      this.setOrigin(0, 1);
+      this.bajar = false;
+      this.body.setSize(10, 450, 50, 0);
+      this.scene.physics.add.collider(this, this.scene.player);
     }
   
   
-    bajarPuente(){
-        var pi = 3 * Math.PI / 2;
-        while(pi < 2 * Math.PI){
-            this.setRotation(pi);            
-            this.scene.time.delayedCall(200, function(){
-                pi += 0.2;
-            }, [], this);
-        }
+    /*bajarPuente(){
+      while(this.angle < 45){
+        this.angle += 0.001;
+      }
+    }*/
+  
+    preUpdate(){
+      super.preUpdate();
+      if(this.bajar && this.angle < -1){
+        this.angle += 1;
+        if(this.angle <= 0)
+          this.body.enable = false;
+      }
     }
-  
-  
+
+    setBajar(){
+      this.bajar = true;
+    }
   
     
   }
