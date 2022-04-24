@@ -24,6 +24,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.body.setSize(400,420);
     this.body.setOffset(0,175);
     this.body.updateFromGameObject(); 
+
+    
+
     //Dirección a la que esta mirando
     this.lado = 'der';
     this.caminando = false;
@@ -96,6 +99,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.puñetazo = this.scene.sound.add('puñoaire', {volume: 1.5});
 
     this.cargarAnimaciones();
+
+
+    
   }
 
   cargarAnimaciones(){
@@ -261,6 +267,43 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.updateScore();
   }
 
+  triggerTimer = this.scene.time.addEvent({
+    callback: this.blink,
+    callbackScope: this,
+    //delay: 2000,// + getRandom(0, 1000), // 1000 = 1 second
+    delay: 100,
+    loop: true
+  });
+
+  numBlink = 0;
+  
+  blink()
+  {
+    if(this.invencible)
+    {
+      
+      if(this.numBlink < 10)
+      {
+        if(this.numBlink%2 == 0)
+        {
+          this.setAlpha(0.3);
+       }
+        else
+        {
+          this.setAlpha(1);
+        }
+
+        this.numBlink++;
+      }  
+      else
+      {
+        this.numBlink = 0;
+      }
+    }
+    else{
+      this.setAlpha(1);
+    }
+  }
 
   hurt(){
     if(!this.invencible){
@@ -270,8 +313,13 @@ export default class Player extends Phaser.GameObjects.Sprite {
       (this.vidas.getChildren())[parseInt(this.vida/2)].reduce();
       this.invencible = true;
 
+      //parpadea cuando le hacen daño
+      this.numBlink = 0;
+      this.blink();
+      
       this.scene.time.delayedCall(800, function(){
         this.invencible = false;
+
       }, [], this);
       this.body.setVelocityX(this.lado === "der" ? -300 : 300);
       this.body.setVelocityY(-150);
@@ -317,6 +365,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
       }
     }
   }
+
+  
  
   atacar()
   {
