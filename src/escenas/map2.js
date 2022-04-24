@@ -15,6 +15,7 @@ import BotonMecanismo from '../objetos/botonMecansimo.js';
 import Nota from '../objetos/nota.js';
 import Puente from '../objetos/puente.js';
 import PiedraMovil from '../objetos/piedraMovil.js';
+import BotonSuelo from '../objetos/botonSuelo.js';
 //import PiedraMovil from './piedraMovil.js';
 
 /**
@@ -32,7 +33,6 @@ export default class MyMap extends Phaser.Scene {
     preload() {
         this.load.tilemapTiledJSON('map2', 'assets/maps/Lvl2.json');
 
-        this.load.image('diana', 'assets/sprites/diana.png');
         this.load.image('textBox', 'assets/tilesets/TextBox.png');
         this.load.image('bgtextBox', 'assets/tilesets/BGTextBox.png');
         this.load.image('MCtextBox', 'assets/tilesets/MCTextBox.png');
@@ -61,8 +61,10 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('restartButton', 'assets/sprites/restartButton.png', {frameWidth: 480, frameHeight: 170});
         this.load.spritesheet('mapsButton', 'assets/sprites/mapsButton.png', {frameWidth: 480, frameHeight: 170});
         this.load.spritesheet('botonMecanismo', 'assets/sprites/Boton.png', {frameWidth: 50, frameHeight: 50});
-        this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128});
-        
+        this.load.spritesheet('botonSuelo', 'assets/sprites/BotonSuelo.png', {frameWidth: 50, frameHeight: 50});
+        this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128}); 
+        this.load.spritesheet('diana', 'assets/sprites/diana.png', {frameWidth: 75, frameHeight: 60});
+
         this.load.audio('musicaFondo', 'assets/music/8bit Dungeon Level.mp3');
         this.load.audio('jump', 'assets/music/jump.wav');
         this.load.audio('daño', 'assets/music/daño.wav');
@@ -74,6 +76,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.audio('pulsaBoton', 'assets/music/boton-efecto-de-sonido.wav');
         this.load.audio('combinacionIncorrecta', 'assets/music/incorrectaCombinacion.wav');
         this.load.audio('abrirPuertaPared', 'assets/music/abrirPuertaPared.wav');
+        this.load.audio('sonidoDiana', 'assets/music/sonidoDeFlecha.wav');
 
         this.load.image('nota', 'assets/sprites/nota.png')
         this.load.image('notaText', 'assets/tilesets/notaText.png');
@@ -104,22 +107,34 @@ export default class MyMap extends Phaser.Scene {
         this.physics.add.collider(this.enemies, suelo);
         this.dianas = this.add.group();
         this.botones = this.add.group();
+        this.botonesSuelo = this.add.group();
         this.puertasPared = this.add.group();
+        this.piedras = this.add.group();
 
         //this.bandera = new Bandera(this, 6750, 455);
         
         this.puerta = new Puerta(this, 15820, 1150);
-        this.dianas.add(new Diana(this, 300, 1000));      
-        this.botones.add(new BotonMecanismo(this, 12180, 1650, 'B1', 3, false));
-        this.botones.add(new BotonMecanismo(this, 12180, 1730, 'B2', 3, false));
-        this.botones.add(new BotonMecanismo(this, 12180, 1810, 'B3', 3, false));
+        this.dianas.add(new Diana(this, 300, 1000, 'puerta'));      
+        this.botones.add(new BotonMecanismo(this, 12180, 1650, 'B1', 3, 'puente', false));
+        this.botones.add(new BotonMecanismo(this, 12180, 1730, 'B2', 3, 'puente', false));
+        this.botones.add(new BotonMecanismo(this, 12180, 1810, 'B3', 3, 'puente', false));
 
         //this.cartel = this.physics.add.image(9000, 700, 'cartel'); 
 
-        this.player = new Player(this, 12000, 1000);
+        this.player = new Player(this, 300, 900);
         //this.player = new Player(this, 12951, 485);
         
-        this.piedra1 = new PiedraMovil(this, 12100, 1000);
+        //this.piedra1 = new PiedraMovil(this, 5000, 900);
+        this.piedras.add(new PiedraMovil(this, 5700, 1100, 75, 75));
+        this.piedras.add(new PiedraMovil(this, 700, 1100, 80, 80));
+        this.piedras.add(new PiedraMovil(this, 13500, 1100, 80, 80));
+        this.piedras.add(new PiedraMovil(this, 14000, 1100, 160, 160));
+        //this.physics.add.collider(this.piedra3, this.piedra4);
+
+        this.botonesSuelo.add(new BotonSuelo(this, 5825, 1365, 'B4', 1, 'puerta', false));
+        
+        //this.botones.add(this.boton4);
+
         this.nota = new Nota(this, 12300, 1800, '123456');
 
 
@@ -144,14 +159,14 @@ export default class MyMap extends Phaser.Scene {
         this.escalera3 = new Escalera(this, 7410, 1560, 10, 250);
         this.escalera4 = new Escalera(this, 10965, 1685, 10, 140);
     
-        this.puertasPared.add(new PuertaPared(this, 6190, 1220));
+        this.puertaPared1 = new PuertaPared(this, 6190, 1220);
         this.puertaPared2 = new PuertaPared(this, 9583, 1375);
 
         this.puente = new Puente(this, 12920, 1863);
         this.puente.setRotation(3*Math.PI/2);
         
         this.enemies.add(new Enemy(this, 12700, 1500));
-
+        
 
 
        /* this.piedraMovil = new PiedraMovil(this, this.player, 500, 500);
@@ -222,7 +237,7 @@ export default class MyMap extends Phaser.Scene {
         //Colisiones
         this.physics.add.collider(this.enemies, suelo);
         this.physics.add.collider(this.player, suelo);
-        this.physics.add.collider(this.piedra1, suelo);
+        this.physics.add.collider(this.piedras, suelo);
         this.cargaColisiones();
         
         //Musica
@@ -283,8 +298,12 @@ export default class MyMap extends Phaser.Scene {
         this.musica.stop();
     }
     
-    getCombination(){
+    getCombinationPuente(){
         return 'B1B3B2'; //combinacion para el mecanismo de botones
+    }
+
+    getCombinationSuelo(){
+        return 'B4'; //combinacion para el mecanismo de botones
     }
 
 }

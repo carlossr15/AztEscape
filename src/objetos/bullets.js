@@ -27,7 +27,7 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
 
     constructor(scene,x,y){
         super(scene, x, y, 'bullet');
-        this.combination = this.scene.getCombination();
+        this.combination = this.scene.getCombinationPuente();
         this.newCombination = '';
         this.combIncorrecta = this.scene.sound.add('combinacionIncorrecta', {volume: 1});
         this.abrirPuertaPared = this.scene.sound.add('abrirPuertaPared', {volume: 1});
@@ -69,8 +69,18 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
         var allDianas = this.scene.dianas.getChildren()
         for (var i = 0; i < this.scene.dianas.getLength(); i++){
             if (this.scene.physics.overlap(this, allDianas[i])){
-                allDianas[i].destroy();
-                console.log("DIANA");
+                allDianas[i].pulsado = true;
+                console.log("Diana-pulsado");
+                if(!allDianas[i].meHanDado){
+                    allDianas[i].impactar();                    
+                    if(allDianas[i].getAcciona() == 'puerta'){
+                        this.scene.puertaPared1.abrirPuerta(); 
+                        this.abrirPuertaPared.play();
+                    }else if(allDianas[i].getAcciona() == 'puente'){
+                        this.scene.puente.bajar = true;
+                        this.abrirPuertaPared.play(); //CAMBIAR POR SONIDO DE BAJAR PUENTE
+                    }
+                }
             }
         }
     }
@@ -85,8 +95,13 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
                 this.newCombination += allbuttons[i].getNombre();
                 console.log("Combination: " + this.newCombination);
                 if(this.newCombination == this.combination) {
-                    this.scene.puertaPared2.abrirPuerta(); 
-                    this.abrirPuertaPared.play();
+                    if(allbuttons[i].getAcciona() == 'puerta'){
+                        this.scene.puertaPared2.abrirPuerta(); 
+                        this.abrirPuertaPared.play();
+                    }else if(allbuttons[i].getAcciona() == 'puente'){
+                        this.scene.puente.bajar = true;
+                        this.abrirPuertaPared.play(); //CAMBIAR POR SONIDO DE BAJAR PUENTE
+                    }
                 } 
                 else if(this.newCombination.length / 2 == allbuttons[i].getNumero()){
                     this.combIncorrecta.play();

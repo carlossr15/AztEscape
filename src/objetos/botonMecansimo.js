@@ -1,11 +1,12 @@
 export default class BotonMecanismo extends Phaser.GameObjects.Sprite{
 
-    constructor(scene, x, y, nombre, numero, pulsado){ //escena, x, y, nombre que tiene el boton (siempre va a ser B y el numero de boton, ej: B1), numero de botones implicado en el mecanismo y booleano de si esta ya pulsado o no
+    constructor(scene, x, y, nombre, numero, acciona, pulsado){ //escena, x, y, nombre que tiene el boton (siempre va a ser B y el numero de boton, ej: B1), numero de botones implicado en el mecanismo, acciona se refiere a lo que activa (un puente una puerta...) y booleano de si esta ya pulsado o no
         super(scene, x, y, 'botonMecanismo');
         this.meHanDado = false;
         this.nombre = nombre;
         this.pulsado = pulsado;
         this.numero = numero;
+        this.acciona = acciona;
         this.setDepth(0);
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this,true);
@@ -56,6 +57,10 @@ export default class BotonMecanismo extends Phaser.GameObjects.Sprite{
 
     getNumero(){ //devuelve el numero de botones del mecanismo
         return this.numero;
+    }
+
+    getAcciona(){
+        return this.acciona;
     }
 
 }

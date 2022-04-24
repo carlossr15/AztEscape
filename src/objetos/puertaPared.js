@@ -29,8 +29,9 @@
   
     abrirPuerta(){
       // this.y = 570;
-      this.scene.cameras.main.centerOn(9583, 1300);
+      this.scene.cameras.main.centerOn(this.x, this.y);
       this.scene.cameras.main.stopFollow();
+      console.log("Puerta 1.0: " + this.x + " " + this.y)
       this.scene.time.delayedCall(250, function(){
         var aux = this.y - 100;
         while(this.y > aux){
@@ -41,7 +42,7 @@
         this.abierta = true;
         this.scene.cameras.main.shake(500, 0.01); //provoca un shake de la camara al abrir la puerta
       }, [], this);
-      
+      console.log("Puerta 2.0: " + this.x + " " + this.y)
       this.scene.time.delayedCall(2000, function(){
         this.scene.cameras.main.startFollow(this.scene.player, false, 0.05, 0.5);
       }, [], this);
