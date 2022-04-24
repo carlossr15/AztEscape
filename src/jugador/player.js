@@ -38,6 +38,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.onLadder = false;
     this.onWallDoor= false;
     this.invencible = false;
+    this.enPiedra = false;
     this.llave = 0;
     this.llaves = [];
 
@@ -364,6 +365,19 @@ export default class Player extends Phaser.GameObjects.Sprite {
         else
             this.scene.game.scale.startFullscreen();
     }
+    /*var allPiedras = this.scene.piedras.getChildren()
+    for (var i = 0; i < this.scene.piedras.getLength(); i++){
+      if (this.scene.physics.overlap(allPiedras[i], this)) {
+        this.enPiedra = true;
+        console.log(this.enPiedra)
+      }
+      else{
+        this.enPiedra = false;
+        console.log(this.enPiedra)
+      } 
+      
+    }*/
+
     if(this.onLadder){
       this.body.setAllowGravity(false);
       console.log("cayendo");
@@ -399,9 +413,15 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.bullets.fireBullet(this.x, this.y, p.x, p.y);
     })
     
-    if (this.cursors.up.isDown && this.body.onFloor()) {
-      this.body.setVelocityY(this.jumpSpeed);
-      this.salto.play();
+    if (this.cursors.up.isDown) {
+      console.log("jj: " + this.enPiedra)
+      if(this.body.onFloor()){
+        this.body.setVelocityY(this.jumpSpeed);
+        this.salto.play();
+      } else if(this.enPiedra){
+        this.body.setVelocityY(this.jumpSpeed);
+        this.salto.play();
+      }
     }
     if(!this.body.onFloor() && this.lado == 'izq' && !this.onLadder) 
       this.play('jump-left', true);
@@ -419,7 +439,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.body.setVelocityX(this.speed);
       this.caminando = true;
     }
-    else if(this.body.onFloor()){
+    else if(this.body.onFloor() || this.enPiedra){
       this.body.setVelocityX(0);
       this.caminando = false;
       //this.play('stand', true);
@@ -427,22 +447,22 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     if(this.caminando && !this.onLadder)
     {
-      if (this.body.onFloor() && this.lado == 'izq')
+      if ((this.body.onFloor() || this.enPiedra) && this.lado == 'izq')
       {
         this.play('walk-left', true);
       }
-      else if(this.body.onFloor() && this.lado == 'der')
+      else if((this.body.onFloor() || this.enPiedra) && this.lado == 'der')
       {
         this.play('walk-right', true);
       }
     }
     else
     {
-      if (this.body.onFloor() && this.lado == 'izq')
+      if ((this.body.onFloor() || this.enPiedra) && this.lado == 'izq')
       {
         this.play('stand-left', true);
       }
-      else if(this.body.onFloor() && this.lado == 'der')
+      else if((this.body.onFloor() || this.enPiedra) && this.lado == 'der')
       {
         this.play('stand-right', true);
       }

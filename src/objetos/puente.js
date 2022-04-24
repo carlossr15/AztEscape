@@ -34,6 +34,7 @@
       super.preUpdate();
       if(this.bajar && this.angle < -1){
         this.angle += 1;
+        this.scene.player.body.setVelocityX(0);
         if(this.angle <= 0)
           this.body.enable = false;
       }

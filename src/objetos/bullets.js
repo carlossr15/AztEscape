@@ -74,10 +74,10 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
                 if(!allDianas[i].meHanDado){
                     allDianas[i].impactar();                    
                     if(allDianas[i].getAcciona() == 'puerta'){
-                        this.scene.puertaPared1.abrirPuerta(); 
+                        this.scene.puertaPared2.abrirPuerta(); 
                         this.abrirPuertaPared.play();
                     }else if(allDianas[i].getAcciona() == 'puente'){
-                        this.scene.puente.bajar = true;
+                        this.scene.puente2.bajar = true;
                         this.abrirPuertaPared.play(); //CAMBIAR POR SONIDO DE BAJAR PUENTE
                     }
                 }
@@ -99,7 +99,7 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
                         this.scene.puertaPared2.abrirPuerta(); 
                         this.abrirPuertaPared.play();
                     }else if(allbuttons[i].getAcciona() == 'puente'){
-                        this.scene.puente.bajar = true;
+                        this.scene.puente1.bajar = true;
                         this.abrirPuertaPared.play(); //CAMBIAR POR SONIDO DE BAJAR PUENTE
                     }
                 } 

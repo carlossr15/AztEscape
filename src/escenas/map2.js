@@ -114,14 +114,16 @@ export default class MyMap extends Phaser.Scene {
         //this.bandera = new Bandera(this, 6750, 455);
         
         this.puerta = new Puerta(this, 15820, 1150);
-        this.dianas.add(new Diana(this, 300, 1000, 'puerta'));      
+        this.dianas.add(new Diana(this, 9870, 1085, 'puerta'));   
+        this.dianas.add(new Diana(this, 2632, 1087, 'puente'));      
+        
         this.botones.add(new BotonMecanismo(this, 12180, 1650, 'B1', 3, 'puente', false));
         this.botones.add(new BotonMecanismo(this, 12180, 1730, 'B2', 3, 'puente', false));
         this.botones.add(new BotonMecanismo(this, 12180, 1810, 'B3', 3, 'puente', false));
 
         //this.cartel = this.physics.add.image(9000, 700, 'cartel'); 
 
-        this.player = new Player(this, 300, 900);
+        this.player = new Player(this, 9450, 1100);
         //this.player = new Player(this, 12951, 485);
         
         //this.piedra1 = new PiedraMovil(this, 5000, 900);
@@ -162,8 +164,11 @@ export default class MyMap extends Phaser.Scene {
         this.puertaPared1 = new PuertaPared(this, 6190, 1220);
         this.puertaPared2 = new PuertaPared(this, 9583, 1375);
 
-        this.puente = new Puente(this, 12920, 1863);
-        this.puente.setRotation(3*Math.PI/2);
+        this.puente1 = new Puente(this, 12920, 1863);
+        this.puente1.setRotation(3*Math.PI/2);
+
+        this.puente2 = new Puente(this, 3070, 1285);
+        this.puente2.setRotation(3*Math.PI/2);
         
         this.enemies.add(new Enemy(this, 12700, 1500));
         
