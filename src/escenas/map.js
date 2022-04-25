@@ -10,6 +10,7 @@ import Invisible from '../objetos/invisible.js';
 import Idolo from '../objetos/idolo.js';
 import TextEvent from '../dialogos/textEvent.js';
 import BotonMecanismo from '../objetos/botonMecansimo.js';
+import Esqueleto from '../enemigos/esqueleto.js';
 //import PiedraMovil from './piedraMovil.js';
 
 /**
@@ -45,6 +46,9 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('puerta', 'assets/sprites/Puerta Abierta y Cerrada.png', {frameWidth: 104, frameHeight: 127});
         this.load.spritesheet('mediaPuerta', 'assets/sprites/mediaPuerta.png', {frameWidth: 128, frameHeight: 128});
         this.load.spritesheet('momia', 'assets/sprites/momiaSpritesheet.png', {frameWidth: 24, frameHeight: 32});
+
+        this.load.spritesheet('esqueleto', 'assets/sprites/esqueleto.png', {frameWidth: 24, frameHeight: 32});
+
         this.load.spritesheet('idolo', 'assets/sprites/Idolo.png', {frameWidth: 32, frameHeight: 32});
         //this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128});
         this.load.spritesheet('botonMecanismo', 'assets/sprites/Boton.png', {frameWidth: 32, frameHeight: 32});
@@ -97,7 +101,7 @@ export default class MyMap extends Phaser.Scene {
 
         this.cartel = this.physics.add.image(9000, 700, 'cartel'); //No he conseguido que se coloque detrás si lo pongo despues
         this.player = new Player(this, 100, 675);
-
+      
         //Creacion grupos
         this.enemies = this.add.group();
         this.escaleras = this.add.group();
@@ -107,7 +111,7 @@ export default class MyMap extends Phaser.Scene {
         //Creacion de objetos relevantes
 
     
-          
+        this.enemies.add(new Esqueleto(this, 100, 675));
         this.enemies.add(new Enemy(this, 1200, 700));
         this.enemies.add(new Enemy(this, 4200, 700));
         this.enemies.add(new Enemy(this, 10250, 920));
