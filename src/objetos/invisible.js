@@ -13,14 +13,14 @@
    * @param {number} x Coordenada x
    * @param {number} y Coordenada y
    */
-  constructor(scene, player, x, y, w, h){
+  constructor(scene, x, y, w, h){
     super(scene, x, y, 'invisible');
     this.setScale(1, 1);
     this.alpha = 0;
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this, true);
     this.body.setSize(w,h);
-    this.scene.physics.add.collider(this, player);
+    this.scene.physics.add.collider(this, this.scene.player);
   }
 
 

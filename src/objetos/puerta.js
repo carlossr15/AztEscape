@@ -35,6 +35,7 @@ export default class Puerta extends Phaser.GameObjects.Sprite {
     console.log("PUERTA-ABIERTA");
     this.scene.time.delayedCall(650, function(){
       this.scene.add.image(this.x + 24, this.y + 1.5, 'mediaPuerta').setDepth(1);
+      this.scene.player.body.setVelocityX(0);
     }, [], this);
 
 

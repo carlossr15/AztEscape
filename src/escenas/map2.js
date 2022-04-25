@@ -65,6 +65,9 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128}); 
         this.load.spritesheet('diana', 'assets/sprites/diana.png', {frameWidth: 75, frameHeight: 60});
 
+        this.load.atlas('heal', 'assets/sprites/heal.png','assets/sprites/heal.json');
+
+
         this.load.audio('musicaFondo', 'assets/music/8bit Dungeon Level.mp3');
         this.load.audio('jump', 'assets/music/jump.wav');
         this.load.audio('daño', 'assets/music/daño.wav');
@@ -84,6 +87,8 @@ export default class MyMap extends Phaser.Scene {
 
     create() {
     
+        this.mapa = 'mapa2';
+
         const map = this.make.tilemap({ key: 'map2' });
         const tilesetTemplo = map.addTilesetImage('Templo', 'templo');
         const tilesetObjetos = map.addTilesetImage('objetos', 'objetos');
@@ -113,7 +118,9 @@ export default class MyMap extends Phaser.Scene {
 
         //this.bandera = new Bandera(this, 6750, 455);
         
-        this.puerta = new Puerta(this, 15820, 1150);
+        this.puerta = new Puerta(this, 15100, 1570);
+        this.inv = new Invisible(this, 15160, 1570, 10, 100);
+
         this.dianas.add(new Diana(this, 9870, 1085, 'puerta'));   
         this.dianas.add(new Diana(this, 2632, 1087, 'puente'));      
         
@@ -123,7 +130,7 @@ export default class MyMap extends Phaser.Scene {
 
         //this.cartel = this.physics.add.image(9000, 700, 'cartel'); 
 
-        this.player = new Player(this, 9450, 1100);
+        this.player = new Player(this, 14500, 1100);
         //this.player = new Player(this, 12951, 485);
         
         //this.piedra1 = new PiedraMovil(this, 5000, 900);
@@ -300,6 +307,7 @@ export default class MyMap extends Phaser.Scene {
 
     death() {
         this.scene.start('lose');
+        this.scene.sta
         this.musica.stop();
     }
     

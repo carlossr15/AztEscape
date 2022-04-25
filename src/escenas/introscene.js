@@ -39,7 +39,7 @@
 
         //after the video end, start the next scene (Map1)
         vid.on('complete', function () {
-            this.scene.start('Map1');
+            this.scene.start('inicio');
         }, this);
 
     }

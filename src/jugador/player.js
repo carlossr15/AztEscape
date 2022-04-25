@@ -42,10 +42,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.onWallDoor= false;
     this.invencible = false;
     this.enPiedra = false;
-    this.llave = 0;
+    this.llave = 1;
     this.llaves = [];
 
-    this.nota = 1;
+    this.nota = 0;
     this.notas = [];
     
     // Esta label es la UI en la que pondremos la puntuación del jugador
@@ -57,14 +57,15 @@ export default class Player extends Phaser.GameObjects.Sprite {
       right:Phaser.Input.Keyboard.KeyCodes.D,
       space:Phaser.Input.Keyboard.KeyCodes.SPACE,
       fullscreen:Phaser.Input.Keyboard.KeyCodes.F,
-      E:Phaser.Input.Keyboard.KeyCodes.E
+      E:Phaser.Input.Keyboard.KeyCodes.E,
+      ESC:Phaser.Input.Keyboard.KeyCodes.ESC
     });
     
     this.scene.add.layer(this);
     this.maxVida = 6;
     this.vida = 6;
     this.vidas = this.scene.add.group();
-    this.bullets = new Bullets(this.scene);
+    if(this.scene.mapa != 'mapa1') this.bullets = new Bullets(this.scene);
     this.setDepth(1);
     //this.scene.add.image(0, 500, 'vida').setDepth(1);
     //this.scene.add.image(200, 500, 'vida').setDepth(1);
@@ -460,7 +461,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     this.scene.input.on('pointerdown', (pointer) =>{
       let p = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
-      this.bullets.fireBullet(this.x, this.y, p.x, p.y);
+      if(this.scene.mapa != 'mapa1') this.bullets.fireBullet(this.x, this.y, p.x, p.y);
     })
     
     if (this.cursors.up.isDown) {
@@ -569,6 +570,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
     if(this.cursors.E.isDown && this.nota >= 1) this.showNote();
     else this.hideNote();
     /****************/
+
+    if(this.cursors.ESC.isDown){
+      //this.scene.scene.pause('Map1'); /// <----------------------------------------------------
+      this.scene.scene.start('menuPausa');
+      //this.scene.scene.setActive(true);
+    }
 
     //this.atacando = false;
     this.abrirPuerta();

@@ -27,8 +27,8 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
 
     constructor(scene,x,y){
         super(scene, x, y, 'bullet');
-        this.combination = this.scene.getCombinationPuente();
         this.newCombination = '';
+        this.combination;
         this.combIncorrecta = this.scene.sound.add('combinacionIncorrecta', {volume: 1});
         this.abrirPuertaPared = this.scene.sound.add('abrirPuertaPared', {volume: 1});
     }
@@ -87,6 +87,7 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
 
     hitBoton(){
         var allbuttons = this.scene.botones.getChildren();
+        if(botones.length > 0) this.combination = this.scene.getCombinationPuente();
         for (var i = 0; i < this.scene.botones.getLength(); i++){
             if(this.scene.physics.overlap(this, allbuttons[i]) && !allbuttons[i].getPulsado()){
                 allbuttons[i].pulsado = true;

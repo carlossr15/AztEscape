@@ -9,7 +9,6 @@ import Puerta from '../objetos/puerta.js';
 import Invisible from '../objetos/invisible.js';
 import Idolo from '../objetos/idolo.js';
 import TextEvent from '../dialogos/textEvent.js';
-import Diana from '../objetos/diana.js';
 import BotonMecanismo from '../objetos/botonMecansimo.js';
 //import PiedraMovil from './piedraMovil.js';
 
@@ -28,7 +27,6 @@ export default class MyMap extends Phaser.Scene {
     preload() {
         this.load.tilemapTiledJSON('map', 'assets/maps/Lvl1.json');
 
-        this.load.image('diana', 'assets/sprites/diana.png');
         this.load.image('textBox', 'assets/tilesets/TextBox.png');
         this.load.image('bgtextBox', 'assets/tilesets/BGTextBox.png');
         this.load.image('MCtextBox', 'assets/tilesets/MCTextBox.png');
@@ -37,9 +35,6 @@ export default class MyMap extends Phaser.Scene {
         this.load.image('escalera', 'assets/sprites/escalera.png');
         this.load.image('bullet', 'assets/sprites/roca.png');
         this.load.image('cartel', 'assets/sprites/Cartel.png');
-        this.load.image('congratulations', 'assets/sprites/congratulations.png');
-        this.load.image('hasPerdido', 'assets/sprites/hasPerdido.png');
-        this.load.image('background', 'assets/sprites/background.jpg');
 
         this.load.spritesheet('templo', 'assets/tilesets/tile_temple.png', { frameWidth: 544, frameHeight: 256 });
         this.load.spritesheet('objetos', 'assets/tilesets/objetos.png', { frameWidth: 256, frameHeight: 256 });
@@ -51,10 +46,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('mediaPuerta', 'assets/sprites/mediaPuerta.png', {frameWidth: 128, frameHeight: 128});
         this.load.spritesheet('momia', 'assets/sprites/momiaSpritesheet.png', {frameWidth: 24, frameHeight: 32});
         this.load.spritesheet('idolo', 'assets/sprites/Idolo.png', {frameWidth: 32, frameHeight: 32});
-        this.load.spritesheet('restartButton', 'assets/sprites/restartButton.png', {frameWidth: 480, frameHeight: 170});
-        this.load.spritesheet('mapsButton', 'assets/sprites/mapsButton.png', {frameWidth: 480, frameHeight: 170});
         //this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128});
-        this.load.image('diana', 'assets/sprites/diana.png');
         this.load.spritesheet('botonMecanismo', 'assets/sprites/Boton.png', {frameWidth: 32, frameHeight: 32});
 
         this.load.atlas('heal', 'assets/sprites/heal.png','assets/sprites/heal.json');
@@ -67,9 +59,26 @@ export default class MyMap extends Phaser.Scene {
         this.load.audio('extraLife', 'assets/music/extraLife.wav');
         this.load.audio('puñetazo', 'assets/music/puñetazo.wav');
         this.load.audio('puñoaire', 'assets/music/puñoaire.wav');
+
+
+        this.load.image('congratulations', 'assets/sprites/congratulations.png');
+        this.load.image('hasPerdido', 'assets/sprites/hasPerdido.png');
+        this.load.image('background', 'assets/sprites/background.jpg');
+        this.load.image('pausa', 'assets/sprites/pausa.png');
+        this.load.spritesheet('soundButton', 'assets/sprites/sonidoButton.png', {frameWidth: 75, frameHeight: 75});
+        this.load.spritesheet('soundButtonOff', 'assets/sprites/sonidoOff.png', {frameWidth: 75, frameHeight: 75});
+        this.load.spritesheet('continueButton', 'assets/sprites/continueButton.png', {frameWidth: 520, frameHeight: 340});
+        this.load.spritesheet('restartButton', 'assets/sprites/restartButton.png', {frameWidth: 480, frameHeight: 170});
+        this.load.spritesheet('mapsButton', 'assets/sprites/mapsButton.png', {frameWidth: 480, frameHeight: 170});
+        this.load.image('preparado', 'assets/sprites/preparado.png');
+
+
+
     }
 
     create() {
+        this.mapa = 'mapa1';
+
         const map = this.make.tilemap({ key: 'map' });
         const tilesetTemplo = map.addTilesetImage('Templo', 'templo');
         const tilesetObjetos = map.addTilesetImage('Objetos', 'objetos');
@@ -84,7 +93,8 @@ export default class MyMap extends Phaser.Scene {
         suelo.setCollisionByExclusion(-1, true);
 
         //Creacion jugador
-        
+        this.puerta = new Puerta(this, 15820, 1150);
+
         this.cartel = this.physics.add.image(9000, 700, 'cartel'); //No he conseguido que se coloque detrás si lo pongo despues
         this.player = new Player(this, 100, 675);
 
@@ -93,13 +103,10 @@ export default class MyMap extends Phaser.Scene {
         this.escaleras = this.add.group();
         this.dialogos = this.add.group();
         this.consumibles = this.add.group();
-        this.dianas = this.add.group();
 
         //Creacion de objetos relevantes
 
-        this.puerta = new Puerta(this, 15820, 1150);
-
-        this.dianas.add(new Diana(this, 300, 1000));      
+    
           
         this.enemies.add(new Enemy(this, 1200, 700));
         this.enemies.add(new Enemy(this, 4200, 700));
@@ -137,11 +144,10 @@ export default class MyMap extends Phaser.Scene {
         this.dialogos.add(new TextEvent(this, 8665, 581, 100, 300, ["Un cartel sospechoso cuanto menos.\n", "Seguro que el que diseñó este templo era un despistado y \nno se acordaba de dónde tenía que dejar las llaves."]));
         this.dialogos.add(new TextEvent(this, 13051, 485, 100, 300, ["Oye, amigo que está en mi cabeza, ¿no estaré siendo \nmuy pesado no? ", "Voy a intentar estar más callado a partir \nde ahora ¿Vale?"]));
         this.dialogos.add(new TextEvent(this, 14514, 901, 100, 300, ["Podrías responder de vez en cuando..."]));
-        this.dialogos.add(new TextEvent(this, 15500, 1100, 200, 200, ["Anda una diana, a lo mejor apuntando y haciendo clic \npuedo romperla de una pedrada."], true));
         
         this.llave = new Llave(this, 8965, 1300);
 
-        this.inv = new Invisible(this, this.player, 15880, 1150, 10, 100);
+        this.inv = new Invisible(this, 15880, 1150, 10, 100);
 
         this.idolo = new Idolo(this, 174, 682);
 
