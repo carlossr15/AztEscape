@@ -34,6 +34,13 @@ export default class inicio extends Phaser.Scene {
         this.soundButton.create();
         this.startButton.create();
         this.pause = this.add.image(650, 200, 'preparado');
+        this.input.keyboard.on('keydown-' + 'F', function (event){
+            console.log("full");
+                if (this.scene.game.scale.isFullscreen)
+                    this.scene.game.scale.stopFullscreen();
+                else
+                    this.scene.game.scale.startFullscreen();
+        })
     }
-
+    
 }

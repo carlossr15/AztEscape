@@ -33,7 +33,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     this.puedeGolpear = true;
     this.atacando = false;
-
     // Queremos que el jugador no se salga de los límites del mundo
     this.body.setCollideWorldBounds();
     this.speed = 300;
@@ -50,16 +49,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     
     // Esta label es la UI en la que pondremos la puntuación del jugador
     //this.cursors = this.scene.input.keyboard.createCursorKeys();
-    this.cursors = this.scene.input.keyboard.addKeys({
-      up:Phaser.Input.Keyboard.KeyCodes.W,
-      down:Phaser.Input.Keyboard.KeyCodes.S,
-      left:Phaser.Input.Keyboard.KeyCodes.A,
-      right:Phaser.Input.Keyboard.KeyCodes.D,
-      space:Phaser.Input.Keyboard.KeyCodes.SPACE,
-      fullscreen:Phaser.Input.Keyboard.KeyCodes.F,
-      E:Phaser.Input.Keyboard.KeyCodes.E,
-      ESC:Phaser.Input.Keyboard.KeyCodes.ESC
-    });
+    this.setControls();
     
     this.scene.add.layer(this);
     this.maxVida = 6;
@@ -74,12 +64,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     this.pintarNotas();
 
-    //TextBox
-    this.texto = this.scene.add.image(700, 600, 'textBox').setScale(0.8,0.8).setDepth(3).setScrollFactor(0);
-    this.bgtexto = this.scene.add.image(445,600, 'bgtextBox').setScale(8,6.5).setSize(200,200).setDepth(1).setScrollFactor(0);
-    this.MCtexto = this.scene.add.image(445,600, 'MCtextBox').setScale(0.55,0.55).setDepth(2).setScrollFactor(0);
-
-    this.hideDialog();
 
     this.notaText = this.scene.add.image(600, 350, 'notaText').setScrollFactor(0);
     this.hideNote();
@@ -102,9 +86,21 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.cargarAnimaciones();
 
 
+    this.movement = true;
     
+    this.cursors = this.scene.input.keyboard.addKeys({
+      up:Phaser.Input.Keyboard.KeyCodes.W,
+      down:Phaser.Input.Keyboard.KeyCodes.S,
+      left:Phaser.Input.Keyboard.KeyCodes.A,
+      right:Phaser.Input.Keyboard.KeyCodes.D,
+      space:Phaser.Input.Keyboard.KeyCodes.SPACE,
+      E:Phaser.Input.Keyboard.KeyCodes.E,
+      ESC:Phaser.Input.Keyboard.KeyCodes.ESC
+    });
   }
-
+  setControls(value){
+    this.movement = value;
+  }
   cargarAnimaciones(){
     this.scene.anims.create({
       key: 'walk-right',
@@ -184,18 +180,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
   });
 
   }
-  
-  showDialog(){
-    this.texto.setAlpha(1);
-    this.bgtexto.setAlpha(1);
-    this.MCtexto.setAlpha(1);
-  }
 
-  hideDialog(){
-    this.texto.setAlpha(0);
-    this.bgtexto.setAlpha(0);
-    this.MCtexto.setAlpha(0);
-  }
 
   /********************/
 
@@ -408,180 +393,178 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   preUpdate(t,dt) {
     super.preUpdate(t,dt);
-    //console.log(this.onLadder);
-    if(this.cursors.fullscreen.isDown){
-      console.log("full");
-        if (this.scene.game.scale.isFullscreen)
-            this.scene.game.scale.stopFullscreen();
-        else
-            this.scene.game.scale.startFullscreen();
-    }
-    /*var allPiedras = this.scene.piedras.getChildren()
-    for (var i = 0; i < this.scene.piedras.getLength(); i++){
-      if (this.scene.physics.overlap(allPiedras[i], this)) {
-        this.enPiedra = true;
-        console.log(this.enPiedra)
+    if(this.movement){
+      //console.log(this.onLadder);
+      /*var allPiedras = this.scene.piedras.getChildren()
+      for (var i = 0; i < this.scene.piedras.getLength(); i++){
+        if (this.scene.physics.overlap(allPiedras[i], this)) {
+          this.enPiedra = true;
+          console.log(this.enPiedra)
+        }
+        else{
+          this.enPiedra = false;
+          console.log(this.enPiedra)
+        } 
+        
+      }*/
+
+      if(this.onLadder){
+        this.body.setAllowGravity(false);
+        console.log("cayendo");
+        this.body.setVelocityY(0);
+        this.body.setVelocityX(0);
+        if(this.cursors.up.isDown || this.cursors.down.isDown) {
+          //this.play('escalar', true);
+        }else this.play('escalar-izq', true);
       }
-      else{
-        this.enPiedra = false;
-        console.log(this.enPiedra)
-      } 
+      else
+      {
+        this.body.setAllowGravity(true);
+      }
+
+      if(this.cursors.up.isDown && this.onLadder)
+      {
+        console.log("subiendo");
+        this.play('escalar', true);
+        this.body.setVelocityY(-300);
+
+      }
       
-    }*/
-
-    if(this.onLadder){
-      this.body.setAllowGravity(false);
-      console.log("cayendo");
-      this.body.setVelocityY(0);
-      this.body.setVelocityX(0);
-      if(this.cursors.up.isDown || this.cursors.down.isDown) {
-        //this.play('escalar', true);
-      }else this.play('escalar-izq', true);
-    }
-    else
-    {
-      this.body.setAllowGravity(true);
-    }
-
-    if(this.cursors.up.isDown && this.onLadder)
-    {
-      console.log("subiendo");
-      this.play('escalar', true);
-      this.body.setVelocityY(-300);
-
-    }
-    
-    if(this.cursors.down.isDown && this.onLadder)
-    {
-      console.log("bajando");
-      this.play('escalar', true);
-      this.body.setVelocityY(250);
-
-    }
-
-    this.scene.input.on('pointerdown', (pointer) =>{
-      let p = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
-      if(this.scene.mapa != 'mapa1') this.bullets.fireBullet(this.x, this.y, p.x, p.y);
-    })
-    
-    if (this.cursors.up.isDown) {
-      console.log("jj: " + this.enPiedra)
-      if(this.body.onFloor()){
-        this.body.setVelocityY(this.jumpSpeed);
-        this.salto.play();
-      } else if(this.enPiedra){
-        this.body.setVelocityY(this.jumpSpeed);
-        this.salto.play();
-      }
-    }
-    if(!this.body.onFloor() && this.lado == 'izq' && !this.onLadder) 
-      this.play('jump-left', true);
-    else if(!this.body.onFloor() && this.lado == 'der' && !this.onLadder)
-      this.play('jump-right', true);
-
-
-    if (this.cursors.left.isDown) {
-      this.lado = 'izq';
-      this.body.setVelocityX(-this.speed);
-      this.caminando = true;
-    }
-    else if (this.cursors.right.isDown) {
-      this.lado = 'der';
-      this.body.setVelocityX(this.speed);
-      this.caminando = true;
-    }
-    else if(this.body.onFloor() || this.enPiedra){
-      this.body.setVelocityX(0);
-      this.caminando = false;
-      //this.play('stand', true);
-    }
-
-    if(this.caminando && !this.onLadder)
-    {
-      if ((this.body.onFloor() || this.enPiedra) && this.lado == 'izq')
+      if(this.cursors.down.isDown && this.onLadder)
       {
-        this.play('walk-left', true);
-      }
-      else if((this.body.onFloor() || this.enPiedra) && this.lado == 'der')
-      {
-        this.play('walk-right', true);
-      }
-    }
-    else
-    {
-      if ((this.body.onFloor() || this.enPiedra) && this.lado == 'izq')
-      {
-        this.play('stand-left', true);
-      }
-      else if((this.body.onFloor() || this.enPiedra) && this.lado == 'der')
-      {
-        this.play('stand-right', true);
-      }
-    }
-    
+        console.log("bajando");
+        this.play('escalar', true);
+        this.body.setVelocityY(250);
 
-    if(this.cursors.space.isDown && this.puedeGolpear){
-      console.log("ATACA");
-      console.log(this.x + " " + this.y);
-      this.atacar();
-      /*if(this.cursors.left.isDown){
+      }
+
+      this.scene.input.on('pointerdown', (pointer) =>{
+        let p = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
+        if(this.scene.mapa != 'mapa1') this.bullets.fireBullet(this.x, this.y, p.x, p.y);
+      })
+      
+      if (this.cursors.up.isDown) {
+        console.log("jj: " + this.enPiedra)
+        if(this.body.onFloor()){
+          this.body.setVelocityY(this.jumpSpeed);
+          this.salto.play();
+        } else if(this.enPiedra){
+          this.body.setVelocityY(this.jumpSpeed);
+          this.salto.play();
+        }
+      }
+      if(!this.body.onFloor() && this.lado == 'izq' && !this.onLadder) 
+        this.play('jump-left', true);
+      else if(!this.body.onFloor() && this.lado == 'der' && !this.onLadder)
+        this.play('jump-right', true);
+
+
+      if (this.cursors.left.isDown) {
+        this.lado = 'izq';
+        this.body.setVelocityX(-this.speed);
+        this.caminando = true;
+      }
+      else if (this.cursors.right.isDown) {
+        this.lado = 'der';
+        this.body.setVelocityX(this.speed);
+        this.caminando = true;
+      }
+      else if(this.body.onFloor() || this.enPiedra){
+        this.body.setVelocityX(0);
+        this.caminando = false;
+        //this.play('stand', true);
+      }
+
+      if(this.caminando && !this.onLadder)
+      {
+        if ((this.body.onFloor() || this.enPiedra) && this.lado == 'izq')
+        {
+          this.play('walk-left', true);
+        }
+        else if((this.body.onFloor() || this.enPiedra) && this.lado == 'der')
+        {
+          this.play('walk-right', true);
+        }
+      }
+      else
+      {
+        if ((this.body.onFloor() || this.enPiedra) && this.lado == 'izq')
+        {
+          this.play('stand-left', true);
+        }
+        else if((this.body.onFloor() || this.enPiedra) && this.lado == 'der')
+        {
+          this.play('stand-right', true);
+        }
+      }
+      
+
+      if(this.cursors.space.isDown && this.puedeGolpear){
+        console.log("ATACA");
+        console.log(this.x + " " + this.y);
+        this.atacar();
+        /*if(this.cursors.left.isDown){
+          this.play('attack-left', true);
+          this.setSize(16,16);
+          this.setScale(0.2,0.2);
+          this.body.setSize(525,420);
+          this.body.setOffset(0,175);
+        }else {
+          this.play('attack-right', true);
+          this.setSize(16,16);
+          this.setScale(0.2,0.2);
+          this.body.setSize(525,420);
+          this.body.setOffset(0,175);
+        }*/
+      }else{
+        this.setSize(16,16);
+        this.setScale(0.2,0.2);
+        this.body.setSize(400,420);
+        this.body.setOffset(0,175);
+      }
+      
+      if(this.atacando){
+        
+        if(this.lado == 'izq'){
         this.play('attack-left', true);
         this.setSize(16,16);
         this.setScale(0.2,0.2);
         this.body.setSize(525,420);
         this.body.setOffset(0,175);
-      }else {
+        }else {
         this.play('attack-right', true);
         this.setSize(16,16);
         this.setScale(0.2,0.2);
         this.body.setSize(525,420);
         this.body.setOffset(0,175);
-      }*/
-    }else{
-      this.setSize(16,16);
-      this.setScale(0.2,0.2);
-      this.body.setSize(400,420);
-      this.body.setOffset(0,175);
-    }
-    
-    if(this.atacando){
-      
-      if(this.lado == 'izq'){
-      this.play('attack-left', true);
-      this.setSize(16,16);
-      this.setScale(0.2,0.2);
-      this.body.setSize(525,420);
-      this.body.setOffset(0,175);
-      }else {
-      this.play('attack-right', true);
-      this.setSize(16,16);
-      this.setScale(0.2,0.2);
-      this.body.setSize(525,420);
-      this.body.setOffset(0,175);
+        }
       }
+      else{
+        this.setSize(16,16);
+        this.setScale(0.2,0.2);
+        this.body.setSize(400,420);
+        this.body.setOffset(0,175);
+      }
+      /****************/
+      if(this.cursors.E.isDown && this.nota >= 1) this.showNote();
+      else this.hideNote();
+      /****************/
+
+      if(this.cursors.ESC.isDown){
+        //this.scene.scene.pause('Map1'); /// <----------------------------------------------------
+        this.scene.scene.start('menuPausa');
+        //this.scene.scene.setActive(true);
+      }
+
+      //this.atacando = false;
+      this.abrirPuerta();
     }
     else{
-      this.setSize(16,16);
-      this.setScale(0.2,0.2);
-      this.body.setSize(400,420);
-      this.body.setOffset(0,175);
-    }
-    /****************/
-    if(this.cursors.E.isDown && this.nota >= 1) this.showNote();
-    else this.hideNote();
-    /****************/
-
-    if(this.cursors.ESC.isDown){
-      //this.scene.scene.pause('Map1'); /// <----------------------------------------------------
-      this.scene.scene.start('menuPausa');
-      //this.scene.scene.setActive(true);
+      this.body.setVelocityX(0);
+      this.anims.stop();
     }
 
-    //this.atacando = false;
-    this.abrirPuerta();
   }
-  
-
 }
 
 

@@ -8,8 +8,11 @@ export default class TextEvent extends Phaser.GameObjects.Zone {
      * @param {number} x Coordenada x
      * @param {number} y Coordenada y
      */
+     
     constructor(scene, x, y, w, h, texto, parar){
         super(scene, x, y);
+
+        this.parar = parar;
         this.setScale(1, 1);
         this.setSize(w,h);
         this.scene.add.existing(this);
@@ -26,12 +29,37 @@ export default class TextEvent extends Phaser.GameObjects.Zone {
 
         this.wordDelay = 10;
         this.lineDelay = 400;
+        
+        //TextBox
+        this.texto = this.scene.add.image(700, 600, 'textBox').setScale(0.8,0.8).setDepth(3).setScrollFactor(0);
+        this.bgtexto = this.scene.add.image(445,600, 'bgtextBox').setScale(8,6.5).setSize(200,200).setDepth(1).setScrollFactor(0);
+        this.MCtexto = this.scene.add.image(445,600, 'MCtextBox').setScale(0.55,0.55).setDepth(2).setScrollFactor(0);
+
+        this.hideDialog();
     }
   
     mostrar(){
-        this.scene.player.showDialog();
+        if(this.parar){
+            this.scene.player.setControls(false);
+        }
+        this.showDialog();
         this.body.setEnable(false);
         this.nextLine();
+    }
+  
+    showDialog(){
+        this.texto.setAlpha(1);
+        this.bgtexto.setAlpha(1);
+        this.MCtexto.setAlpha(1);
+    }
+    
+    hideDialog(){
+        if(this.parar){
+            this.scene.player.setControls(true);
+        }
+        this.texto.setAlpha(0);
+        this.bgtexto.setAlpha(0);
+        this.MCtexto.setAlpha(0);
     }
 
     nextLine(){
@@ -92,12 +120,14 @@ export default class TextEvent extends Phaser.GameObjects.Zone {
     }
 
     clearText(){
-        this.scene.player.hideDialog();
+        this.hideDialog();
         this.textoPantalla.text = "";
         this.destroy();
     }
 
-    preUpdate() {}
+    preUpdate() {
+
+    }
   
 }
   

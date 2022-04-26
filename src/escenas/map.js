@@ -75,9 +75,6 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('restartButton', 'assets/sprites/restartButton.png', {frameWidth: 480, frameHeight: 170});
         this.load.spritesheet('mapsButton', 'assets/sprites/mapsButton.png', {frameWidth: 480, frameHeight: 170});
         this.load.image('preparado', 'assets/sprites/preparado.png');
-
-
-
     }
 
     create() {
@@ -92,6 +89,14 @@ export default class MyMap extends Phaser.Scene {
         const suelo = map.createLayer('Suelo', tilesetTemplo, 0, 0);
         const objetosUtiles = map.createLayer('ObjetosUtiles', tilesetObjetos, 0, 0);
 
+        this.input.keyboard.on('keydown-' + 'F', function (event){
+            console.log("full");
+                if (this.scene.game.scale.isFullscreen)
+                    this.scene.game.scale.stopFullscreen();
+                else
+                    this.scene.game.scale.startFullscreen();
+        })
+        
         //Configuracion mundo
         this.physics.world.setBounds(0, 0, 16000, 3000);
         suelo.setCollisionByExclusion(-1, true);
@@ -111,7 +116,7 @@ export default class MyMap extends Phaser.Scene {
         //Creacion de objetos relevantes
 
     
-        this.enemies.add(new Esqueleto(this, 100, 675));
+        //this.enemies.add(new Esqueleto(this, 100, 675));
         this.enemies.add(new Enemy(this, 1200, 700));
         this.enemies.add(new Enemy(this, 4200, 700));
         this.enemies.add(new Enemy(this, 10250, 920));

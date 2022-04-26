@@ -88,7 +88,15 @@ export default class MyMap extends Phaser.Scene {
     create() {
     
         this.mapa = 'mapa2';
-
+        
+        this.input.keyboard.on('keydown-' + 'F', function (event){
+            console.log("full");
+                if (this.scene.game.scale.isFullscreen)
+                    this.scene.game.scale.stopFullscreen();
+                else
+                    this.scene.game.scale.startFullscreen();
+        })
+        
         const map = this.make.tilemap({ key: 'map2' });
         const tilesetTemplo = map.addTilesetImage('Templo', 'templo');
         const tilesetObjetos = map.addTilesetImage('objetos', 'objetos');
