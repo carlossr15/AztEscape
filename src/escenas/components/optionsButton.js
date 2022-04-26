@@ -6,7 +6,7 @@ export class OptionsButton extends Button {
   }
 
   doClick() {
-    
+    this.relatedScene.scene.start('opciones');
   }
 
 }

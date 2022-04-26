@@ -20,8 +20,10 @@ export default class opciones extends Phaser.Scene {
         this.load.image('sonido', 'assets/sprites/sonido.png');
         this.load.image('opciones', 'assets/sprites/opciones.png');
         this.load.image('controles', 'assets/sprites/controles.png');
-        this.load.spritesheet('simboloMasButton', 'assets/sprites/simbolo+.png', {frameWidth: 50, frameHeight: 50});
-        this.load.spritesheet('simboloMenosButton', 'assets/sprites/simbolo-.png', {frameWidth: 50, frameHeight: 50});
+        this.load.image('movimientoFlechas', 'assets/sprites/movimientoFlechas.png');
+
+        this.load.spritesheet('simboloMasButton', 'assets/sprites/simbolo+.png', {frameWidth: 100, frameHeight: 100});
+        this.load.spritesheet('simboloMenosButton', 'assets/sprites/simbolo-.png', {frameWidth: 100, frameHeight: 100});
 
 
     }
@@ -30,8 +32,9 @@ export default class opciones extends Phaser.Scene {
         this.add.image(0, 0, 'background').setOrigin(0, 0);
 
         this.add.image(650, 100, 'opciones');
-        this.add.image(350, 350, 'controles');
+        this.add.image(350, 260, 'controles');
         this.add.image(950, 260, 'sonido');
+        this.add.image(350, 500, 'movimientoFlechas');
 
         this.simboloMasButton.create();
         this.simboloMenosButton.create();

@@ -2,7 +2,7 @@ import { Button } from './button.js';
 
 export class SimboloMenosButton extends Button {
   constructor(scene) {
-    super(scene, 'simboloMenosButton', 1000, 500);
+    super(scene, 'simboloMenosButton', 850, 500);
   }
 
   doClick() {
