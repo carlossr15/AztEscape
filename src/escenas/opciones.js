@@ -1,3 +1,4 @@
+import { BackButton } from "./components/backButton.js";
 import { SimboloMasButton } from "./components/simbolo+Button.js";
 import { SimboloMenosButton } from "./components/simbolo-Button.js";
 
@@ -11,6 +12,7 @@ export default class opciones extends Phaser.Scene {
         super({ key: 'opciones' });
         this.simboloMasButton = new SimboloMasButton(this);
         this.simboloMenosButton = new SimboloMenosButton(this);
+        this.backButton = new BackButton(this);
 
     }
     
@@ -24,6 +26,7 @@ export default class opciones extends Phaser.Scene {
 
         this.load.spritesheet('simboloMasButton', 'assets/sprites/simbolo+.png', {frameWidth: 100, frameHeight: 100});
         this.load.spritesheet('simboloMenosButton', 'assets/sprites/simbolo-.png', {frameWidth: 100, frameHeight: 100});
+        this.load.spritesheet('backButton', 'assets/sprites/atrasButton.png', {frameWidth: 100, frameHeight: 100});
 
 
     }
@@ -38,6 +41,7 @@ export default class opciones extends Phaser.Scene {
 
         this.simboloMasButton.create();
         this.simboloMenosButton.create();
+        this.backButton.create();
 
 
         this.input.keyboard.on('keydown-' + 'F', function (event){
