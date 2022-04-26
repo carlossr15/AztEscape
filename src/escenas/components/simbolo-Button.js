@@ -1,10 +1,8 @@
 import { Button } from './button.js';
 
-export class SoundButton extends Button {
+export class SimboloMenosButton extends Button {
   constructor(scene) {
-    super(scene, 'soundButton', 1200, 100);
-    this.encendido = true;
-    this.sonido = 0;
+    super(scene, 'simboloMenosButton', 1000, 500);
   }
 
   doClick() {
@@ -20,9 +18,7 @@ export class SoundButton extends Button {
       this.encendido = true;
     }*/
 
-    this.relatedScene.sound.setVolume(this.sonido);
-    this.sonido += 0.2;
-    if(this.sonido > 1) this.sonido = 0;
+    if(this.relatedScene.sound.volume > 0) this.relatedScene.sound.setVolume(this.relatedScene.sound.volume - 0.1);
   }
 
 }

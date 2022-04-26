@@ -87,8 +87,8 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
 
     hitBoton(){
         var allbuttons = this.scene.botones.getChildren();
-        if(botones.length > 0) this.combination = this.scene.getCombinationPuente();
-        for (var i = 0; i < this.scene.botones.getLength(); i++){
+        if(allbuttons.length > 0) this.combination = this.scene.getCombinationPuente();
+        for (var i = 0; i < allbuttons.length; i++){
             if(this.scene.physics.overlap(this, allbuttons[i]) && !allbuttons[i].getPulsado()){
                 allbuttons[i].pulsado = true;
                 console.log("Boton-pulsado");
@@ -108,7 +108,7 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
                     this.combIncorrecta.play();
                     this.newCombination = '';
                     this.scene.time.delayedCall(200, function(){
-                        for(var j = 0; j < this.scene.botones.getLength(); j++){
+                        for(var j = 0; j < allbuttons.length; j++){
                             allbuttons[j].pulsado = false;
                             allbuttons[j].sacar();
                         }   

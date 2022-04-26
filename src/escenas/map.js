@@ -67,7 +67,7 @@ export default class MyMap extends Phaser.Scene {
 
         this.load.image('congratulations', 'assets/sprites/congratulations.png');
         this.load.image('hasPerdido', 'assets/sprites/hasPerdido.png');
-        this.load.image('background', 'assets/sprites/background.jpg');
+        this.load.image('background', 'assets/sprites/background.png');
         this.load.image('pausa', 'assets/sprites/pausa.png');
         this.load.spritesheet('soundButton', 'assets/sprites/sonidoButton.png', {frameWidth: 75, frameHeight: 75});
         this.load.spritesheet('soundButtonOff', 'assets/sprites/sonidoOff.png', {frameWidth: 75, frameHeight: 75});
@@ -75,6 +75,9 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('restartButton', 'assets/sprites/restartButton.png', {frameWidth: 480, frameHeight: 170});
         this.load.spritesheet('mapsButton', 'assets/sprites/mapsButton.png', {frameWidth: 480, frameHeight: 170});
         this.load.image('preparado', 'assets/sprites/preparado.png');
+        this.load.spritesheet('optionsButton', 'assets/sprites/opcionesButton.png', {frameWidth: 75, frameHeight: 75});
+
+
     }
 
     create() {
@@ -180,6 +183,7 @@ export default class MyMap extends Phaser.Scene {
         this.musica = this.sound.add('musicaFondo', {volume: 0.2});
         this.musica.loop = true;
         this.musica.play();
+
     }
 
     cargaParticulas(){

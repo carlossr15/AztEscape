@@ -55,6 +55,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.maxVida = 6;
     this.vida = 6;
     this.vidas = this.scene.add.group();
+    console.log(this.scene.mapa)
     if(this.scene.mapa != 'mapa1') this.bullets = new Bullets(this.scene);
     this.setDepth(1);
     //this.scene.add.image(0, 500, 'vida').setDepth(1);

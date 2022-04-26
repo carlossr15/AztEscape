@@ -41,10 +41,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.image('escalera', 'assets/sprites/escalera.png');
         this.load.image('bullet', 'assets/sprites/roca.png');
         this.load.image('cartel', 'assets/sprites/Cartel.png');
-        this.load.image('congratulations', 'assets/sprites/congratulations.png');
-        this.load.image('hasPerdido', 'assets/sprites/hasPerdido.png');
-        this.load.image('background', 'assets/sprites/background.jpg');
-        this.load.image('puertaPared', 'assets/sprites/puertaPared.png');
+         this.load.image('puertaPared', 'assets/sprites/puertaPared.png');
         this.load.image('puente', 'assets/sprites/Puente.png');
         //this.load.image('cursor', 'assets/sprites/player.png');
 
@@ -83,7 +80,21 @@ export default class MyMap extends Phaser.Scene {
 
         this.load.image('nota', 'assets/sprites/nota.png')
         this.load.image('notaText', 'assets/tilesets/notaText.png');
+    
+        this.load.image('congratulations', 'assets/sprites/congratulations.png');
+        this.load.image('hasPerdido', 'assets/sprites/hasPerdido.png');
+        this.load.image('background', 'assets/sprites/background.png');
+        this.load.image('pausa', 'assets/sprites/pausa.png');
+        this.load.spritesheet('soundButton', 'assets/sprites/sonidoButton.png', {frameWidth: 75, frameHeight: 75});
+        this.load.spritesheet('soundButtonOff', 'assets/sprites/sonidoOff.png', {frameWidth: 75, frameHeight: 75});
+        this.load.spritesheet('continueButton', 'assets/sprites/continueButton.png', {frameWidth: 520, frameHeight: 340});
+        this.load.spritesheet('restartButton', 'assets/sprites/restartButton.png', {frameWidth: 480, frameHeight: 170});
+        this.load.spritesheet('mapsButton', 'assets/sprites/mapsButton.png', {frameWidth: 480, frameHeight: 170});
+        this.load.image('preparado', 'assets/sprites/preparado.png');
+    
     }
+
+    
 
     create() {
     
@@ -138,7 +149,7 @@ export default class MyMap extends Phaser.Scene {
 
         //this.cartel = this.physics.add.image(9000, 700, 'cartel'); 
 
-        this.player = new Player(this, 14500, 1100);
+        this.player = new Player(this, 1750, 1100);
         //this.player = new Player(this, 12951, 485);
         
         //this.piedra1 = new PiedraMovil(this, 5000, 900);
