@@ -20,25 +20,28 @@
         this.setScrollFactor(0);
         this.cantidad = amount;
         //console.log(this);
-        
-        this.scene.anims.create({ 
+        this.full = this.scene.anims.create({ 
             key: 'full', 
             frames: this.scene.anims.generateFrameNames('vida', { frames: [0, 3] }), 
             frameRate: 7,
             repeat: -1 
         });
-        this.scene.anims.create({ 
+
+        this.half = this.scene.anims.create({ 
             key: 'half', 
             frames: this.scene.anims.generateFrameNames('vida', { frames: [1, 4] }), 
-            frameRate: 7,
+            //frameRate: 7,
             repeat: -1 
         });
-        this.scene.anims.create({ 
+        
+        this.empty = this.scene.anims.create({ 
             key: 'zero', 
             frames: this.scene.anims.generateFrameNames('vida', { frames: [2] }), 
-            frameRate: 5,
+            //frameRate: 5,
             repeat: -1 
         });
+        this.full.frameRate = beatRate;
+        this.half.frameRate = beatRate;
     }
     
     reduce(){

@@ -98,9 +98,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
       ESC:Phaser.Input.Keyboard.KeyCodes.ESC
     });
   }
-  setControls(value){
-    this.movement = value;
-  }
+
   cargarAnimaciones(){
     this.scene.anims.create({
       key: 'walk-right',
@@ -181,7 +179,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   }
 
-
   /********************/
 
   showNote(){
@@ -211,16 +208,13 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   /********************/
 
-
-  timerEventGolpe()
-  {
-    //this.puedeGolpear = true;
+  setControls(value){
+    this.movement = value;
   }
-
 
   pintarVida()  {
     console.log(this.vida);
-    let beatRate = this.vida*50;
+    let beatRate = (2+(this.maxVida-this.vida)*0.75);
     let i = 0;
     if(this.vida >= 1)
     {
@@ -295,8 +289,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
     if(!this.invencible){
       this.vida -= 1;
       this.daño.play();
-      //this.pintarVida();
-      (this.vidas.getChildren())[parseInt(this.vida/2)].reduce();
+      this.pintarVida();
+      //(this.vidas.getChildren())[parseInt(this.vida/2)].reduce();
       this.invencible = true;
 
       //parpadea cuando le hacen daño
