@@ -100,7 +100,7 @@ export default class MyMap extends Phaser.Scene {
 
     create() {
     
-        this.mapa = 'mapa2';
+        this.mapa = 'Map2';
         
         this.input.keyboard.on('keydown-' + 'F', function (event){
             console.log("full");
@@ -154,7 +154,7 @@ export default class MyMap extends Phaser.Scene {
 
         //this.cartel = this.physics.add.image(9000, 700, 'cartel'); 
 
-        this.player = new Player(this, 100/*1750*/, 1100);
+        this.player = new Player(this, 100, 1100);
         //this.player = new Player(this, 12951, 485);
         
         //this.piedra1 = new PiedraMovil(this, 5000, 900);

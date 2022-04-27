@@ -41,7 +41,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.onWallDoor= false;
     this.invencible = false;
     this.enPiedra = false;
-    this.llave = 1;
+    this.llave = 0;
     this.llaves = [];
 
     this.nota = 0;
@@ -53,10 +53,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
     
     this.scene.add.layer(this);
     this.maxVida = 6;
-    this.vida = 1;
+    this.vida = 6;
     this.vidas = this.scene.add.group();
     console.log(this.scene.mapa)
-    if(this.scene.mapa != 'mapa1') this.bullets = new Bullets(this.scene);
+    if(this.scene.mapa != 'Map1') this.bullets = new Bullets(this.scene);
     this.setDepth(1);
     //this.scene.add.image(0, 500, 'vida').setDepth(1);
     //this.scene.add.image(200, 500, 'vida').setDepth(1);
@@ -459,7 +459,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
       this.scene.input.on('pointerdown', (pointer) =>{
         let p = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
-        if(this.scene.mapa != 'mapa1') this.bullets.fireBullet(this.x, this.y, p.x, p.y);
+        if(this.scene.mapa != 'Map1') this.bullets.fireBullet(this.x, this.y, p.x, p.y);
       })
       
       if (this.cursors.up.isDown) {

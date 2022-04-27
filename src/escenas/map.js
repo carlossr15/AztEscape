@@ -83,7 +83,7 @@ export default class MyMap extends Phaser.Scene {
     }
 
     create() {
-        this.mapa = 'mapa1';
+        this.mapa = 'Map1';
 
         const map = this.make.tilemap({ key: 'map' });
         const tilesetTemplo = map.addTilesetImage('Templo', 'templo');
@@ -110,7 +110,7 @@ export default class MyMap extends Phaser.Scene {
         this.puerta = new Puerta(this, 15820, 1150);
 
         this.cartel = this.physics.add.image(9000, 700, 'cartel'); //No he conseguido que se coloque detrás si lo pongo despues
-        this.player = new Player(this, 1100, 500);
+        this.player = new Player(this, 100, 675);
       
         //Creacion grupos
         this.enemies = this.add.group();
