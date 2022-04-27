@@ -7,6 +7,7 @@ export class BackButton extends Button {
 
   doClick() {
     this.relatedScene.scene.stop();
+    this.relatedScene.scene.resume();
   }
 
 }

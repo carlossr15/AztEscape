@@ -92,6 +92,8 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('mapsButton', 'assets/sprites/mapsButton.png', {frameWidth: 480, frameHeight: 170});
         this.load.image('preparado', 'assets/sprites/preparado.png');
     
+        this.load.image('columna', 'assets/sprites/columna.png')
+
     }
 
     
@@ -135,6 +137,9 @@ export default class MyMap extends Phaser.Scene {
         this.puertasPared = this.add.group();
         this.piedras = this.add.group();
 
+        this.add.image(128, 1050, "columna").setScale(0.8, 0.8).setDepth(0);
+
+
         //this.bandera = new Bandera(this, 6750, 455);
         
         this.puerta = new Puerta(this, 15100, 1570);
@@ -149,7 +154,7 @@ export default class MyMap extends Phaser.Scene {
 
         //this.cartel = this.physics.add.image(9000, 700, 'cartel'); 
 
-        this.player = new Player(this, 1750, 1100);
+        this.player = new Player(this, 100/*1750*/, 1100);
         //this.player = new Player(this, 12951, 485);
         
         //this.piedra1 = new PiedraMovil(this, 5000, 900);
@@ -249,7 +254,6 @@ export default class MyMap extends Phaser.Scene {
 
         //this.physics.add.collider(this.piedraMovil, suelo);
 
-        //this.add.image(553, 450, "mediaPuerta").set
 
         //this.physics.add.collider(this.bandera, suelo);
 

@@ -63,6 +63,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.audio('extraLife', 'assets/music/extraLife.wav');
         this.load.audio('puñetazo', 'assets/music/puñetazo.wav');
         this.load.audio('puñoaire', 'assets/music/puñoaire.wav');
+        this.load.audio('deathSound', 'assets/music/deathMusic.wav');
 
 
         this.load.image('congratulations', 'assets/sprites/congratulations.png');
@@ -76,6 +77,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('mapsButton', 'assets/sprites/mapsButton.png', {frameWidth: 480, frameHeight: 170});
         this.load.image('preparado', 'assets/sprites/preparado.png');
         this.load.spritesheet('optionsButton', 'assets/sprites/opcionesButton.png', {frameWidth: 75, frameHeight: 75});
+        this.load.spritesheet('backButton', 'assets/sprites/atrasButton.png', {frameWidth: 100, frameHeight: 100});
 
 
     }
@@ -108,7 +110,7 @@ export default class MyMap extends Phaser.Scene {
         this.puerta = new Puerta(this, 15820, 1150);
 
         this.cartel = this.physics.add.image(9000, 700, 'cartel'); //No he conseguido que se coloque detrás si lo pongo despues
-        this.player = new Player(this, 100, 675);
+        this.player = new Player(this, 1100, 500);
       
         //Creacion grupos
         this.enemies = this.add.group();

@@ -1,3 +1,4 @@
+import { BackButton } from './components/backButton.js';
 import { ContinueButton } from './components/continueButton.js';
 import { MapsButton } from './components/mapsButton.js';
 import { SoundButton } from './components/soundButton.js';
@@ -12,6 +13,7 @@ export default class menuPausa extends Phaser.Scene {
         this.soundButton = new SoundButton(this);
         this.mapsButton = new MapsButton(this);
         this.continueButton = new ContinueButton(this);
+        this.backButton = new BackButton(this);
     }
     
       
@@ -20,6 +22,7 @@ export default class menuPausa extends Phaser.Scene {
         this.soundButton.create();
         this.mapsButton.create();
         this.continueButton.create();
+        this.backButton.create();
         this.pause = this.add.image(650, 200, 'pausa');
     }
 

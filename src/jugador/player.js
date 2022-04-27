@@ -53,7 +53,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     
     this.scene.add.layer(this);
     this.maxVida = 6;
-    this.vida = 6;
+    this.vida = 1;
     this.vidas = this.scene.add.group();
     console.log(this.scene.mapa)
     if(this.scene.mapa != 'mapa1') this.bullets = new Bullets(this.scene);
@@ -80,7 +80,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.salto = this.scene.sound.add('jump', {volume: 0.5});
     this.daño = this.scene.sound.add('daño', {volume: 1});
     this.extraLife = this.scene.sound.add('extraLife', {volume: 1});
-
+    this.deathSound = this.scene.sound.add('deathSound', {volume: 1});
 
     this.puñetazo = this.scene.sound.add('puñoaire', {volume: 1.5});
 
@@ -178,6 +178,13 @@ export default class Player extends Phaser.GameObjects.Sprite {
       repeat: -1
   });
 
+  this.scene.anims.create({
+    key: 'muerte',
+    frames: this.scene.anims.generateFrameNames('player', { frames: [18, 19] }),
+    frameRate: 10,
+    repeat: -1
+  });
+
   }
 
   /********************/
@@ -260,7 +267,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
   
   blink()
   {
-    if(this.invencible)
+    if(this.invencible && this.vida > 0)
     {
       
       if(this.numBlink < 10)
@@ -287,7 +294,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   hurt(){
-    if(!this.invencible){
+    if(!this.invencible && this.vida > 0){
       this.vida -= 1;
       this.daño.play();
       this.pintarVida();
@@ -300,13 +307,22 @@ export default class Player extends Phaser.GameObjects.Sprite {
       
       this.scene.time.delayedCall(800, function(){
         this.invencible = false;
-
       }, [], this);
       this.body.setVelocityX(this.lado === "der" ? -300 : 300);
       this.body.setVelocityY(-150);
     }
-    if(this.vida === 0){
-      this.scene.death();
+    if(this.vida == 0){
+      this.vida -= 1;
+      this.deathSound.play();
+      this.movement = false;
+      this.invencible = true;
+      this.play('muerte');
+
+      this.scene.time.delayedCall(2000, function(){
+        this.scene.death();
+
+
+      }, [], this);
     }
   }
 
@@ -347,7 +363,15 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
   }
 
-  
+  caerAlFondo(){
+    if(this.y > 2500){
+      //while(!this.body.onFloor()){
+        this.x -= 200;
+        this.y = 1000;
+        this.hurt();
+     // }
+    }
+  }
  
   atacar()
   {
@@ -553,6 +577,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
       //this.atacando = false;
       this.abrirPuerta();
+      this.caerAlFondo();
     }
     else{
       this.body.setVelocityX(0);
