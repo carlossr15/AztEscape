@@ -91,7 +91,6 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     }/*else{
       this.scene.player.hurt();
     }*/
-      console.log("GOLPE");
   }
 
   checkGolpe()
@@ -101,7 +100,6 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
       
       this.scene.player.hurt();
 
-      console.log("GOLPE Araña");
     }
   }
 

@@ -39,13 +39,16 @@ export default class MyMap extends Phaser.Scene {
 
         this.load.spritesheet('templo', 'assets/tilesets/tile_temple.png', { frameWidth: 544, frameHeight: 256 });
         this.load.spritesheet('objetos', 'assets/tilesets/objetos.png', { frameWidth: 256, frameHeight: 256 });
-        this.load.spritesheet('player', 'assets/sprites/MC-Spritesheet.png', {frameWidth: 600, frameHeight: 600});
         this.load.spritesheet('enemy', 'assets/sprites/araña.png', {frameWidth: 64, frameHeight: 64});
         this.load.spritesheet('vida', 'assets/sprites/health.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('batido', 'assets/sprites/Batido.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('puerta', 'assets/sprites/Puerta Abierta y Cerrada.png', {frameWidth: 104, frameHeight: 127});
         this.load.spritesheet('mediaPuerta', 'assets/sprites/mediaPuerta.png', {frameWidth: 128, frameHeight: 128});
         this.load.spritesheet('momia', 'assets/sprites/momiaSpritesheet.png', {frameWidth: 24, frameHeight: 32});
+
+        this.load.spritesheet('player', 'assets/sprites/MC.png',{ frameWidth: 370, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
+        this.load.spritesheet('player-hit', 'assets/sprites/MC-Pegando.png', { frameWidth: 600, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
+        this.load.spritesheet('player-dead', 'assets/sprites/MC-Muerte.png', { frameWidth: 600, frameHeight: 600 })
 
         this.load.spritesheet('esqueleto', 'assets/sprites/esqueleto.png', {frameWidth: 24, frameHeight: 32});
 
@@ -110,7 +113,7 @@ export default class MyMap extends Phaser.Scene {
         this.puerta = new Puerta(this, 15820, 1150);
 
         this.cartel = this.physics.add.image(9000, 700, 'cartel'); //No he conseguido que se coloque detrás si lo pongo despues
-        this.player = new Player(this, 100, 675);
+        this.player = new Player(this, 0, 610);
       
         //Creacion grupos
         this.enemies = this.add.group();

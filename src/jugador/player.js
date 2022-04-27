@@ -102,92 +102,63 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   cargarAnimaciones(){
     this.scene.anims.create({
-      key: 'walk-right',
+      key: 'walk',
       frames: this.scene.anims.generateFrameNames('player', { frames: [0, 1, 2] }),
       frameRate: 10,
       repeat: -1
   });
 
   this.scene.anims.create({
-      key: 'walk-left',
-      frames: this.scene.anims.generateFrameNames('player', { frames: [10, 11, 12] }),
-      frameRate: 10,
-      repeat: -1
-  });
-
-  this.scene.anims.create({
-      key: 'stand-right',
+      key: 'stand',
       frames: this.scene.anims.generateFrameNames('player', { frames: [0] }),
       frameRate: 10,
       repeat: -1
   });
 
   this.scene.anims.create({
-      key: 'stand-left',
-      frames: this.scene.anims.generateFrameNames('player', { frames: [10] }),
-      frameRate: 10,
-      repeat: -1
-  });
-
-  this.scene.anims.create({
-      key: 'jump-right',
-      frames: this.scene.anims.generateFrameNames('player', { frames: [4] }),
-      frameRate: 10,
-      repeat: -1
-  });
-
-  this.scene.anims.create({
-      key: 'jump-left',
-      frames: this.scene.anims.generateFrameNames('player', { frames: [13] }),
-      frameRate: 10,
-      repeat: -1
-  });
-
-  this.scene.anims.create({
-      key: 'attack-right',
-      frames: this.scene.anims.generateFrameNames('player', { frames: [15] }),
-      frameRate: 10,
-      repeat: -1
-  });
-
-  this.scene.anims.create({
-      key: 'attack-left',
-      frames: this.scene.anims.generateFrameNames('player', { frames: [16] }),
-      frameRate: 10,
-      repeat: -1
-  });
-
-  this.scene.anims.create({
-      key: 'escalar',
-      frames: this.scene.anims.generateFrameNames('player', { frames: [8, 9] }),
-      frameRate: 10,
-      repeat: -1
-  });
-
-  this.scene.anims.create({
-      key: 'escalar-izq',
-      frames: this.scene.anims.generateFrameNames('player', { frames: [8] }),
-      frameRate: 10,
-      repeat: -1
-  });
-
-  this.scene.anims.create({
-      key: 'escalar-der',
+      key: 'jump',
       frames: this.scene.anims.generateFrameNames('player', { frames: [9] }),
       frameRate: 10,
       repeat: -1
   });
 
   this.scene.anims.create({
+      key: 'attack',
+      frames: this.scene.anims.generateFrameNames('player-hit', { frames: [1,2] }),
+      frameRate: 10,
+      repeat: -1
+  });
+
+  this.scene.anims.create({
+      key: 'escalar',
+      frames: this.scene.anims.generateFrameNames('player', { frames: [5, 6] }),
+      frameRate: 10,
+      repeat: -1
+  });
+
+  this.scene.anims.create({
+      key: 'escalar-izq',
+      frames: this.scene.anims.generateFrameNames('player', { frames: [5] }),
+      frameRate: 10,
+      repeat: -1
+  });
+
+  this.scene.anims.create({
+      key: 'escalar-der',
+      frames: this.scene.anims.generateFrameNames('player', { frames: [6] }),
+      frameRate: 10,
+      repeat: -1
+  });
+
+  this.scene.anims.create({
     key: 'muerte',
-    frames: this.scene.anims.generateFrameNames('player', { frames: [18, 19] }),
+    frames: this.scene.anims.generateFrameNames('player-dead', { frames: [0, 1] }),
     frameRate: 10,
     repeat: -1
   });
 
   }
 
-  /********************/
 
   showNote(){
     this.notaText.setAlpha(1);
@@ -221,15 +192,14 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   pintarVida()  {
-    console.log(this.vida);
     let beatRate = (2+(this.maxVida-this.vida)*0.75);
+    console.log(this.vida)
     let i = 0;
+    this.vidas.clear(true, true);
     if(this.vida >= 1)
     {
-      this.vidas.clear(true, true);
-      while(i <parseInt(this.vida/2))
+      while(i < parseInt(this.vida/2))
       {
-        console.log("vida: "+this.vida/2 + " i: " + i + " bucle 1");
         this.vidas.add(new Vida(this.scene, 31*i + 35, 30, 2, beatRate));
         i++;
       }
@@ -239,7 +209,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
       }
       while(i < this.maxVida/2)
       {
-        console.log("vida: "+this.vida/2 + " i: " + i + " bucle 2");
         this.vidas.add(new Vida(this.scene, 31*i + 35, 30, 0, beatRate));
         i++;
       }
@@ -296,8 +265,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
   hurt(){
     if(!this.invencible && this.vida > 0){
       this.vida -= 1;
-      this.daño.play();
       this.pintarVida();
+      this.daño.play();
       //(this.vidas.getChildren())[parseInt(this.vida/2)].reduce();
       this.invencible = true;
 
@@ -316,12 +285,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.deathSound.play();
       this.movement = false;
       this.invencible = true;
-      this.play('muerte');
+      this.play('muerte', true);
 
       this.scene.time.delayedCall(2000, function(){
         this.scene.death();
-
-
       }, [], this);
     }
   }
@@ -473,18 +440,20 @@ export default class Player extends Phaser.GameObjects.Sprite {
         }
       }
       if(!this.body.onFloor() && this.lado == 'izq' && !this.onLadder) 
-        this.play('jump-left', true);
+        this.play('jump', true);
       else if(!this.body.onFloor() && this.lado == 'der' && !this.onLadder)
-        this.play('jump-right', true);
+        this.play('jump', true);
 
 
       if (this.cursors.left.isDown) {
         this.lado = 'izq';
+        this.flipX = true;
         this.body.setVelocityX(-this.speed);
         this.caminando = true;
       }
       else if (this.cursors.right.isDown) {
         this.lado = 'der';
+        this.flipX = false;
         this.body.setVelocityX(this.speed);
         this.caminando = true;
       }
@@ -498,22 +467,22 @@ export default class Player extends Phaser.GameObjects.Sprite {
       {
         if ((this.body.onFloor() || this.enPiedra) && this.lado == 'izq')
         {
-          this.play('walk-left', true);
+          this.play('walk', true);
         }
         else if((this.body.onFloor() || this.enPiedra) && this.lado == 'der')
         {
-          this.play('walk-right', true);
+          this.play('walk', true);
         }
       }
       else
       {
         if ((this.body.onFloor() || this.enPiedra) && this.lado == 'izq')
         {
-          this.play('stand-left', true);
+          this.play('stand', true);
         }
         else if((this.body.onFloor() || this.enPiedra) && this.lado == 'der')
         {
-          this.play('stand-right', true);
+          this.play('stand', true);
         }
       }
       
@@ -523,7 +492,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         console.log(this.x + " " + this.y);
         this.atacar();
         /*if(this.cursors.left.isDown){
-          this.play('attack-left', true);
+          this.play('attack', true);
           this.setSize(16,16);
           this.setScale(0.2,0.2);
           this.body.setSize(525,420);
@@ -541,29 +510,25 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.body.setSize(400,420);
         this.body.setOffset(0,175);
       }
-      
       if(this.atacando){
-        
-        if(this.lado == 'izq'){
-        this.play('attack-left', true);
-        this.setSize(16,16);
-        this.setScale(0.2,0.2);
-        this.body.setSize(525,420);
-        this.body.setOffset(0,175);
-        }else {
-        this.play('attack-right', true);
-        this.setSize(16,16);
-        this.setScale(0.2,0.2);
-        this.body.setSize(525,420);
-        this.body.setOffset(0,175);
+        this.play('attack', true);
+        if(this.lado === 'izq'){
+          this.body.setOffset(200,175);
+          this.setOrigin(0.5,0);
         }
+          //this.setSize(16,16);
+          //this.setScale(0.2,0.2); 
+          //this.body.setSize(525,420);
+          //this.body.setOffset(0,175);
       }
       else{
-        this.setSize(16,16);
-        this.setScale(0.2,0.2);
-        this.body.setSize(400,420);
         this.body.setOffset(0,175);
-      }
+        this.setOrigin(0,0)
+        //this.setSize(16,16);
+        //this.setScale(0.2,0.2);
+        //this.body.setSize(400,420);
+        //this.body.setOffset(0,175);
+      } 
       /****************/
       if(this.cursors.E.isDown && this.nota >= 1) this.showNote();
       else this.hideNote();
