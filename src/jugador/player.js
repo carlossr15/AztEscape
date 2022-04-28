@@ -1,5 +1,6 @@
 import Bullets from '../objetos/bullets.js';
 import Vida from '../objetos/vida.js';
+import PunchZone from './punchZone.js';
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.
  * También almacena la puntuación o número de estrellas que ha recogido hasta el momento.
@@ -55,7 +56,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.maxVida = 6;
     this.vida = 6;
     this.vidas = this.scene.add.group();
-    console.log(this.scene.mapa)
     if(this.scene.mapa != 'Map1') this.bullets = new Bullets(this.scene);
     this.setDepth(1);
     //this.scene.add.image(0, 500, 'vida').setDepth(1);
@@ -286,7 +286,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.movement = false;
       this.invencible = true;
       this.play('muerte', true);
-
+      this.body.setSize(400, 350)
       this.scene.time.delayedCall(2000, function(){
         this.scene.death();
       }, [], this);
@@ -439,9 +439,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
           this.salto.play();
         }
       }
-      if(!this.body.onFloor() && this.lado == 'izq' && !this.onLadder) 
-        this.play('jump', true);
-      else if(!this.body.onFloor() && this.lado == 'der' && !this.onLadder)
+      if(!this.body.onFloor() && !this.onLadder) 
         this.play('jump', true);
 
 
@@ -461,6 +459,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.body.setVelocityX(0);
         this.caminando = false;
         //this.play('stand', true);
+      }
+      if(!this.body.onFloor() && !this.cursors.right.isDown && !this.cursors.left.isDown){
+        if(this.body.velocity.x > 0)
+          this.body.setVelocityX(this.body.velocity.x - 10);
+        else if(this.body.velocity.x < 0)
+        this.body.setVelocityX(this.body.velocity.x + 10);
       }
 
       if(this.caminando && !this.onLadder)
@@ -512,14 +516,16 @@ export default class Player extends Phaser.GameObjects.Sprite {
       }
       if(this.atacando){
         this.play('attack', true);
+        
         if(this.lado === 'izq'){
           this.body.setOffset(200,175);
           this.setOrigin(0.5,0);
+          this.zona = new PunchZone(this.scene, this.x-40, this.y+77);
         }
-          //this.setSize(16,16);
-          //this.setScale(0.2,0.2); 
-          //this.body.setSize(525,420);
-          //this.body.setOffset(0,175);
+        else{
+          this.zona = new PunchZone(this.scene, this.x+100, this.y+77);
+        }
+        
       }
       else{
         this.body.setOffset(0,175);

@@ -9,8 +9,10 @@ import Puerta from '../objetos/puerta.js';
 import Invisible from '../objetos/invisible.js';
 import Idolo from '../objetos/idolo.js';
 import TextEvent from '../dialogos/textEvent.js';
+import PunchZone from '../jugador/punchZone.js';
 import BotonMecanismo from '../objetos/botonMecansimo.js';
 import Esqueleto from '../enemigos/esqueleto.js';
+import PlayerContainer from '../jugador/playerContainer.js';
 //import PiedraMovil from './piedraMovil.js';
 
 /**
@@ -113,8 +115,10 @@ export default class MyMap extends Phaser.Scene {
         this.puerta = new Puerta(this, 15820, 1150);
 
         this.cartel = this.physics.add.image(9000, 700, 'cartel'); //No he conseguido que se coloque detrás si lo pongo despues
-        this.player = new Player(this, 0, 610);
-      
+        this.player = new Player(this, 0, 600);
+        this.golpear = new PunchZone(this, 100, 600);
+        this.container = new PlayerContainer(this, 0, 600, this.player, this.golpear);
+        
         //Creacion grupos
         this.enemies = this.add.group();
         this.escaleras = this.add.group();
