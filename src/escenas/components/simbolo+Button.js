@@ -18,7 +18,12 @@ export class SimboloMasButton extends Button {
       this.encendido = true;
     }*/
 
-    if(this.relatedScene.sound.volume < 2) this.relatedScene.sound.setVolume(this.relatedScene.sound.volume + 0.1);
+    if(this.relatedScene.sound.volume < 2){
+      this.relatedScene.sound.setVolume(this.relatedScene.sound.volume + 0.2);
+     // this.scene.volumen += 0.1;
+      this.relatedScene.aumentarVolumen();
+
+    } 
   }
 
 }

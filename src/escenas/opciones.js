@@ -10,6 +10,7 @@ export default class opciones extends Phaser.Scene {
 
     constructor() {
         super({ key: 'opciones' });
+        this.volumen = 5;
         this.simboloMasButton = new SimboloMasButton(this);
         this.simboloMenosButton = new SimboloMenosButton(this);
         this.backButton = new BackButton(this);
@@ -38,6 +39,9 @@ export default class opciones extends Phaser.Scene {
         this.add.image(350, 260, 'controles');
         this.add.image(950, 260, 'sonido');
         this.add.image(350, 500, 'movimientoFlechas');
+        
+        this.volumeText = this.add.text(937, 485, this.volumen).setFontSize(50).setColor("#FFFFFF").setBackgroundColor("#000000");
+
 
         this.simboloMasButton.create();
         this.simboloMenosButton.create();
@@ -51,6 +55,19 @@ export default class opciones extends Phaser.Scene {
                 else
                     this.scene.game.scale.startFullscreen();
         })
+    }
+
+    update(){
+        this.volumeText.text = this.volumen;
+        if(this.volumen == 10) this.volumeText.x = 920;
+    }
+
+    aumentarVolumen(){
+        this.volumen += 1;
+    }
+
+    disminuirVolumen(){
+        this.volumen -= 1;
     }
     
 }

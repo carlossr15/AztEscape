@@ -7,7 +7,7 @@ export class ContinueButton extends Button {
 
   doClick() {
     this.relatedScene.scene.stop();
-    this.relatedScene.scene.resume('Map1');
+    this.relatedScene.continuar();
   }
 
 }
