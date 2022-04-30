@@ -55,6 +55,10 @@ export default class PiedraMovil extends Phaser.GameObjects.Sprite{
 
     preUpdate(){
         this.hitBoton();
+        if (this.scene.player.body.touching.down && this.body.touching.up){
+            this.scene.player.onPiedra(true);
+            this.scene.player.play('stand', true);
+        }
     }
 
 }

@@ -23,7 +23,7 @@ export default class Bullets extends Phaser.Physics.Arcade.Group{
     
 }
 
-class Bullet extends Phaser.Physics.Arcade.Sprite{
+class Bullet extends Phaser.GameObjects.Sprite{
 
     constructor(scene,x,y){
         super(scene, x, y, 'bullet');
@@ -50,6 +50,10 @@ class Bullet extends Phaser.Physics.Arcade.Sprite{
             this.setVisible(false);
         }
         if (this.y > 2000){
+            this.setActive(false);
+            this.setVisible(false);
+        }
+        if (this.scene.physics.overlap(this, this.scene.suelo)){
             this.setActive(false);
             this.setVisible(false);
         }

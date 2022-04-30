@@ -47,13 +47,17 @@ export default class MyMap extends Phaser.Scene {
 
         this.load.spritesheet('templo', 'assets/tilesets/tile_temple.png', { frameWidth: 544, frameHeight: 256 });
         this.load.spritesheet('objetos', 'assets/tilesets/objetos.png', { frameWidth: 256, frameHeight: 256 });
-        this.load.spritesheet('player', 'assets/sprites/MC-Spritesheet.png', {frameWidth: 600, frameHeight: 600});
         this.load.spritesheet('enemy', 'assets/sprites/araña.png', {frameWidth: 64, frameHeight: 64});        
         this.load.spritesheet('vida', 'assets/sprites/health.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('batido', 'assets/sprites/Batido.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('puerta', 'assets/sprites/Puerta Abierta y Cerrada.png', {frameWidth: 104, frameHeight: 127});
         this.load.spritesheet('mediaPuerta', 'assets/sprites/mediaPuerta.png', {frameWidth: 128, frameHeight: 128});
         this.load.spritesheet('momia', 'assets/sprites/momiaSpritesheet.png', {frameWidth: 24, frameHeight: 32});
+        
+        this.load.spritesheet('player', 'assets/sprites/MC.png',{ frameWidth: 370, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
+        this.load.spritesheet('player-hit', 'assets/sprites/MC-Pegando.png', { frameWidth: 600, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
+        this.load.spritesheet('player-dead', 'assets/sprites/MC-Muerte.png', { frameWidth: 600, frameHeight: 600 })
+        
         this.load.spritesheet('idolo', 'assets/sprites/Idolo.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('restartButton', 'assets/sprites/restartButton.png', {frameWidth: 480, frameHeight: 170});
         this.load.spritesheet('mapsButton', 'assets/sprites/mapsButton.png', {frameWidth: 480, frameHeight: 170});
@@ -63,7 +67,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('diana', 'assets/sprites/diana.png', {frameWidth: 75, frameHeight: 60});
 
         this.load.atlas('heal', 'assets/sprites/heal.png','assets/sprites/heal.json');
-
+        
 
         this.load.audio('musicaFondo', 'assets/music/8bit Dungeon Level.mp3');
         this.load.audio('jump', 'assets/music/jump.wav');
@@ -77,6 +81,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.audio('combinacionIncorrecta', 'assets/music/incorrectaCombinacion.wav');
         this.load.audio('abrirPuertaPared', 'assets/music/abrirPuertaPared.wav');
         this.load.audio('sonidoDiana', 'assets/music/sonidoDeFlecha.wav');
+        this.load.audio('deathSound', 'assets/music/deathMusic.wav');
 
         this.load.image('nota', 'assets/sprites/nota.png')
         this.load.image('notaText', 'assets/tilesets/notaText.png');
@@ -160,6 +165,7 @@ export default class MyMap extends Phaser.Scene {
         //this.piedra1 = new PiedraMovil(this, 5000, 900);
         this.piedras.add(new PiedraMovil(this, 5700, 1100, 75, 75));
         this.piedras.add(new PiedraMovil(this, 700, 1100, 80, 80));
+        this.piedras.add(new PiedraMovil(this, 900, 1100, 80, 80));
         this.piedras.add(new PiedraMovil(this, 13500, 1100, 80, 80));
         this.piedras.add(new PiedraMovil(this, 14000, 1100, 160, 160));
         //this.physics.add.collider(this.piedra3, this.piedra4);
@@ -273,6 +279,14 @@ export default class MyMap extends Phaser.Scene {
         this.physics.add.collider(this.enemies, suelo);
         this.physics.add.collider(this.player, suelo);
         this.physics.add.collider(this.piedras, suelo);
+
+        var allPiedras = this.piedras.getChildren();
+        for (var i = 0; i < this.piedras.getLength(); i++){
+            for (var j = i+1; j < this.piedras.getLength(); j++){
+                this.physics.add.collider(allPiedras[i], allPiedras[j])
+            }
+            
+        }
         this.cargaColisiones();
         
         //Musica

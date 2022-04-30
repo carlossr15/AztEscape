@@ -377,6 +377,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }, [], this);
   }
 
+  onPiedra(trueFalse){
+    this.enPiedra=trueFalse
+  }
+
   preUpdate(t,dt) {
     super.preUpdate(t,dt);
     if(this.movement){
@@ -430,18 +434,15 @@ export default class Player extends Phaser.GameObjects.Sprite {
       })
       
       if (this.cursors.up.isDown) {
-        console.log("jj: " + this.enPiedra)
-        if(this.body.onFloor()){
+        if(this.body.onFloor() || this.enPiedra){
           this.body.setVelocityY(this.jumpSpeed);
-          this.salto.play();
-        } else if(this.enPiedra){
-          this.body.setVelocityY(this.jumpSpeed);
+          this.enPiedra=false;
           this.salto.play();
         }
       }
-      if(!this.body.onFloor() && !this.onLadder) 
+      if(!this.body.onFloor() && !this.onLadder && !this.enPiedra) 
         this.play('jump', true);
-
+        this.enPiedra=false;
 
       if (this.cursors.left.isDown) {
         this.lado = 'izq';
@@ -458,13 +459,13 @@ export default class Player extends Phaser.GameObjects.Sprite {
       else if(this.body.onFloor() || this.enPiedra){
         this.body.setVelocityX(0);
         this.caminando = false;
-        //this.play('stand', true);
+        this.play('stand', true);
       }
-      if(!this.body.onFloor() && !this.cursors.right.isDown && !this.cursors.left.isDown){
+      if(!this.body.onFloor() && !this.cursors.right.isDown && !this.cursors.left.isDown && !this.enPiedra){
         if(this.body.velocity.x > 0)
           this.body.setVelocityX(this.body.velocity.x - 10);
         else if(this.body.velocity.x < 0)
-        this.body.setVelocityX(this.body.velocity.x + 10);
+          this.body.setVelocityX(this.body.velocity.x + 10);
       }
 
       if(this.caminando && !this.onLadder)
