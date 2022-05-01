@@ -23,7 +23,7 @@
 
         this.input.keyboard.on('keyup', function (pointer) {
 
-            this.scene.start('Map1');
+            this.scene.start('inicio');
         }, this);
 
         let vid = this.add.video(640, 360, 'videointro');

@@ -90,6 +90,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.audio('abrirPuertaPared', 'assets/music/abrirPuertaPared.wav');
         this.load.audio('sonidoDiana', 'assets/music/sonidoDeFlecha.wav');
         this.load.audio('deathSound', 'assets/music/deathMusic.wav');
+        this.load.audio('flechaEnemigo', 'assets/music/flechaEnemigo.mp3');
 
         this.load.image('nota', 'assets/sprites/nota.png')
         this.load.image('notaText', 'assets/tilesets/notaText.png');
@@ -167,17 +168,21 @@ export default class MyMap extends Phaser.Scene {
 
         //this.cartel = this.physics.add.image(9000, 700, 'cartel'); 
 
-        this.player = new Player(this, 100, 1100);        
+        this.player = new Player(this, 7410, 1600);        
         this.golpear = new PunchZone(this, 200, 1100);
         //this.player = new Player(this, 12951, 485);
 
-        //this.enemies.add(new Esqueleto(this, 700, 1000));
-        this.esqu = new Esqueleto(this, 700, 1000);
-       // this.enemy = new Momia(this, 450, 1000);
+        this.enemies.add(new Esqueleto(this, 700, 1000));
+        this.enemies.add(new Esqueleto(this, 6870, 1550));
+        //this.esqu = new Esqueleto(this, 700, 1000);
+
+        this.enemies.add(new Enemy(this, 7000, 1700));
+
+        this.enemies.add(new Momia(this, 6950, 1700));
 
         //this.piedra1 = new PiedraMovil(this, 5000, 900);
-        this.piedras.add(new PiedraMovil(this, 5700, 1100, 75, 75));
-        //this.piedras.add(new PiedraMovil(this, 700, 1100, 80, 80));
+        this.piedras.add(new PiedraMovil(this, 5200, 900, 75, 75));
+        this.piedras.add(new PiedraMovil(this, 700, 1100, 80, 80));
         this.piedras.add(new PiedraMovil(this, 13500, 1100, 80, 80));
         this.piedras.add(new PiedraMovil(this, 14000, 1100, 160, 160));
         //this.physics.add.collider(this.piedra3, this.piedra4);
@@ -186,7 +191,11 @@ export default class MyMap extends Phaser.Scene {
         
         //this.botones.add(this.boton4);
 
-        this.nota = new Nota(this, 12300, 1800, '123456');
+        this.nota = new Nota(this, 6870, 1780);
+
+        this.llave = new Llave(this, 6920, 1780);
+
+
 
 
         this.physics.add.collider(this.player, suelo);
@@ -219,7 +228,6 @@ export default class MyMap extends Phaser.Scene {
         this.puente2 = new Puente(this, 3070, 1285);
         this.puente2.setRotation(3*Math.PI/2); 
         
-        this.enemies.add(new Enemy(this, 12700, 1500));
         
 
        /* this.piedraMovil = new PiedraMovil(this, this.player, 500, 500);

@@ -13,9 +13,7 @@
      * @param {number} x coordenada x
      * @param {number} y coordenada y
      */
-    constructor(scene, x, y, texto) {
-
-      var texto = texto; //contenido de la nota
+    constructor(scene, x, y) {
         
       super(scene, x, y, 'nota');
       this.scene.add.existing(this);

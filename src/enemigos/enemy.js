@@ -28,7 +28,6 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.vida = 1;
     // Esta label es la UI en la que pondremos la puntuación del jugador
     this.scene.add.layer(this);
-    this.scene.enemies.add(this);
 
     this.dir = true;
 

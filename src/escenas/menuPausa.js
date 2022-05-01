@@ -24,11 +24,12 @@ export default class menuPausa extends Phaser.Scene {
         this.continueButton.create();
         this.backButton.create();
         this.pause = this.add.image(650, 200, 'pausa');
+        console.log("Escena: "+ this.scene)
     }
 
     continuar(){
+        this.scene.resume("Map2");
         this.scene.stop();
-        this.scene.resume("Map1");
     }
 
 }

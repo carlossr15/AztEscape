@@ -42,7 +42,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.onWallDoor= false;
     this.invencible = false;
     this.enPiedra = false;
-    this.llave = 0;
+    this.llave = 1;
     this.llaves = [];
 
     this.nota = 0;
@@ -124,8 +124,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   this.scene.anims.create({
       key: 'attack',
-      frames: this.scene.anims.generateFrameNames('player-hit', { frames: [1,2] }),
-      frameRate: 10,
+      frames: this.scene.anims.generateFrameNames('player-hit', { frames: [1, 2] }),
+      frameRate: 7,
       repeat: -1
   });
 
@@ -458,7 +458,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
       else if(this.body.onFloor() || this.enPiedra){
         this.body.setVelocityX(0);
         this.caminando = false;
-        this.play('stand', true);
+        if(!this.atacando) this.play('stand', true);
       }
       if(!this.body.onFloor() && !this.cursors.right.isDown && !this.cursors.left.isDown && !this.enPiedra){
         if(this.body.velocity.x > 0)
@@ -482,11 +482,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
       {
         if ((this.body.onFloor() || this.enPiedra) && this.lado == 'izq')
         {
-          this.play('stand', true);
+          if(!this.atacando) this.play('stand', true);
         }
         else if((this.body.onFloor() || this.enPiedra) && this.lado == 'der')
         {
-          this.play('stand', true);
+          if(!this.atacando) this.play('stand', true);
         }
       }
       
@@ -536,13 +536,13 @@ export default class Player extends Phaser.GameObjects.Sprite {
         //this.body.setOffset(0,175);
       } 
       /****************/
-      if(this.cursors.E.isDown && this.nota >= 1) this.showNote();
+      if (this.cursors.E.isDown && this.nota >= 1) this.showNote();
       else this.hideNote();
       /****************/
 
       if(this.cursors.ESC.isDown){
-        this.scene.scene.launch('menuPausa');
-        this.scene.scene.stop();
+        this.scene.scene.pause("Map2");
+        this.scene.scene.launch("menuPausa");
       }
 
       //this.atacando = false;
