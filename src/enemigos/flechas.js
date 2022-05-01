@@ -1,49 +1,56 @@
-export default class Bullets extends Phaser.Physics.Arcade.Group{
+export default class Arrows extends Phaser.Physics.Arcade.Group{
     constructor(scene){
         super(scene.physics.world, scene);
+        
 
         this.createMultiple({
-            classType: Bullet,
+            classType: Arrow,
             frameQuantity: 30,
             active: false,
             visible: false,
-            key: 'bullet'
+            key: 'arrow'
         });
+
     }
 
-    fireBullet(x, y, pointerX, pointerY) {
-        let bullet = this.getFirstDead(false);
+    fireArrow(x, y, pointerX, pointerY) {
+        let arrow = this.getFirstDead(true);
 
-        if (bullet){
-            bullet.fire(x,y, pointerX, pointerY);
+        if (arrow){
+            console.log("prueba")
+            arrow.fire(x,y, pointerX, pointerY);
         }
     }
 
     
 }
 
-class Bullet extends Phaser.GameObjects.Sprite{
+class Arrow extends Phaser.GameObjects.Sprite{
 
     constructor(scene,x,y){
-        super(scene, x, y, 'bullet');
-        this.newCombination = '';
-        this.combination;
-        this.combIncorrecta = this.scene.sound.add('combinacionIncorrecta', {volume: 1});
-        this.abrirPuertaPared = this.scene.sound.add('abrirPuertaPared', {volume: 1});
+        super(scene, x, y, 'arrow');
     }
 
     fire(x, y, pointerX, pointerY){
-        this.body.reset(x, y);
-        this.setActive(true);
-        this.setVisible(true);
-        this.scene.physics.moveTo(this, pointerX, pointerY, 650);
+        if(pointerX - x >= 0){
+            this.setFlip(true, false);
+            this.body.reset(x, y);
+            this.setActive(true);
+            this.setVisible(true);
+            this.scene.physics.moveTo(this, pointerX, pointerY, 650);
+        }else{
+            this.body.reset(x, y);
+            this.setActive(true);
+            this.setVisible(true);
+            this.scene.physics.moveTo(this, pointerX, pointerY, 650);
+        }
     }
 
     preUpdate(time, delta){
         super.preUpdate(time, delta);
-        this.hurtEnemy();
-        this.hitDiana();
-        this.hitBoton();
+        this.hurtPlayer();
+        // this.hitDiana();
+        // this.hitBoton();
         if (this.x <= 0){
             this.setActive(false);
             this.setVisible(false);
@@ -58,7 +65,13 @@ class Bullet extends Phaser.GameObjects.Sprite{
         }
     }
 
-    hurtEnemy(){
+    hurtPlayer(){
+        if(this.scene.physics.overlap(this, this.scene.player)){
+            this.scene.player.hurt();
+        }
+    }
+    
+    /*hurtEnemy(){
         var allEnemies = this.scene.enemies.getChildren();
         for (var i = 0; i < this.scene.enemies.getLength(); i++){
             if (this.scene.physics.overlap(this, allEnemies[i])){
@@ -66,9 +79,9 @@ class Bullet extends Phaser.GameObjects.Sprite{
                 console.log("PEDRADA");
             }
         }
-    }
+    }*/
 
-    hitDiana(){
+    /*hitDiana(){
         var allDianas = this.scene.dianas.getChildren()
         for (var i = 0; i < this.scene.dianas.getLength(); i++){
             if (this.scene.physics.overlap(this, allDianas[i])){
@@ -86,9 +99,9 @@ class Bullet extends Phaser.GameObjects.Sprite{
                 }
             }
         }
-    }
+    }*/
 
-    hitBoton(){
+    /*hitBoton(){
         var allbuttons = this.scene.botones.getChildren();
         if(allbuttons.length > 0) this.combination = this.scene.getCombinationPuente();
         for (var i = 0; i < allbuttons.length; i++){
@@ -121,6 +134,6 @@ class Bullet extends Phaser.GameObjects.Sprite{
             }
         }
         
-    }
+    }*/
 
 }

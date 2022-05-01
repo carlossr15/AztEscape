@@ -1,3 +1,5 @@
+import Arrows from "./flechas.js";
+
 /**
  * Clase que representa el jugador del juego. El jugador se mueve por el mundo usando los cursores.
  * También almacena la puntuación o número de estrellas que ha recogido hasta el momento.
@@ -23,19 +25,23 @@
       this.body.setCollideWorldBounds();
   
       //Establecemos tamaño y hitbox
-      this.body.setSize(52,28);
+      this.body.setSize(90,90);
       this.atacando = false;
       this.speed = 200;
       this.vida = 2;
       // Esta label es la UI en la que pondremos la puntuación del jugador
       this.scene.add.layer(this);
       this.scene.enemies.add(this);
-  
+      //this.setRotation(Math.PI)
+      //this.setScale(0.2, 0.2)
+
+      this.arrows = new Arrows(this.scene);
+
       this.dir = true;
       this.invencible = false;
       this.tracking = false;
 
-      this.setFlip(true, false);
+      this.setFlip(false, false)
       this.body.setVelocityX(this.speed);
       this.triggerTimer = this.scene.time.addEvent({
           callback: this.timerEvent,
@@ -59,12 +65,40 @@
   
       this.scene.physics.add.collider(this, this.scene.suelo);
       
+      this.cargarAnimaciones();
+
+      let timer = this.scene.time.addEvent( {
+        delay: this.getRandom(2000, 4000),
+        callback: this.shooting,
+        callbackScope: this,
+        loop: true
+      });
+     
+    }
+
+    cargarAnimaciones(){
+
       this.scene.anims.create({
         key: 'move-enemy',
-        frames: this.scene.anims.generateFrameNames('enemy', {frames: [0, 1]}),
+        frames: this.scene.anims.generateFrameNames('esqueleto', {frames: [/*0,*/ 1, /*2,*/ 3]}),
+        frameRate: 2,
+        repeat: -1
+      })
+
+      this.scene.anims.create({
+        key: 'disparar',
+        frames: this.scene.anims.generateFrameNames('esqueleto', {frames: [4, 0]}),
+        frameRate: 7,
+        repeat: 1
+      })
+
+      this.scene.anims.create({
+        key: 'morir',
+        frames: this.scene.anims.generateFrameNames('esqueleto', {frames: [5]}),
         frameRate: 7,
         repeat: -1
       })
+
     }
   
     getRandom(min, max) {
@@ -81,44 +115,31 @@
        if(this.vida > 0 && !this.tracking){
           if(this.dir)
           {
-              this.body.setVelocityX(-this.speed);
-              this.dir = false;
-              this.setFlip(false, false);
-              //this.player.setFlip(true, false)
+          //this.anims.play('move-enemy', true);
+            this.body.setVelocityX(-this.speed);
+            this.dir = false;
+            this.setFlip(true, false);
+            this.player.setFlip(true, false);
           }
           else{
-              this.body.setVelocityX(this.speed);
-              this.dir = true;
-              this.setFlip(true, false);
+          //this.anims.play('move-enemy', true);
+            this.body.setVelocityX(this.speed);
+            this.dir = true;
+            this.setFlip(false, false);
+
           }
           
         }
         
      }
-   
-     attack(){
-        if(this.scene.player.cursors.space.isDown && this.scene.player.atacando){
-          this.hurt();
-            this.scene.time.delayedCall(800, function(){
-                this.invencible = false;
-    
-            }, [], this);
-          this.puñetazo.play();
-
-          console.log("GOLPEado esqueleto. Vida restante:" + this.vida);
-       } 
-       
-      
-      
-       
-        
-      }
   
       retroceder()
       {
         if(this.atacando)
         {
-            console.log("Retrocediendo");
+          this.anims.play('move-enemy', true);
+
+            //console.log("Retrocediendo");
             if(this.x < this.scene.player.x) //Jugador a la derecha
             {
                 this.body.setVelocityX(-this.speed);
@@ -151,8 +172,8 @@
          this.atacando = true;
         this.retroceder();
   
-        console.log("GOLPE Esqueleto");
-        }
+        //console.log("GOLPE Esqueleto");
+      }
     }
     
     
@@ -196,23 +217,30 @@
     
     hurt(){
         
-        if(!this.invencible){
-            this.invencible = true;
-            this.vida -=1;
-        }
+      if(!this.invencible){
+        this.invencible = true;
+        this.vida -=1;
+        //console.log("Vida: " +this.vida)
+      }
+      this.scene.time.delayedCall(800, function(){
+        this.invencible = false;
+
+      }, [], this);
 
       if(this.vida <= 0)
         {
-            this.setFlip(false, true);
-            this.body.setVelocityX(0);
-            this.anims.stop();
-            this.body.enable = false;
-            this.setTintFill(0xff00ff, 0xffff00, 0x0000ff, 0xff0000);
-            this.scene.time.delayedCall(800, function(){
-              this.destroy();
-            }, [], this);
+          console.log("muerte")
+          this.stop();
+          this.body.setVelocityX(0);
+          
+          this.body.enable = false;
+          this.play("morir")
+          this.scene.time.delayedCall(800, function(){
+            this.destroy();
+          }, [], this);
             
         }
+        
       
     }
 
@@ -236,14 +264,14 @@
                 this.setFlip(true, false);
             }
             else{
-                this.setFlip(false, false);
+                this.setFlip(true, false);
             }
         }
-        else//Jugador a la izquierda
+        else //Jugador a la izquierda
         {
             if(this.dir)
             {
-                this.setFlip(true, false);
+                this.setFlip(false, false);
             }
             else{
                 this.setFlip(false, false);
@@ -254,7 +282,7 @@
         {
             this.body.setVelocityX(0);
             
-            this.attack();
+            //this.attack();
         }
         else{
 
@@ -264,14 +292,36 @@
 
     follow()
     {
-        if(this.x < this.scene.player.x) //Jugador a la derecha
-        {
-            this.body.setVelocityX(this.speed);
+      if(this.x < this.scene.player.x) //Jugador a la derecha
+      {
+        this.anims.play('move-enemy', true);
+
+          this.body.setVelocityX(this.speed);
+      }
+      else//Jugador a la izquierda
+      {
+        this.anims.play('move-enemy', true);
+
+          this.body.setVelocityX(-this.speed);
+      }
+    }
+
+
+    
+    attack(){
+      if(this.scene.player.cursors.space.isDown && this.scene.player.atacando){
+        this.hurt();      
+        this.puñetazo.play();
+      }dddd
+    }
+
+    shooting(){
+      if(this.vida > 0){
+        if(Math.abs(this.x - this.scene.player.x) <= 600 && this.scene.player.vida > 0){          
+          this.play('disparar', true)
+          this.arrows.fireArrow(this.x, this.y, this.scene.player.x, this.scene.player.y);
         }
-        else//Jugador a la izquierda
-        {
-            this.body.setVelocityX(-this.speed);
-        }
+      }
     }
   
     getRandom(min, max) {
@@ -279,13 +329,10 @@
       }
 
     preUpdate(t, d) {
-      // IMPORTANTE: Si no ponemos esta instrucción y el sprite está animado
-      // no se podrá ejecutar la animación del sprite. 
-    this.vision();
+      this.vision();
       this.checkGolpe();
-  
+      
       super.preUpdate(t, d);
-      this.anims.play('move-enemy', true);
     }
   }
   

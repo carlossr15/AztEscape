@@ -12,7 +12,6 @@ import TextEvent from '../dialogos/textEvent.js';
 import PunchZone from '../jugador/punchZone.js';
 import BotonMecanismo from '../objetos/botonMecansimo.js';
 import Esqueleto from '../enemigos/esqueleto.js';
-import PlayerContainer from '../jugador/playerContainer.js';
 //import PiedraMovil from './piedraMovil.js';
 
 /**
@@ -37,6 +36,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.image('llave', 'assets/sprites/Llave.png' );
         this.load.image('escalera', 'assets/sprites/escalera.png');
         this.load.image('bullet', 'assets/sprites/roca.png');
+        this.load.image('arrow', 'assets/sprites/flecha.png');
         this.load.image('cartel', 'assets/sprites/Cartel.png');
 
         this.load.spritesheet('templo', 'assets/tilesets/tile_temple.png', { frameWidth: 544, frameHeight: 256 });
@@ -117,7 +117,6 @@ export default class MyMap extends Phaser.Scene {
         this.cartel = this.physics.add.image(9000, 700, 'cartel'); //No he conseguido que se coloque detrás si lo pongo despues
         this.player = new Player(this, 0, 600);
         this.golpear = new PunchZone(this, 100, 600);
-        this.container = new PlayerContainer(this, 0, 600, this.player, this.golpear);
         
         //Creacion grupos
         this.enemies = this.add.group();

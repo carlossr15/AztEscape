@@ -16,6 +16,9 @@ import Nota from '../objetos/nota.js';
 import Puente from '../objetos/puente.js';
 import PiedraMovil from '../objetos/piedraMovil.js';
 import BotonSuelo from '../objetos/botonSuelo.js';
+import Esqueleto from '../enemigos/esqueleto.js'; 
+import PunchZone from '../jugador/punchZone.js';
+
 //import PiedraMovil from './piedraMovil.js';
 
 /**
@@ -40,6 +43,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.image('llave', 'assets/sprites/Llave.png' );
         this.load.image('escalera', 'assets/sprites/escalera.png');
         this.load.image('bullet', 'assets/sprites/roca.png');
+        this.load.image('arrow', 'assets/sprites/flecha.png');
         this.load.image('cartel', 'assets/sprites/Cartel.png');
          this.load.image('puertaPared', 'assets/sprites/puertaPared.png');
         this.load.image('puente', 'assets/sprites/Puente.png');
@@ -47,6 +51,9 @@ export default class MyMap extends Phaser.Scene {
 
         this.load.spritesheet('templo', 'assets/tilesets/tile_temple.png', { frameWidth: 544, frameHeight: 256 });
         this.load.spritesheet('objetos', 'assets/tilesets/objetos.png', { frameWidth: 256, frameHeight: 256 });
+        this.load.spritesheet('player', 'assets/sprites/MC.png',{ frameWidth: 370, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
+        this.load.spritesheet('player-hit', 'assets/sprites/MC-Pegando.png', { frameWidth: 600, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
+        this.load.spritesheet('player-dead', 'assets/sprites/MC-Muerte.png', { frameWidth: 600, frameHeight: 600 })       
         this.load.spritesheet('enemy', 'assets/sprites/araña.png', {frameWidth: 64, frameHeight: 64});        
         this.load.spritesheet('vida', 'assets/sprites/health.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('batido', 'assets/sprites/Batido.png', {frameWidth: 32, frameHeight: 32});
@@ -65,6 +72,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('botonSuelo', 'assets/sprites/BotonSuelo.png', {frameWidth: 50, frameHeight: 50});
         this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128}); 
         this.load.spritesheet('diana', 'assets/sprites/diana.png', {frameWidth: 75, frameHeight: 60});
+        this.load.spritesheet('esqueleto', 'assets/sprites/esqueleto.png', {frameWidth: 90, frameHeight: 90});
 
         this.load.atlas('heal', 'assets/sprites/heal.png','assets/sprites/heal.json');
         
@@ -159,13 +167,17 @@ export default class MyMap extends Phaser.Scene {
 
         //this.cartel = this.physics.add.image(9000, 700, 'cartel'); 
 
-        this.player = new Player(this, 100, 1100);
+        this.player = new Player(this, 100, 1100);        
+        this.golpear = new PunchZone(this, 200, 1100);
         //this.player = new Player(this, 12951, 485);
-        
+
+        //this.enemies.add(new Esqueleto(this, 700, 1000));
+        this.esqu = new Esqueleto(this, 700, 1000);
+       // this.enemy = new Momia(this, 450, 1000);
+
         //this.piedra1 = new PiedraMovil(this, 5000, 900);
         this.piedras.add(new PiedraMovil(this, 5700, 1100, 75, 75));
-        this.piedras.add(new PiedraMovil(this, 700, 1100, 80, 80));
-        this.piedras.add(new PiedraMovil(this, 900, 1100, 80, 80));
+        //this.piedras.add(new PiedraMovil(this, 700, 1100, 80, 80));
         this.piedras.add(new PiedraMovil(this, 13500, 1100, 80, 80));
         this.piedras.add(new PiedraMovil(this, 14000, 1100, 160, 160));
         //this.physics.add.collider(this.piedra3, this.piedra4);
@@ -205,11 +217,10 @@ export default class MyMap extends Phaser.Scene {
         this.puente1.setRotation(3*Math.PI/2);
 
         this.puente2 = new Puente(this, 3070, 1285);
-        this.puente2.setRotation(3*Math.PI/2);
+        this.puente2.setRotation(3*Math.PI/2); 
         
         this.enemies.add(new Enemy(this, 12700, 1500));
         
-
 
        /* this.piedraMovil = new PiedraMovil(this, this.player, 500, 500);
         this.physics.add.collider(this.player, this.piedraMovil); */

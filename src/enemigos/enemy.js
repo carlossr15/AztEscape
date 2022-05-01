@@ -85,8 +85,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
  
   attack(){
     if(this.scene.player.cursors.space.isDown && this.scene.player.atacando){
-      this.hurt();
-      
+      this.hurt();      
       this.puñetazo.play();
     }/*else{
       this.scene.player.hurt();
