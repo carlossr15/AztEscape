@@ -220,6 +220,17 @@ export default class MyMap extends Phaser.Scene {
             on:false,
             emitZone: { type: 'random', source: this.playerSource }
         });
+        this.cambio = this.particles.createEmitter({
+            frame: 'white',
+            x: this.player.x, y: this.player.y,
+            lifespan: 500,
+            gravityY: 0,
+            angle: { start: 0, end: 360, steps: 64 },
+            on:false,
+            speed: 200,
+            quantity: 64,
+            frequency: 32
+        });
     }
 
     cargaColisiones(){

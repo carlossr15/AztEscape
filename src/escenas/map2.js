@@ -75,6 +75,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('esqueleto', 'assets/sprites/esqueleto.png', {frameWidth: 90, frameHeight: 90});
 
         this.load.atlas('heal', 'assets/sprites/heal.png','assets/sprites/heal.json');
+        this.load.atlas('white', 'assets/sprites/white.png', 'assets/sprites/white.json');
         
 
         this.load.audio('musicaFondo', 'assets/music/8bit Dungeon Level.mp3');
@@ -312,12 +313,14 @@ export default class MyMap extends Phaser.Scene {
         this.musica = this.sound.add('musicaFondo',{volume: 0.2});
         this.musica.loop = true;
         this.musica.play();
+
     }
 
     cargaParticulas(){
         var jugador = this.player; //Necesario para los efectos
 
         this.particles = this.add.particles('heal');
+        this.particles = this.add.particles('white');
         this.playerSource = {
             getRandomPoint: function (vec)
             {
@@ -335,6 +338,29 @@ export default class MyMap extends Phaser.Scene {
             on:false,
             emitZone: { type: 'random', source: this.playerSource }
         });
+        this.cambio = this.particles.createEmitter({
+            frame: 'white',
+            follow:this.player,
+            lifespan: 100,
+            gravityY: 0,
+            scale: { start: 0.2, end: 0.3, ease: 'Quad.easeOut' },
+            angle: { start: 0, end: 360, steps: 64 },
+            on:false,
+            speed: 600,
+            quantity: 64,
+            frequency: 32
+        });
+        /*
+        this.centro = this.particles.createEmitter({
+            frame: 'healparticle',
+            lifespan: 500,
+            gravityY: 0,
+            alpha: { start: 1, end: 0, ease: 'Quad.easeIn' },
+            on:false,
+            follow: this.player
+        });
+        this.centro.start();
+        */
     }
     
     cargaColisiones(){

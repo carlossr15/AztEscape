@@ -19,7 +19,7 @@ export default class PunchZone extends Phaser.GameObjects.Zone {
         this.scene.physics.add.overlap(this, this.scene.enemies, (golpe, enemigo) => {
             enemigo.attack();
         });
-        this.scene.time.delayedCall(150, function(){
+        this.scene.time.delayedCall(10, function(){
             this.destroy();
           }, [], this);
     }
