@@ -42,7 +42,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.onWallDoor= false;
     this.invencible = false;
     this.enPiedra = false;
-    this.llave = 1;
+    this.llave = 0;
     this.llaves = [];
 
     this.nota = 0;

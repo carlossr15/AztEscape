@@ -16,7 +16,7 @@ import Arrows from "./flechas.js";
      //this.load.spritesheet('esqueleto', 'assets/sprites/esqueleto.png', {frameWidth: 24, frameHeight: 32});
 
   
-    constructor(scene, x, y) {
+    constructor(scene, x, y, moving) {
       super(scene, x, y, 'esqueleto');
       this.setDepth(0);
       this.scene.add.existing(this);
@@ -39,6 +39,7 @@ import Arrows from "./flechas.js";
       this.dir = true;
       this.invencible = false;
       this.tracking = false;
+      this.moving = moving;
 
       this.setFlip(false, false)
       this.body.setVelocityX(this.speed);
@@ -68,7 +69,7 @@ import Arrows from "./flechas.js";
       this.cargarAnimaciones();
 
       let timer  = this.scene.time.addEvent( {
-        delay: this.getRandom(2000, 4000),
+        delay: 3000,
         callback: this.shooting,
         callbackScope: this,
         loop: true
@@ -88,14 +89,21 @@ import Arrows from "./flechas.js";
 
       this.scene.anims.create({
         key: 'disparar',
-        frames: this.scene.anims.generateFrameNames('esqueleto', {frames: [4, 0]}),
-        frameRate: 7,
-        repeat: 1
+        frames: this.scene.anims.generateFrameNames('esqueleto', {frames: [4, 0, 6]}),
+        frameRate: 1,
+        repeat: -1
       })
 
       this.scene.anims.create({
         key: 'morir',
         frames: this.scene.anims.generateFrameNames('esqueleto', {frames: [5]}),
+        frameRate: 7,
+        repeat: -1
+      })
+
+      this.scene.anims.create({
+        key: 'stand-skeleton',
+        frames: this.scene.anims.generateFrameNames('esqueleto', {frames: [0]}),
         frameRate: 7,
         repeat: -1
       })
@@ -136,7 +144,7 @@ import Arrows from "./flechas.js";
   
       retroceder()
       {
-        if(this.vida > 0 && Math.abs(this.x - this.scene.player.x) < 200)
+        if(this.vida > 0 && Math.abs(this.x - this.scene.player.x) < 200 && this.moving)
         {
           this.play('move-skeleton', true);
 
@@ -296,12 +304,12 @@ import Arrows from "./flechas.js";
 
     follow()
     {
-      if(this.vida > 0) {
+      if(this.vida > 0 && Math.abs(this.x - this.scene.player.x) < 800 && Math.abs(this.x - this.scene.player.x) > 550) {
         if(this.x < this.scene.player.x) //Jugador a la derecha
         {
           this.play('move-skeleton', true);
 
-            this.body.setVelocityX(this.speed);
+          this.body.setVelocityX(this.speed);
         }
         else//Jugador a la izquierda
         {
@@ -326,7 +334,10 @@ import Arrows from "./flechas.js";
         if(Math.abs(this.x - this.scene.player.x) <= 600 && this.scene.player.vida > 0){    
           this.flecha.play();      
           this.play('disparar', true)
-          this.arrows.fireArrow(this.x, this.y, this.scene.player.x, this.scene.player.y);
+          this.scene.time.delayedCall(1000, function(){
+            this.arrows.fireArrow(this.x, this.y, this.scene.player.x, this.scene.player.y);
+
+        }, [], this);
         }
       }
     }

@@ -151,7 +151,7 @@ export default class MyMap extends Phaser.Scene {
         this.puertasPared = this.add.group();
         this.piedras = this.add.group();
 
-        this.add.image(128, 1050, "columna").setScale(0.8, 0.8).setDepth(0);
+        this.add.image(150, 1065, "columna").setScale(0.8, 0.8).setDepth(0);
 
 
         //this.bandera = new Bandera(this, 6750, 455);
@@ -168,12 +168,12 @@ export default class MyMap extends Phaser.Scene {
 
         //this.cartel = this.physics.add.image(9000, 700, 'cartel'); 
 
-        this.player = new Player(this, 7410, 1600);        
+        this.player = new Player(this, 0, 1100);        
         this.golpear = new PunchZone(this, 200, 1100);
         //this.player = new Player(this, 12951, 485);
 
-        this.enemies.add(new Esqueleto(this, 700, 1000));
-        this.enemies.add(new Esqueleto(this, 6870, 1550));
+        this.enemies.add(new Esqueleto(this, 700, 1000, true));
+        this.enemies.add(new Esqueleto(this, 6870, 1550, false));
         //this.esqu = new Esqueleto(this, 700, 1000);
 
         this.enemies.add(new Enemy(this, 7000, 1700));

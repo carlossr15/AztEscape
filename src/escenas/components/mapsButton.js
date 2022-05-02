@@ -6,7 +6,7 @@ export class MapsButton extends Button {
   }
 
   doClick() {
-    //this.relatedScene.scene.start('myMap');
+    this.relatedScene.scene.start('mapsMenu');
   }
 
 }

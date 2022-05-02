@@ -12,6 +12,7 @@ import TextEvent from '../dialogos/textEvent.js';
 import PunchZone from '../jugador/punchZone.js';
 import BotonMecanismo from '../objetos/botonMecansimo.js';
 import Esqueleto from '../enemigos/esqueleto.js';
+import Antorcha from '../objetos/antorcha.js';
 //import PiedraMovil from './piedraMovil.js';
 
 /**
@@ -51,6 +52,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('player', 'assets/sprites/MC.png',{ frameWidth: 370, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
         this.load.spritesheet('player-hit', 'assets/sprites/MC-Pegando.png', { frameWidth: 600, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
         this.load.spritesheet('player-dead', 'assets/sprites/MC-Muerte.png', { frameWidth: 600, frameHeight: 600 })
+        this.load.spritesheet('antorcha', 'assets/sprites/Antorcha.png', {frameWidth: 32, frameHeight: 32});
 
         this.load.spritesheet('esqueleto', 'assets/sprites/esqueleto.png', {frameWidth: 90, frameHeight: 90});
 
@@ -113,8 +115,11 @@ export default class MyMap extends Phaser.Scene {
         //Creacion jugador
         this.puerta = new Puerta(this, 15820, 1150);
 
+        this.antorchas = this.add.group();
+        this.cargarAntorchas();
+
         this.cartel = this.physics.add.image(9000, 700, 'cartel'); //No he conseguido que se coloque detrás si lo pongo despues
-        this.player = new Player(this, 14000, 600);
+        this.player = new Player(this, 0, 400);
         this.golpear = new PunchZone(this, 100, 600);
         
         //Creacion grupos
@@ -125,7 +130,7 @@ export default class MyMap extends Phaser.Scene {
 
         //Creacion de objetos relevantes
 
-    
+        
         //this.enemies.add(new Esqueleto(this, 100, 675));
         this.enemies.add(new Enemy(this, 1200, 700));
         this.enemies.add(new Enemy(this, 4200, 700));
@@ -171,6 +176,7 @@ export default class MyMap extends Phaser.Scene {
         this.idolo = new Idolo(this, 174, 682);
 
         this.physics.add.collider(this.cartel, suelo);
+
 
         //Config Camara
         this.cameras.main.setBounds(0, 0, 16000, 3000); //Y = 250
@@ -246,5 +252,46 @@ export default class MyMap extends Phaser.Scene {
         this.musica.stop();
     }
 
+    cargarAntorchas(){
+        
+        this.antorchas.add(new Antorcha(this, 112, 555));
+        this.antorchas.add(new Antorcha(this, 176, 555));
+        this.antorchas.add(new Antorcha(this, 240, 555));
+        this.antorchas.add(new Antorcha(this, 500, 600));
+        this.antorchas.add(new Antorcha(this, 900, 500));
+        this.antorchas.add(new Antorcha(this, 1200, 600));
+        this.antorchas.add(new Antorcha(this, 1500, 600));
+        this.antorchas.add(new Antorcha(this, 1900, 500));
+        this.antorchas.add(new Antorcha(this, 2300, 400));
+        this.antorchas.add(new Antorcha(this, 2700, 300));
+        this.antorchas.add(new Antorcha(this, 2900, 260));
+        this.antorchas.add(new Antorcha(this, 3100, 230));
+        this.antorchas.add(new Antorcha(this, 3280, 335));
+        this.antorchas.add(new Antorcha(this, 3800, 450));
+        this.antorchas.add(new Antorcha(this, 4300, 600));
+        this.antorchas.add(new Antorcha(this, 4850, 320));
+        this.antorchas.add(new Antorcha(this, 5070, 160));
+        this.antorchas.add(new Antorcha(this, 5500, 220));
+        this.antorchas.add(new Antorcha(this, 6050, 132));
+        this.antorchas.add(new Antorcha(this, 6600, 100));
+        this.antorchas.add(new Antorcha(this, 8000, 500));
+        this.antorchas.add(new Antorcha(this, 8500, 500));
+        this.antorchas.add(new Antorcha(this, 9300, 1200));
+        this.antorchas.add(new Antorcha(this, 9070, 1200));
+        this.antorchas.add(new Antorcha(this, 9700, 600));
+        this.antorchas.add(new Antorcha(this, 11700, 670));
+        this.antorchas.add(new Antorcha(this, 12700, 400));
+        this.antorchas.add(new Antorcha(this, 15060, 1000));
+
+        this.antorchas.add(new Antorcha(this, 15330, 1080));
+        this.antorchas.add(new Antorcha(this, 15400, 1080));
+        this.antorchas.add(new Antorcha(this, 15470, 1080));
+        this.antorchas.add(new Antorcha(this, 15540, 1080));
+        this.antorchas.add(new Antorcha(this, 15610, 1080));
+        this.antorchas.add(new Antorcha(this, 15680, 1080));
+        this.antorchas.add(new Antorcha(this, 15750, 1080));
+
+    
+    }
 
 }

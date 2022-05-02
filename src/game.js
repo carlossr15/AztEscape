@@ -9,6 +9,7 @@ import loseMenu from './escenas/loseMenu.js';
 import menuPausa from './escenas/menuPausa.js';
 import inicio from './escenas/inicio.js';
 import opciones from './escenas/opciones.js';
+import mapsMenu from './escenas/mapsMenu.js'
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos
  * la clase Game de Phaser, encargada de crear e iniciar el juego.
@@ -22,12 +23,12 @@ let config = {
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
     },
     pixelArt: true,
-    scene: [Boot, menu, inicio, opciones, menuPausa, Map1, Map2, winMenu, loseMenu, End, introscene],
+    scene: [Boot, menu, inicio, opciones, mapsMenu, menuPausa, Map1, Map2, winMenu, loseMenu, End, introscene],
     physics: {
         default: 'arcade',
         arcade: {
             gravity: { y: 700 },
-            debug: true
+            debug: false
         }
     }
 };

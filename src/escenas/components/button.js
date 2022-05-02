@@ -19,4 +19,5 @@ export class Button {
         this.doClick();
       });
     }
+
   }
