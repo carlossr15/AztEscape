@@ -91,13 +91,15 @@ class Bullet extends Phaser.GameObjects.Sprite{
     hitBoton(){
         var allbuttons = this.scene.botones.getChildren();
         if(allbuttons.length > 0) this.combination = this.scene.getCombinationPuente();
+
+
+
         for (var i = 0; i < allbuttons.length; i++){
             if(this.scene.physics.overlap(this, allbuttons[i]) && !allbuttons[i].getPulsado()){
                 allbuttons[i].pulsado = true;
                 console.log("Boton-pulsado");
                 allbuttons[i].pulsar();
                 this.newCombination += allbuttons[i].getNombre();
-                console.log("Combination: " + this.newCombination);
                 if(this.newCombination == this.combination) {
                     if(allbuttons[i].getAcciona() == 'puerta'){
                         this.scene.puertaPared2.abrirPuerta(); 

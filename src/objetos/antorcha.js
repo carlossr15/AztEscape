@@ -4,6 +4,8 @@
  * una nueva estrella en otra posición, si el juego no ha terminado.
  * @extends Phaser.GameObjects.Sprite
  */
+
+    var timer;
  export default class Antorcha extends Phaser.GameObjects.Sprite {
   
     /**
@@ -29,7 +31,14 @@
         repeat: -1
       });
 
-      let timer  = this.scene.time.addEvent( {
+      this.scene.anims.create({
+        key: 'antorcha-off',
+        frames: this.scene.anims.generateFrameNames('antorcha', { frames: [3] }),
+        frameRate: 2,
+        repeat: -1
+      });
+
+      timer = this.scene.time.addEvent( {
         delay: this.getRandom(30, 1500),
         callback: this.move,
         callbackScope: this
@@ -52,6 +61,15 @@
     preUpdate(t,dt) {
         super.preUpdate(t,dt);
 
+    }
+
+    encender(){
+        this.move();
+    }
+
+    apagar(){
+        timer.paused = true;
+        this.play('antorcha-off');
     }
 
 

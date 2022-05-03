@@ -115,7 +115,6 @@ export default class MyMap extends Phaser.Scene {
         //Creacion jugador
         this.puerta = new Puerta(this, 15820, 1150);
 
-        this.antorchas = this.add.group();
         this.cargarAntorchas();
 
         this.cartel = this.physics.add.image(9000, 700, 'cartel'); //No he conseguido que se coloque detrás si lo pongo despues
@@ -264,7 +263,8 @@ export default class MyMap extends Phaser.Scene {
     }
 
     cargarAntorchas(){
-        
+        this.antorchas = this.add.group();
+
         this.antorchas.add(new Antorcha(this, 112, 555));
         this.antorchas.add(new Antorcha(this, 176, 555));
         this.antorchas.add(new Antorcha(this, 240, 555));

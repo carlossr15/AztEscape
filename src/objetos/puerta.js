@@ -50,6 +50,5 @@ export default class Puerta extends Phaser.GameObjects.Sprite {
   }
 
 
-
   
 }

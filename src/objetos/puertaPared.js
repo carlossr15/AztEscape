@@ -12,7 +12,7 @@
      * @param {number} x Coordenada x
      * @param {number} y Coordenada y
      */
-    constructor(scene, x, y){
+    constructor(scene, x, y, nombre){
       super(scene, x, y, 'puertaPared');
       this.setScale(1, 1);
       this.scene.add.existing(this);
@@ -24,13 +24,14 @@
       this.body.setSize(0.5, 1);
       //this.scene.physics.add.collider(this.mediaPuerta, this.player, 44, 44);
       //this.scene.physics.add.collider(this, this.player);
+      this.nombre = nombre;
       
     }
   
   
     abrirPuerta(){
       // this.y = 570;
-      this.scene.cameras.main.centerOn(this.x, this.y);
+      this.scene.cameras.main.centerOn(this.x + 200, this.y);
       this.scene.cameras.main.stopFollow();
       this.scene.time.delayedCall(250, function(){
         var aux = this.y - 100;
@@ -43,6 +44,7 @@
         this.body.enable = false;
         this.scene.cameras.main.shake(500, 0.01); //provoca un shake de la camara al abrir la puerta
       }, [], this);
+      this.encenderAntorchas();
       this.scene.time.delayedCall(2000, function(){
         this.scene.cameras.main.startFollow(this.scene.player, false, 0.05, 0.5);
       }, [], this);
@@ -62,6 +64,22 @@
 
 
     
+  encenderAntorchas(){
+    if(this.nombre == "puerta1"){
+      var allAntorchasApagadas = this.scene.antorchasApagadas2.getChildren();
+
+      for (var i = 0; i < allAntorchasApagadas.length; i++){
+        allAntorchasApagadas[i].encender();
+      }
+    }else if(this.nombre == "puerta2"){
+      var allAntorchasApagadas2 = this.scene.antorchasApagadas3.getChildren();
+
+      for (var i = 0; i < allAntorchasApagadas2.length; i++){
+        allAntorchasApagadas2[i].encender();
+      }
+    }
+
+  }
 
     preUpdate() {
       // IMPORTANTE: Si no ponemos esta instrucción y el sprite está animado
