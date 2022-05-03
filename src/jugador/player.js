@@ -631,7 +631,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
           this.scene.cambio.stop();
         }, [], this);
       }
-      else if(this.body.onFloor() && this.cursors.TWO.isDown && this.personaje !== 2){
+      else if(this.scene.mapa !== 'Map1' && this.body.onFloor() && this.cursors.TWO.isDown && this.personaje !== 2){
         this.personaje = 2;
         this.scene.cambio.start();
         this.scene.time.delayedCall(100, function(){
