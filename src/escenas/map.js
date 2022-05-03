@@ -37,7 +37,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.image('llave', 'assets/sprites/Llave.png' );
         this.load.image('escalera', 'assets/sprites/escalera.png');
         this.load.image('bullet', 'assets/sprites/roca.png');
-        this.load.image('arrow', 'assets/sprites/flecha.png');
+        this.load.image('arrow', 'assets/sprites/Flecha.png');
         this.load.image('cartel', 'assets/sprites/Cartel.png');
 
         this.load.spritesheet('templo', 'assets/tilesets/tile_temple.png', { frameWidth: 544, frameHeight: 256 });
@@ -52,7 +52,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('player', 'assets/sprites/MC.png',{ frameWidth: 370, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
         this.load.spritesheet('player-hit', 'assets/sprites/MC-Pegando.png', { frameWidth: 600, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
         this.load.spritesheet('player-dead', 'assets/sprites/MC-Muerte.png', { frameWidth: 600, frameHeight: 600 })
-        this.load.spritesheet('antorcha', 'assets/sprites/Antorcha.png', {frameWidth: 32, frameHeight: 32});
+        this.load.spritesheet('antorcha', 'assets/sprites/antorcha.png', {frameWidth: 32, frameHeight: 32});
 
         this.load.spritesheet('esqueleto', 'assets/sprites/esqueleto.png', {frameWidth: 90, frameHeight: 90});
 
