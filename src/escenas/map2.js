@@ -171,80 +171,10 @@ export default class MyMap extends Phaser.Scene {
 
         //this.cartel = this.physics.add.image(9000, 700, 'cartel'); 
 
-        this.antorchas = this.add.group();
-        this.antorchasApagadas1 = this.add.group();
-        this.antorchasApagadas2 = this.add.group();
-        this.antorchasApagadas3 = this.add.group();
-        this.antorchasApagadas4 = this.add.group();
-
-        this.antorchas.add(new Antorcha(this, 500, 1150));
-        this.antorchas.add(new Antorcha(this, 1200, 1150));
-        this.antorchas.add(new Antorcha(this, 1700, 1020));
-        this.antorchas.add(new Antorcha(this, 2630, 1020));
-        
-        this.antorchasApagadas1.add(this.ant11 = new Antorcha(this, 3100, 1150));
-        this.ant11.apagar();
-        this.antorchasApagadas1.add(this.ant12 = new Antorcha(this, 3160, 1150));
-        this.ant12.apagar();
-        this.antorchasApagadas1.add(this.ant13 = new Antorcha(this, 3220, 1150));
-        this.ant13.apagar();
-        this.antorchasApagadas1.add(this.ant14 = new Antorcha(this, 3280, 1150));
-        this.ant14.apagar();
-        this.antorchasApagadas1.add(this.ant15 = new Antorcha(this, 3340, 1150));
-        this.ant15.apagar();
-
-        this.antorchas.add(new Antorcha(this, 3600, 1150));
-        this.antorchas.add(new Antorcha(this, 4150, 1100));
-        this.antorchas.add(new Antorcha(this, 4400, 1020));
-        this.antorchas.add(new Antorcha(this, 4630, 970));
-        this.antorchas.add(new Antorcha(this, 5100, 850));
-
-        this.antorchasApagadas2.add(this.ant21 = new Antorcha(this, 6300, 1200));
-        this.ant21.apagar();
-        this.antorchasApagadas2.add(this.ant22 = new Antorcha(this, 6400, 1200));
-        this.ant22.apagar();
-        this.antorchasApagadas2.add(this.ant23 = new Antorcha(this, 6500, 1200));
-        this.ant23.apagar();
-        this.antorchasApagadas2.add(this.ant24 = new Antorcha(this, 6600, 1200));
-        this.ant24.apagar();
-        this.antorchasApagadas2.add(this.ant25 = new Antorcha(this, 6700, 1200));
-        this.ant25.apagar();
-        this.antorchasApagadas2.add(this.ant26 = new Antorcha(this, 6800, 1200));
-        this.ant26.apagar();
-
-        this.antorchas.add(new Antorcha(this, 7800, 1250));
-        this.antorchas.add(new Antorcha(this, 7000, 1650));
-        this.antorchas.add(new Antorcha(this, 7300, 1650));
-        this.antorchas.add(new Antorcha(this, 8600, 1500));
-
-        this.antorchasApagadas3.add(this.ant31 = new Antorcha(this, 9700, 1370));
-        this.ant31.apagar();
-        this.antorchasApagadas3.add(this.ant32 = new Antorcha(this, 9800, 1370));
-        this.ant32.apagar();
-        this.antorchasApagadas3.add(this.ant33 = new Antorcha(this, 9900, 1370));
-        this.ant33.apagar();
-        this.antorchasApagadas3.add(this.ant34 = new Antorcha(this, 10000, 1370));
-        this.ant34.apagar();
-        this.antorchasApagadas3.add(this.ant35 = new Antorcha(this, 10100, 1370));
-        this.ant35.apagar();
-
-        this.antorchas.add(new Antorcha(this, 12000, 1450));
-        this.antorchas.add(new Antorcha(this, 12550, 1730));
-
-        this.antorchasApagadas4.add(this.ant41 = new Antorcha(this, 13000, 1730));
-        this.ant41.apagar();
-        this.antorchasApagadas4.add(this.ant42 = new Antorcha(this, 13100, 1730));
-        this.ant42.apagar();
-        this.antorchasApagadas4.add(this.ant43 = new Antorcha(this, 13200, 1730));
-        this.ant43.apagar();
-
-        this.antorchas.add(new Antorcha(this, 14450, 1500));
-        this.antorchas.add(new Antorcha(this, 14700, 1500));
-        this.antorchas.add(new Antorcha(this, 14950, 1500));
+        this.cargarAntorchas();
 
 
-
-        this.player = new Player(this, 0, 1000);        
+        this.player = new Player(this, 13000, 800);        
         this.golpear = new PunchZone(this, 200, 1100);
         //this.player = new Player(this, 12951, 485);
 
@@ -252,9 +182,17 @@ export default class MyMap extends Phaser.Scene {
         this.enemies.add(new Esqueleto(this, 6870, 1550, false));
         //this.esqu = new Esqueleto(this, 700, 1000);
 
+        this.enemies.add(new Enemy(this, 4000, 1000));
         this.enemies.add(new Enemy(this, 7000, 1700));
+        this.enemies.add(new Enemy(this, 11000, 1700));
+        this.enemies.add(new Enemy(this, 11700, 1700));
+        this.enemies.add(new Enemy(this, 12600, 1700));
+
 
         this.enemies.add(new Momia(this, 6950, 1700));
+        this.enemies.add(new Momia(this, 8400, 1500));
+        this.enemies.add(new Momia(this, 11500, 1600));
+
 
         //this.piedra1 = new PiedraMovil(this, 5000, 900);
         this.piedras.add(new PiedraMovil(this, 5200, 900, 75, 75));
@@ -291,7 +229,7 @@ export default class MyMap extends Phaser.Scene {
         */
 
         this.escalera1 = new Escalera(this, 2064, 1005, 10, 485); //x = 4530
-        this.escalera2 = new Escalera(this, 5492, 1007, 10, 460);
+        this.escalera2 = new Escalera(this, 5492, 937, 10, 350);
         this.escalera3 = new Escalera(this, 7410, 1560, 10, 250);
         this.escalera4 = new Escalera(this, 10965, 1685, 10, 140);
     
@@ -476,11 +414,79 @@ export default class MyMap extends Phaser.Scene {
         return 'B4'; //combinacion para el mecanismo de botones
     }
     
-    apagarAntorchas(){
-        var allAntorchasApagadas = this.antorchasApagadas.getChildren();
-        for(let i = 0; i < allAntorchasApagadas.length; i++){
-            allAntorchasApagadas[i].apagar();
-        }
+    cargarAntorchas(){
+        
+
+        this.antorchas = this.add.group();
+        this.antorchasApagadas1 = this.add.group();
+        this.antorchasApagadas2 = this.add.group();
+        this.antorchasApagadas3 = this.add.group();
+        this.antorchasApagadas4 = this.add.group();
+
+        this.antorchas.add(new Antorcha(this, 500, 1150));
+        this.antorchas.add(new Antorcha(this, 1200, 1150));
+        this.antorchas.add(new Antorcha(this, 1700, 1020));
+        this.antorchas.add(new Antorcha(this, 2630, 1020));
+        
+        this.antorchasApagadas1.add(this.ant11 = new Antorcha(this, 3100, 1150));
+        this.ant11.apagar();
+        this.antorchasApagadas1.add(this.ant12 = new Antorcha(this, 3160, 1150));
+        this.ant12.apagar();
+        this.antorchasApagadas1.add(this.ant13 = new Antorcha(this, 3220, 1150));
+        this.ant13.apagar();
+        this.antorchasApagadas1.add(this.ant14 = new Antorcha(this, 3280, 1150));
+        this.ant14.apagar();
+        this.antorchasApagadas1.add(this.ant15 = new Antorcha(this, 3340, 1150));
+        this.ant15.apagar();
+
+        this.antorchas.add(new Antorcha(this, 3600, 1150));
+        this.antorchas.add(new Antorcha(this, 4150, 1100));
+        this.antorchas.add(new Antorcha(this, 4400, 1020));
+        this.antorchas.add(new Antorcha(this, 4630, 970));
+        this.antorchas.add(new Antorcha(this, 5100, 850));
+
+        this.antorchasApagadas2.add(this.ant21 = new Antorcha(this, 6300, 1200));
+        this.ant21.apagar();
+        this.antorchasApagadas2.add(this.ant22 = new Antorcha(this, 6400, 1200));
+        this.ant22.apagar();
+        this.antorchasApagadas2.add(this.ant23 = new Antorcha(this, 6500, 1200));
+        this.ant23.apagar();
+        this.antorchasApagadas2.add(this.ant24 = new Antorcha(this, 6600, 1200));
+        this.ant24.apagar();
+        this.antorchasApagadas2.add(this.ant25 = new Antorcha(this, 6700, 1200));
+        this.ant25.apagar();
+        this.antorchasApagadas2.add(this.ant26 = new Antorcha(this, 6800, 1200));
+        this.ant26.apagar();
+
+        this.antorchas.add(new Antorcha(this, 7800, 1250));
+        this.antorchas.add(new Antorcha(this, 7000, 1650));
+        this.antorchas.add(new Antorcha(this, 7300, 1650));
+        this.antorchas.add(new Antorcha(this, 8600, 1500));
+
+        this.antorchasApagadas3.add(this.ant31 = new Antorcha(this, 9700, 1370));
+        this.ant31.apagar();
+        this.antorchasApagadas3.add(this.ant32 = new Antorcha(this, 9800, 1370));
+        this.ant32.apagar();
+        this.antorchasApagadas3.add(this.ant33 = new Antorcha(this, 9900, 1370));
+        this.ant33.apagar();
+        this.antorchasApagadas3.add(this.ant34 = new Antorcha(this, 10000, 1370));
+        this.ant34.apagar();
+        this.antorchasApagadas3.add(this.ant35 = new Antorcha(this, 10100, 1370));
+        this.ant35.apagar();
+
+        this.antorchas.add(new Antorcha(this, 12000, 1450));
+        this.antorchas.add(new Antorcha(this, 12550, 1730));
+
+        this.antorchasApagadas4.add(this.ant41 = new Antorcha(this, 13000, 1730));
+        this.ant41.apagar();
+        this.antorchasApagadas4.add(this.ant42 = new Antorcha(this, 13100, 1730));
+        this.ant42.apagar();
+        this.antorchasApagadas4.add(this.ant43 = new Antorcha(this, 13200, 1730));
+        this.ant43.apagar();
+
+        this.antorchas.add(new Antorcha(this, 14450, 1500));
+        this.antorchas.add(new Antorcha(this, 14700, 1500));
+        this.antorchas.add(new Antorcha(this, 14950, 1500));
     }
 
 }
