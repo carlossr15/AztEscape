@@ -60,7 +60,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('batido', 'assets/sprites/Batido.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('puerta', 'assets/sprites/Puerta Abierta y Cerrada.png', {frameWidth: 104, frameHeight: 127});
         this.load.spritesheet('mediaPuerta', 'assets/sprites/mediaPuerta.png', {frameWidth: 128, frameHeight: 128});
-        this.load.spritesheet('momia', 'assets/sprites/momiaSpritesheet.png', {frameWidth: 24, frameHeight: 32});
+        this.load.spritesheet('momia', 'assets/sprites/momiaSpritesheet.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('antorcha', 'assets/sprites/antorcha.png', {frameWidth: 32, frameHeight: 32});
 
         this.load.spritesheet('player', 'assets/sprites/MC.png',{ frameWidth: 370, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
@@ -175,6 +175,7 @@ export default class MyMap extends Phaser.Scene {
 
 
         this.player = new Player(this, 0, 800);
+
 
         this.enemies.add(new Esqueleto(this, 700, 1000, true));
         this.enemies.add(new Esqueleto(this, 6870, 1550, false));

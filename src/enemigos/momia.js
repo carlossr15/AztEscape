@@ -49,12 +49,34 @@ export default class Momia extends Phaser.GameObjects.Sprite {
       frameRate: 3,
       repeat: -1
     });
+
+    this.scene.anims.create({
+      key: 'death-momia-left',
+      frames: this.scene.anims.generateFrameNames('momia', { frames: [12, 13, 14, 18] }),
+      frameRate: 3,
+      repeat: 0
+    });
+
+    this.scene.anims.create({
+      key: 'death-momia-right',
+      frames: this.scene.anims.generateFrameNames('momia', { frames: [17, 16, 15, 18] }),
+      frameRate: 3,
+      repeat: 0
+    });
+
   }
 
- hurt()
- {
+ hurt() {
   this.vida -=1;
-  this.destroy();
+
+  if(this.x < this.scene.player.x) //Jugador a la derecha
+    this.play('death-momia-left');
+  else//Jugador a la izquierda
+    this.play('death-momia-right');
+    
+    
+  this.body.enable = false;
+  
  }
   
  checkGolpe()
@@ -76,7 +98,7 @@ export default class Momia extends Phaser.GameObjects.Sprite {
 
   seguir()
   {
-    if(Math.round(Math.abs(this.x - this.scene.player.x) < 1500) && Math.round(Math.abs(this.x - this.scene.player.x) > 50))
+    if(Math.round(Math.abs(this.x - this.scene.player.x) < 1500) && Math.round(Math.abs(this.x - this.scene.player.x) > 50) && this.vida > 0)
     {
       if(this.x < this.scene.player.x) //Jugador a la derecha
       {
