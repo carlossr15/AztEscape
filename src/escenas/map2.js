@@ -44,7 +44,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.image('llave', 'assets/sprites/Llave.png' );
         this.load.image('escalera', 'assets/sprites/escalera.png');
         this.load.image('bullet', 'assets/sprites/roca.png');
-        this.load.image('arrow', 'assets/sprites/flecha.png');
+        this.load.image('arrow', 'assets/sprites/Flecha.png');
         this.load.image('cartel', 'assets/sprites/Cartel.png');
          this.load.image('puertaPared', 'assets/sprites/puertaPared.png');
         this.load.image('puente', 'assets/sprites/Puente.png');
@@ -61,7 +61,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('puerta', 'assets/sprites/Puerta Abierta y Cerrada.png', {frameWidth: 104, frameHeight: 127});
         this.load.spritesheet('mediaPuerta', 'assets/sprites/mediaPuerta.png', {frameWidth: 128, frameHeight: 128});
         this.load.spritesheet('momia', 'assets/sprites/momiaSpritesheet.png', {frameWidth: 24, frameHeight: 32});
-        this.load.spritesheet('antorcha', 'assets/sprites/Antorcha.png', {frameWidth: 32, frameHeight: 32});
+        this.load.spritesheet('antorcha', 'assets/sprites/antorcha.png', {frameWidth: 32, frameHeight: 32});
 
         this.load.spritesheet('player', 'assets/sprites/MC.png',{ frameWidth: 370, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
         this.load.spritesheet('player-hit', 'assets/sprites/MC-Pegando.png', { frameWidth: 600, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
