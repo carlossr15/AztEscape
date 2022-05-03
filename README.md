@@ -1,5 +1,13 @@
 # AztEscape
 
+![image](https://user-images.githubusercontent.com/72986779/166503204-cc5c6dfe-df02-4b69-92e3-ee2e73e3e9d7.png)
+
+# Grupo
+AztEscape
+
+# Enlace al juego
+
+
 Game Design Document
 AztEscape
 
