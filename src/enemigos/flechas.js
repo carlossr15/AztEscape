@@ -1,7 +1,6 @@
 export default class Arrows extends Phaser.Physics.Arcade.Group{
     constructor(scene){
         super(scene.physics.world, scene);
-        
 
         this.createMultiple({
             classType: Arrow,
@@ -29,16 +28,26 @@ class Arrow extends Phaser.GameObjects.Sprite{
 
     constructor(scene,x,y){
         super(scene, x, y, 'arrow');
+        this.scene.physics.add.collider(this, this.scene.suelo, (arrow, suelo) => {
+            arrow.body.setVelocityX(0);
+            arrow.body.setVelocityY(0);
+            arrow.body.enable = false;
+            this.scene.time.delayedCall(1000, function(){
+              arrow.destroy();
+            }, [], this);
+        });
     }
 
     fire(x, y, pointerX, pointerY){
         if(pointerX - x >= 0){
             this.setFlip(true, false);
+            this.body.setSize(20, 5);
             this.body.reset(x, y);
             this.setActive(true);
             this.setVisible(true);
             this.scene.physics.moveTo(this, pointerX, pointerY, 650);
         }else{
+            this.body.setSize(20, 5);
             this.body.reset(x, y);
             this.setActive(true);
             this.setVisible(true);
@@ -52,16 +61,7 @@ class Arrow extends Phaser.GameObjects.Sprite{
         // this.hitDiana();
         // this.hitBoton();
         if (this.x <= 0){
-            this.setActive(false);
-            this.setVisible(false);
-        }
-        if (this.y > 2000){
-            this.setActive(false);
-            this.setVisible(false);
-        }
-        if (this.scene.physics.overlap(this, this.scene.suelo)){
-            this.setActive(false);
-            this.setVisible(false);
+            this.destroy();
         }
     }
 

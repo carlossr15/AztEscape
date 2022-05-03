@@ -11,7 +11,7 @@ export default class PiedraMovil extends Phaser.GameObjects.Sprite{
         //this.body.setSize(w,h);
 
         this.scene.physics.add.collider(this, this.scene.player);
-        this.scene.physics.add.collider(this, this.scene.suelo);
+       // this.scene.physics.add.collider(this, this.scene.suelo);
         this.scene.physics.add.collider(this, this.scene.piedras);
         this.combination = this.scene.getCombinationSuelo();
         this.newCombination = '';
@@ -57,7 +57,10 @@ export default class PiedraMovil extends Phaser.GameObjects.Sprite{
         this.hitBoton();
         if (this.scene.player.body.touching.down && this.body.touching.up){
             this.scene.player.onPiedra(true);
-            this.scene.player.play('stand', true);
+            /* if(this.player.body.velocity.x === 0){
+                let parar = 'stand' + (this.scene.player.personaje === 1 ? '' : this.scene.player.personaje);
+                this.scene.player.play(parar, true);
+            } */
         }
     }
 

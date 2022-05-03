@@ -509,7 +509,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
         let saltar = 'jump' + (this.personaje === 1 ? '' : this.personaje);
         this.play(saltar, true);
       }
-      this.enPiedra=false;
+      if(this.body.onFloor())
+        this.enPiedra=false;
       if (this.cursors.left.isDown) {
         this.lado = 'izq';
         this.flipX = true;
@@ -530,7 +531,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
           this.play(parar, true);
         }
       }
-      if(!this.body.onFloor() && !this.cursors.right.isDown && !this.cursors.left.isDown && !this.enPiedra){
+      if(!this.body.onFloor() && !this.enPiedra && !this.cursors.right.isDown && !this.cursors.left.isDown){
+        if(this.body.velocity.x > -10 && this.body.velocity.x !== 0 && this.body.velocity.x < 10)
+          this.body.setVelocity(0);
         if(this.body.velocity.x > 0)
           this.body.setVelocityX(this.body.velocity.x - 10);
         else if(this.body.velocity.x < 0)
@@ -624,14 +627,14 @@ export default class Player extends Phaser.GameObjects.Sprite {
       //this.atacando = false;
       this.abrirPuerta();
       this.caerAlFondo();
-      if(this.body.onFloor() && this.cursors.ONE.isDown && this.personaje !== 1){
+      if((this.body.onFloor() || this.enPiedra) && this.cursors.ONE.isDown && this.personaje !== 1){
         this.personaje = 1;
         this.scene.cambio.start();
         this.scene.time.delayedCall(100, function(){
           this.scene.cambio.stop();
         }, [], this);
       }
-      else if(this.scene.mapa !== 'Map1' && this.body.onFloor() && this.cursors.TWO.isDown && this.personaje !== 2){
+      else if(this.scene.mapa !== 'Map1' && (this.body.onFloor() || this.enPiedra) && this.cursors.TWO.isDown && this.personaje !== 2){
         this.personaje = 2;
         this.scene.cambio.start();
         this.scene.time.delayedCall(100, function(){

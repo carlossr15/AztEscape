@@ -135,7 +135,7 @@ export default class MyMap extends Phaser.Scene {
         const decoracion = map.createLayer('Decoracion', tilesetObjetos, 0, 0);
         const suelo = map.createLayer('Suelo', tilesetTemplo, 0, 0);
         const objetosUtiles = map.createLayer('ObjetosUtiles', tilesetObjetos, 0, 0);
-
+        this.suelo = suelo;
         //const pinchos = map.createFromObjects('Pinchos', tilesetObjetos)
 
         //Configuracion mundo
@@ -174,9 +174,7 @@ export default class MyMap extends Phaser.Scene {
         this.cargarAntorchas();
 
 
-        this.player = new Player(this, 13000, 800);        
-        this.golpear = new PunchZone(this, 200, 1100);
-        //this.player = new Player(this, 12951, 485);
+        this.player = new Player(this, 0, 800);
 
         this.enemies.add(new Esqueleto(this, 700, 1000, true));
         this.enemies.add(new Esqueleto(this, 6870, 1550, false));
@@ -195,14 +193,13 @@ export default class MyMap extends Phaser.Scene {
 
 
         //this.piedra1 = new PiedraMovil(this, 5000, 900);
+        this.piedras.add(new PiedraMovil(this, 900, 1100, 80, 80));
         this.piedras.add(new PiedraMovil(this, 5200, 900, 75, 75));
-        this.piedras.add(new PiedraMovil(this, 700, 1100, 80, 80));
         this.piedras.add(new PiedraMovil(this, 13500, 1100, 80, 80));
         this.piedras.add(new PiedraMovil(this, 14000, 1100, 160, 160));
         //this.physics.add.collider(this.piedra3, this.piedra4);
 
         this.botonesSuelo.add(new BotonSuelo(this, 5825, 1365, 'B4', 1, 'puerta', false));
-        
         //this.botones.add(this.boton4);
 
         this.nota = new Nota(this, 6870, 1780);
@@ -402,7 +399,6 @@ export default class MyMap extends Phaser.Scene {
 
     death() {
         this.scene.start('lose');
-        this.scene.sta
         this.musica.stop();
     }
     

@@ -30,6 +30,12 @@ class Bullet extends Phaser.GameObjects.Sprite{
         this.combination;
         this.combIncorrecta = this.scene.sound.add('combinacionIncorrecta', {volume: 1});
         this.abrirPuertaPared = this.scene.sound.add('abrirPuertaPared', {volume: 1});
+        
+        this.scene.physics.add.collider(this, this.scene.suelo, (bullet, suelo) => {
+            this.scene.time.delayedCall(1000, function(){
+                bullet.setVisible(false);
+            }, [], this);
+        });
     }
 
     fire(x, y, pointerX, pointerY){
@@ -44,18 +50,6 @@ class Bullet extends Phaser.GameObjects.Sprite{
         this.hurtEnemy();
         this.hitDiana();
         this.hitBoton();
-        if (this.x <= 0){
-            this.setActive(false);
-            this.setVisible(false);
-        }
-        if (this.y > 2000){
-            this.setActive(false);
-            this.setVisible(false);
-        }
-        if (this.scene.physics.overlap(this, this.scene.suelo)){
-            this.setActive(false);
-            this.setVisible(false);
-        }
     }
 
     hurtEnemy(){
