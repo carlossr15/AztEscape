@@ -374,7 +374,7 @@ export default class MyMap extends Phaser.Scene {
         this.physics.add.collider(this.enemies, suelo);
         this.physics.add.collider(this.player, suelo);
         this.physics.add.collider(this.piedras, suelo);
-
+        
         var allPiedras = this.piedras.getChildren();
         for (var i = 0; i < this.piedras.getLength(); i++){
             for (var j = i+1; j < this.piedras.getLength(); j++){
