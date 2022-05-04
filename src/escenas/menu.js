@@ -12,7 +12,8 @@ export default class menu extends Phaser.Scene {
     }
 
     create(text){
-        this.scene.start('Map2');
+        this.scene.start('intro');
+        //this.scene.start('Map2');
 
         this.add.text(0, 0, text, {fontSize: '20px'});
     }
