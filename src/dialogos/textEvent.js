@@ -66,7 +66,7 @@ export default class TextEvent extends Phaser.GameObjects.Zone {
         if (this.lineIndex === this.textoAMostrar.length)
         {
             this.scene.time.addEvent({
-                delay: this.lineDelay*3,
+                delay: this.lineDelay*8,
                 callback: this.clearText,
                 callbackScope: this,
                 repeat: 0
@@ -82,7 +82,7 @@ export default class TextEvent extends Phaser.GameObjects.Zone {
         //  Call the 'nextWord' function once for each word in the line (line.length)
         //this.scene.time.events.repeat(this.wordDelay, this.line.length, this.nextWord, this);
         this.scene.time.addEvent({
-            delay: this.wordDelay,
+            delay: this.wordDelay*2,
             callback: this.nextWord,
             callbackScope: this,
             repeat: this.line.length
@@ -110,7 +110,7 @@ export default class TextEvent extends Phaser.GameObjects.Zone {
             //  Get the next line after the lineDelay amount of ms has elapsed
             //this.scene.time.events.add(this.lineDelay, this.nextLine, this);
             this.scene.time.addEvent({
-                delay: this.lineDelay,
+                delay: this.lineDelay*2,
                 callback: this.nextLine,
                 callbackScope: this,
                 repeat: 0

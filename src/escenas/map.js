@@ -13,6 +13,7 @@ import PunchZone from '../jugador/punchZone.js';
 import BotonMecanismo from '../objetos/botonMecansimo.js';
 import Esqueleto from '../enemigos/esqueleto.js';
 import Antorcha from '../objetos/antorcha.js';
+import Sombrero from '../objetos/sombrero.js';
 //import PiedraMovil from './piedraMovil.js';
 
 /**
@@ -45,6 +46,7 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('enemy', 'assets/sprites/araña.png', {frameWidth: 64, frameHeight: 64});
         this.load.spritesheet('vida', 'assets/sprites/health.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('batido', 'assets/sprites/Batido.png', {frameWidth: 32, frameHeight: 32});
+        this.load.spritesheet('gorroHelices', 'assets/sprites/GorroHelices.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('puerta', 'assets/sprites/Puerta Abierta y Cerrada.png', {frameWidth: 104, frameHeight: 127});
         this.load.spritesheet('mediaPuerta', 'assets/sprites/mediaPuerta.png', {frameWidth: 128, frameHeight: 128});
         this.load.spritesheet('momia', 'assets/sprites/momiaSpritesheet.png', {frameWidth: 32, frameHeight: 32});
@@ -120,8 +122,9 @@ export default class MyMap extends Phaser.Scene {
 
         this.cartel = this.physics.add.image(9000, 700, 'cartel'); //No he conseguido que se coloque detrás si lo pongo despues
         //this.player = new Player(this, 0, 400);
-        this.player = new Player(this, 4800, 400);
-        this.golpear = new PunchZone(this, 100, 600);
+        
+        this.player = new Player(this, 0, 400);
+        this.muro = new Invisible(this, 175, 550)
         
         //Creacion grupos
         this.enemies = this.add.group();
@@ -163,16 +166,16 @@ export default class MyMap extends Phaser.Scene {
         this.dialogos.add(new TextEvent(this, 2478, 453, 100, 300, ["¿¡Y ahora pinchos!? ", "Venga sí, ¿Y qué más? ¿Momias?.\n", "Bueno, mejor intento no caerme mientras salto a esas... \n¿Plataformas flotantes? Creo que no he fumado nada \ndesde aquella vez que me desperté desnudo en una \nfiesta para niños"], true));
         this.dialogos.add(new TextEvent(this, 4076, 517, 100, 300, ["¿Y ahora estoy en un instituto estadounidense?\n", "Nunca hubiese imaginado que subir por una cuerda fuese a \nservir realmente para algo...\n", "En fin, la vida es una lenteja, vamos a ello."], true));
         this.dialogos.add(new TextEvent(this, 4900, 389, 100, 300, ["¿Eso es un Fresisuis? ", "Que bien entraba uno despues \nde hacer un poco de ejercicio, la verdad. ", "Seguro que es... \nREVITALIZANTE"], true));
-        this.dialogos.add(new TextEvent(this, 5965, 389, 100, 300, ["No, en serio, ¿dónde se sujeta esa cuerda?"]));
-        this.dialogos.add(new TextEvent(this, 6700, 165, 100, 300, ["Quien me mandaría entrar a un templo azteca perdido de la\n mano de Dios... ", "No tenía suficiente con una cuerda que \nahora encima son 3 y tengo que saltar de una a otra.\n", "Y espera... ¿Cuando he entrado al templo?"], true));
+        this.dialogos.add(new TextEvent(this, 5600, 359, 100, 300, ["¿Dónde se sujeta esa cuerda?"]));
+        this.dialogos.add(new TextEvent(this, 6700, 165, 100, 300, ["Quien me mandaría entrar a un templo azteca perdido de la\nmano de Dios... ", "No tenía suficiente con una cuerda que \nahora encima son 3 y tengo que saltar de una a otra.\n", "Y espera... ¿Cuando he entrado al templo?"], true));
         this.dialogos.add(new TextEvent(this, 7450, 220, 100, 300, ["Anda mira, la momia de la que hablaba antes, que ilusión...\n", "Al menos parece tonta."], true));
         this.dialogos.add(new TextEvent(this, 8665, 581, 100, 300, ["Un cartel sospechoso cuanto menos.\n", "Seguro que el que diseñó este templo era un despistado y \nno se acordaba de dónde tenía que dejar las llaves."]));
         this.dialogos.add(new TextEvent(this, 13051, 485, 100, 300, ["Oye, amigo que está en mi cabeza, ¿no estaré siendo \nmuy pesado no? ", "Voy a intentar estar más callado a partir \nde ahora ¿Vale?"]));
-        this.dialogos.add(new TextEvent(this, 14514, 901, 100, 300, ["Podrías responder de vez en cuando..."]));
+        this.dialogos.add(new TextEvent(this, 15700, 1150, 25, 25, ["¿Qué hace un niño aquí? Anda ven conmigo que este no \nes un buen lugar, yo te saco, que tengo la llave."], true));
         
         this.llave = new Llave(this, 8965, 1300);
-
-        this.inv = new Invisible(this, 15880, 1150, 10, 100);
+        this.sombrero = new Sombrero(this, 15700,1150,25,25);
+        this.inv = new Invisible(this, 15880, 1150, 10, 150);
 
         this.idolo = new Idolo(this, 174, 682);
 
@@ -250,6 +253,9 @@ export default class MyMap extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.consumibles, (player, consumible) => {
             consumible.curar();
             player.healing();
+        });
+        this.physics.add.overlap(this.player, this.sombrero, (player, sombrero) => {
+            sombrero.destroy();
         });
     }
 

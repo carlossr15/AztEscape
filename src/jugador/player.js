@@ -100,18 +100,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
       TWO:Phaser.Input.Keyboard.KeyCodes.TWO
     });
     this.personaje = 1;
-    this.tint = Math.random() * 0xffffff;
-    
-      this.scene.physics.add.overlap(this, this.scene.piedras, (player, piedra) => {
-        if(this.scene.piedras){
-          if(player.body.overlapX > 10)
-          if(!player.enPiedra && player.body.center.x - piedra.body.center.x > piedra.body.width){
-            player.body.x += player.body.overlapX;
-          }
-          else if(!player.enPiedra && player.body.center.x - piedra.body.center.x < piedra.body.width)
-            player.body.x -= player.body.overlapX;
-        }
-    });
   }
 
   cargarAnimaciones(){
@@ -597,9 +585,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
           this.body.setSize(525,420);
           this.body.setOffset(0,175);
         }*/
-      }else{
-        this.setSize(16,16);
-        this.setScale(0.2,0.2);
       }
       if(this.atacando){
         let attack = 'attack' + (this.personaje === 1 ? '' : this.personaje);
@@ -649,6 +634,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
     else{
       this.body.setVelocityX(0);
+      if(!this.onLadder){
+        let walk = 'walk' + (this.personaje === 1 ? '' : this.personaje);
+        this.play(walk, true);
+      }
+      
       this.anims.stop();
     }
 

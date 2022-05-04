@@ -52,9 +52,6 @@ export default class MyMap extends Phaser.Scene {
 
         this.load.spritesheet('templo', 'assets/tilesets/tile_temple.png', { frameWidth: 544, frameHeight: 256 });
         this.load.spritesheet('objetos', 'assets/tilesets/objetos.png', { frameWidth: 256, frameHeight: 256 });
-        this.load.spritesheet('player', 'assets/sprites/MC.png',{ frameWidth: 370, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
-        this.load.spritesheet('player-hit', 'assets/sprites/MC-Pegando.png', { frameWidth: 600, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
-        this.load.spritesheet('player-dead', 'assets/sprites/MC-Muerte.png', { frameWidth: 600, frameHeight: 600 })       
         this.load.spritesheet('enemy', 'assets/sprites/araña.png', {frameWidth: 64, frameHeight: 64});        
         this.load.spritesheet('vida', 'assets/sprites/health.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('batido', 'assets/sprites/Batido.png', {frameWidth: 32, frameHeight: 32});
@@ -64,8 +61,9 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('antorcha', 'assets/sprites/antorcha.png', {frameWidth: 32, frameHeight: 32});
 
         this.load.spritesheet('player', 'assets/sprites/MC.png',{ frameWidth: 370, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
-        this.load.spritesheet('player-hit', 'assets/sprites/MC-Pegando.png', { frameWidth: 600, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
+        this.load.spritesheet('player-hit', 'assets/sprites/MC-Pegando.png', { frameWidth: 370, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
         this.load.spritesheet('player-dead', 'assets/sprites/MC-Muerte.png', { frameWidth: 600, frameHeight: 600 })
+        this.load.spritesheet('punch', 'assets/sprites/punch.png', { frameWidth: 230, frameHeight: 600 })
         
         this.load.spritesheet('idolo', 'assets/sprites/Idolo.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('restartButton', 'assets/sprites/restartButton.png', {frameWidth: 480, frameHeight: 170});
@@ -160,7 +158,7 @@ export default class MyMap extends Phaser.Scene {
         //this.bandera = new Bandera(this, 6750, 455);
         
         this.puerta = new Puerta(this, 15300, 1470);
-        this.inv = new Invisible(this, 15360, 1470, 10, 100);
+        this.inv = new Invisible(this, 15360, 1470,10,150);
 
         this.dianas.add(new Diana(this, 9870, 1085, 'puerta'));   
         this.dianas.add(new Diana(this, 2632, 1087, 'puente'));      
@@ -174,8 +172,10 @@ export default class MyMap extends Phaser.Scene {
         this.cargarAntorchas();
 
 
-        this.player = new Player(this, 15000, 800);
+        this.player = new Player(this, 0, 1220);
 
+
+        this.physics.add.collider(this.player, this.inv);
 
         //this.enemies.add(new Esqueleto(this, 700, 1000, true));
         this.enemies.add(new Esqueleto(this, 6870, 1550, false));
@@ -194,18 +194,28 @@ export default class MyMap extends Phaser.Scene {
 
 
         //this.piedra1 = new PiedraMovil(this, 5000, 900);
-        this.piedras.add(new PiedraMovil(this, 900, 1100, 80, 80));
-        this.piedras.add(new PiedraMovil(this, 5200, 900, 75, 75));
+        this.piedras.add(new PiedraMovil(this, 900, 1200, 80, 80));
+        this.piedras.add(new PiedraMovil(this, 5200, 900, 65, 75));
         this.piedras.add(new PiedraMovil(this, 13500, 1100, 80, 80));
         this.piedras.add(new PiedraMovil(this, 14000, 1100, 140, 140));
         //this.physics.add.collider(this.piedra3, this.piedra4);
 
+
+        
+        this.dialogos.add(new TextEvent(this, 453, 1221, 100, 300, ["Parece que esa roca se puede mover, debería probar \na empujarla. ", "Ya sabía yo que todos estos años de gym \niban a servir para algo."]));
+        this.dialogos.add(new TextEvent(this, 2481, 1221, 100, 300, ["¿Una diana? Oye niño no tendrás por casualidad un \ntirachinas, ¿no? ", "Menuda pregunta más tonta, por supuesto \nque lo tienes. ", "Vamos a ver...", "En un videojuego seguro \nque cambiariamos de personaje con las teclas numericas y \ndispararias pulsando el click del ratón.", "\n", "¿Qué? ¿A que te refieres con que estoy loco y te \nhe secuestrado? Anda calla y haz lo que digo, que por algo \nsoy el mayor aquí."]));
+        this.dialogos.add(new TextEvent(this, 4410, 1093, 100, 300, ["Que guapo el puente levadizo, quiero uno de esos para mi \ncasa.", " Aunque seguro que son demasiado caros, \ndudo que pueda permitirmelo"]));
+        this.dialogos.add(new TextEvent(this, 5825, 1330, 100, 60, ["¡Un boton! ", "Pero no se activa al ponerme encima...\n", "Seguro que necesito algo más pesado"]));
+        this.dialogos.add(new TextEvent(this, 12500, 1800, 800, 60, ["¿Botones en la pared? ", "Seguro que debería haberme \nencontrado con alguna combinación.", " A lo malo puedo \nprobar todas las posibles combinanciones. ", "¿Cuantas serán? \nUnas 6, ¿no?"]));
+        this.dialogos.add(new TextEvent(this, 6870, 1780, 25, 25, ["¡Eh mira niño, una nota!", " En los videojuegos suelen \nleerse pulsando la E.\n", "Anda, deja de llorar que tu madre no va a volver con \nnosotros. Tenemos que seguir."]));
+        this.dialogos.add(new TextEvent(this, 14900, 1470, 100, 300, ["Menuda aventura, pero ya veo la salida y va siendo \nhora de volver a casa, que casi es hora de comer.", "\n¿Te vas a quedar aquí? ", "Vale,"," adiós."],true));
+        
         this.botonesSuelo.add(new BotonSuelo(this, 5825, 1365, 'B4', 1, 'puerta', false));
         //this.botones.add(this.boton4);
 
         this.nota = new Nota(this, 6870, 1780);
 
-        this.llave = new Llave(this, 6920, 1780);
+        this.llave = new Llave(this, 13280, 1797);
 
 
 
