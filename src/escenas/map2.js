@@ -405,6 +405,7 @@ export default class MyMap extends Phaser.Scene {
 
     win() {
         this.musica.stop();
+        console.log("cargando final");
         this.scene.start('final');
     }
 

@@ -3,7 +3,7 @@
  * texto que indica que el juego se ha acabado.
  * Si se pulsa cualquier tecla, se vuelve a iniciar el juego.
  */
- export default class introScene extends Phaser.Scene {
+ export default class escenaFinal extends Phaser.Scene {
     /**
      * Constructor de la escena
      */
@@ -15,14 +15,13 @@
     {
         this.load.video('videofinal', 'assets/video/final.mp4', 'loadeddata', false, false);
     }
-    /**
-     * Creación de la escena. Tan solo contiene el texto que indica que el juego se ha acabado
-     */
+   
+    
     create() 
     {
 
        
-
+        console.log("ESCENA FINAL");
         let vid = this.add.video(640, 360, 'videofinal');
         //Adjust vid size to the center of the screen
         /*vid.setScale(0.5);
