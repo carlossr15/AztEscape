@@ -159,8 +159,8 @@ export default class MyMap extends Phaser.Scene {
 
         //this.bandera = new Bandera(this, 6750, 455);
         
-        this.puerta = new Puerta(this, 15100, 1570);
-        this.inv = new Invisible(this, 15160, 1570, 10, 100);
+        this.puerta = new Puerta(this, 15300, 1470);
+        this.inv = new Invisible(this, 15360, 1470, 10, 100);
 
         this.dianas.add(new Diana(this, 9870, 1085, 'puerta'));   
         this.dianas.add(new Diana(this, 2632, 1087, 'puente'));      
@@ -174,7 +174,7 @@ export default class MyMap extends Phaser.Scene {
         this.cargarAntorchas();
 
 
-        this.player = new Player(this, 14000, 800);
+        this.player = new Player(this, 15000, 800);
 
 
         //this.enemies.add(new Esqueleto(this, 700, 1000, true));
@@ -197,7 +197,7 @@ export default class MyMap extends Phaser.Scene {
         this.piedras.add(new PiedraMovil(this, 900, 1100, 80, 80));
         this.piedras.add(new PiedraMovil(this, 5200, 900, 75, 75));
         this.piedras.add(new PiedraMovil(this, 13500, 1100, 80, 80));
-        this.piedras.add(new PiedraMovil(this, 14000, 1100, 160, 160));
+        this.piedras.add(new PiedraMovil(this, 14000, 1100, 140, 140));
         //this.physics.add.collider(this.piedra3, this.piedra4);
 
         this.botonesSuelo.add(new BotonSuelo(this, 5825, 1365, 'B4', 1, 'puerta', false));
