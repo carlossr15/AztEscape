@@ -331,13 +331,12 @@ import Arrows from "./flechas.js";
 
     shooting(){
       if(this.vida > 0){
-        if(Math.abs(this.x - this.scene.player.x) <= 600 && this.scene.player.vida > 0){    
-          this.flecha.play();      
-          this.play('disparar', true)
-          this.scene.time.delayedCall(1000, function(){
+        if(Math.abs(this.x - this.scene.player.x) <= 600 && this.scene.player.vida > 0){ 
+          this.play('disparar', true);
+          this.scene.time.delayedCall(1000, function(){   
+            this.flecha.play();      
             this.arrows.fireArrow(this.x, this.y, this.scene.player.x, this.scene.player.y);
-
-        }, [], this);
+          }, [], this);
         }
       }
     }

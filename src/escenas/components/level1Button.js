@@ -6,7 +6,10 @@ export class Level1Button extends Button {
   }
 
   doClick() {
-    this.relatedScene.scene.launch("Map1");
+    this.relatedScene.volume = 0;
+    //this.relatedScene.scene.stop()
+
+    this.relatedScene.scene.launch("Inicio");
   }
 
 }

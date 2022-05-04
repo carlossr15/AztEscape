@@ -41,7 +41,7 @@ export default class MapsMenu extends Phaser.Scene {
         this.mapsIm = this.add.image(650, 100, 'mapsIm');
         this.lvl1Im = this.add.image(380, 300, 'lvl1Im');
         this.lvl2Im = this.add.image(920, 300, 'lvl2Im');
-
+        this.scene.bringToTop();
         console.log("Escena: "+ this.scene)
     }
 

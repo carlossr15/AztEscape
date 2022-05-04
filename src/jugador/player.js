@@ -631,8 +631,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
       /****************/
 
       if(this.cursors.ESC.isDown){
-        this.scene.scene.pause("Map2");
-        this.scene.scene.launch("menuPausa");
+        this.scene.scene.pause();
+        this.scene.scene.launch("menuPausa", this.scene.mapa);
       }
 
       //this.atacando = false;

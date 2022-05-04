@@ -174,10 +174,10 @@ export default class MyMap extends Phaser.Scene {
         this.cargarAntorchas();
 
 
-        this.player = new Player(this, 0, 800);
+        this.player = new Player(this, 14000, 800);
 
 
-        this.enemies.add(new Esqueleto(this, 700, 1000, true));
+        //this.enemies.add(new Esqueleto(this, 700, 1000, true));
         this.enemies.add(new Esqueleto(this, 6870, 1550, false));
         //this.esqu = new Esqueleto(this, 700, 1000);
 

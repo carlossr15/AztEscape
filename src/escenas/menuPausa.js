@@ -14,22 +14,30 @@ export default class menuPausa extends Phaser.Scene {
         this.mapsButton = new MapsButton(this);
         this.continueButton = new ContinueButton(this);
         this.backButton = new BackButton(this);
+        this.nombre;
     }
-    
+
+    init(nombre){
+        console.log("init: " + nombre)
+        this.nombre = nombre;
+    }    
       
     create() {
+        this.mapa = 'menuPausa';
         this.add.image(0, 0, 'background').setOrigin(0, 0);
         this.soundButton.create();
         this.mapsButton.create();
         this.continueButton.create();
-        this.backButton.create();
+        this.backButton.create(this.nombre);
         this.pause = this.add.image(650, 200, 'pausa');
-        console.log("Escena: "+ this.scene)
+        console.log("create: " + this.nombre)
+        this.scene.bringToTop();
+
     }
 
     continuar(){
-        this.scene.resume("Map2");
         this.scene.stop();
+        this.scene.resume(this.nombre);
     }
 
 }

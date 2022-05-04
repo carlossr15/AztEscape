@@ -12,7 +12,7 @@ export default class inicio extends Phaser.Scene {
         super({ key: 'inicio' });
         this.soundButton = new SoundButton(this); 
         this.startButton = new StartButton(this);
-        this.optionsButton = new OptionsButton(this);
+        this.optionsButton = new OptionsButton(this, "inicio");
     
     }
     
@@ -29,6 +29,7 @@ export default class inicio extends Phaser.Scene {
     }
       
     create() {
+        this.mapa = 'incio';
         this.musica = this.sound.add('menuInicioMusic', {volume: 0.2});
         this.musica.loop = true;
         this.musica.play();
@@ -36,7 +37,7 @@ export default class inicio extends Phaser.Scene {
         this.add.image(0, 0, 'background').setOrigin(0, 0);
         this.soundButton.create();
         this.startButton.create();
-        this.optionsButton.create();
+        this.optionsButton.create(this.mapa);
         this.pause = this.add.image(650, 200, 'preparado');
         this.input.keyboard.on('keydown-' + 'F', function (event){
             console.log("full");
@@ -45,6 +46,7 @@ export default class inicio extends Phaser.Scene {
                 else
                     this.scene.game.scale.startFullscreen();
         })
+        this.scene.bringToTop();
     }
     
 }

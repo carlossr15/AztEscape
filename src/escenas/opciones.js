@@ -14,7 +14,7 @@ export default class opciones extends Phaser.Scene {
         this.simboloMasButton = new SimboloMasButton(this);
         this.simboloMenosButton = new SimboloMenosButton(this);
         this.backButton = new BackButton(this);
-
+        this.nombre;
     }
     
     preload() {
@@ -31,8 +31,13 @@ export default class opciones extends Phaser.Scene {
 
 
     }
+
+    init(nombre){
+        this.nombre = nombre;
+    }
       
     create() {
+        this.mapa = 'opciones';
         this.add.image(0, 0, 'background').setOrigin(0, 0);
 
         this.add.image(650, 100, 'opciones');
@@ -45,7 +50,7 @@ export default class opciones extends Phaser.Scene {
 
         this.simboloMasButton.create();
         this.simboloMenosButton.create();
-        this.backButton.create();
+        this.backButton.create(this.nombre);
 
 
         this.input.keyboard.on('keydown-' + 'F', function (event){
