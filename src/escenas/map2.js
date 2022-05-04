@@ -404,8 +404,8 @@ export default class MyMap extends Phaser.Scene {
     }
 
     win() {
-        this.scene.start('menu', "Has ganado, ¡Enhorabuena! Pulsa cualquier tecla para volver a jugar");
         this.musica.stop();
+        this.scene.start('final');
     }
 
     death() {
