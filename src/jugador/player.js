@@ -606,12 +606,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.play(attack, true); 
         
         if(this.lado === 'izq'){
-          this.zona = new PunchZone(this.scene, this.x - this.body.width/2 - 20, this.y, true);
+          this.zona = new PunchZone(this.scene, this.x - this.body.width/2 - 20 - (this.body.velocity.x === 0 ? 0 : 5), this.y + (this.body.velocity.y === 0 ? 0 : this.body.velocity.y > 0 ? 4 : -4), true);
         }
         else{
-          this.zona = new PunchZone(this.scene, this.x + this.body.width/2 + 20, this.y, false);
+          this.zona = new PunchZone(this.scene, this.x + this.body.width/2 + 20 + (this.body.velocity.x === 0 ? 0 : 5), this.y + (this.body.velocity.y === 0 ? 0 : this.body.velocity.y > 0 ? 4 : -4), false);
         }
-        
       }  
       else{
         //this.body.setOffset(0,175);
