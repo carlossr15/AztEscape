@@ -139,7 +139,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     this.scene.anims.create({
         key: 'attack',
-        frames: this.scene.anims.generateFrameNames('player-hit', { frames: [1, 2] }),
+        frames: this.scene.anims.generateFrameNames('player-hit', { frames: [1] }),
         frameRate: 7,
         repeat: -1
     });

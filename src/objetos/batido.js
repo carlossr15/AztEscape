@@ -18,7 +18,6 @@
       this.scene.add.existing(this);
       this.scene.physics.add.existing(this);
       this.body.allowGravity = false;
-      
       //Establecemos tamaño y hitbox
       this.body.setSize(25,25);
       this.body.setVelocityY(10);

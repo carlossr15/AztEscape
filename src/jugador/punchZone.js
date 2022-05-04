@@ -34,7 +34,6 @@ export default class PunchZone extends Phaser.GameObjects.Sprite {
     }
 
     preUpdate() {
-
     }
   
 }
