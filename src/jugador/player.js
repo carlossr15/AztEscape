@@ -101,6 +101,17 @@ export default class Player extends Phaser.GameObjects.Sprite {
     });
     this.personaje = 1;
     this.tint = Math.random() * 0xffffff;
+    
+      this.scene.physics.add.overlap(this, this.scene.piedras, (player, piedra) => {
+        if(this.scene.piedras){
+          if(player.body.overlapX > 10)
+          if(!player.enPiedra && player.body.center.x - piedra.body.center.x > piedra.body.width){
+            player.body.x += player.body.overlapX;
+          }
+          else if(!player.enPiedra && player.body.center.x - piedra.body.center.x < piedra.body.width)
+            player.body.x -= player.body.overlapX;
+        }
+    });
   }
 
   cargarAnimaciones(){

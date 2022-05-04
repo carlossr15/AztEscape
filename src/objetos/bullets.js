@@ -32,7 +32,10 @@ class Bullet extends Phaser.GameObjects.Sprite{
         this.abrirPuertaPared = this.scene.sound.add('abrirPuertaPared', {volume: 1});
         
         this.scene.physics.add.collider(this, this.scene.suelo, (bullet, suelo) => {
-            this.scene.time.delayedCall(1000, function(){
+            bullet.body.setVelocityX(0)
+            bullet.setActive(false);
+            this.body.enable = false;
+            this.scene.time.delayedCall(100, function(){
                 bullet.setVisible(false);
             }, [], this);
         });
@@ -40,9 +43,10 @@ class Bullet extends Phaser.GameObjects.Sprite{
 
     fire(x, y, pointerX, pointerY){
         this.body.reset(x, y);
+        this.scene.physics.moveTo(this, pointerX, pointerY, 650);
+        this.body.enable = true;
         this.setActive(true);
         this.setVisible(true);
-        this.scene.physics.moveTo(this, pointerX, pointerY, 650);
     }
 
     preUpdate(time, delta){
