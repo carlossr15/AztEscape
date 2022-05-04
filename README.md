@@ -110,4 +110,5 @@ Pero también existen sprites creados a mano y de manera original por nuestra pa
 
 ## Diagrama UML
 
-![Clase UML](https://user-images.githubusercontent.com/72986779/166729851-61f92782-c516-4422-92b6-d603591a4b8d.png)
+![Clase UML - AztEscape](https://user-images.githubusercontent.com/72986779/166731008-1293b654-b242-4aed-9c7f-728440919e00.png)
+
