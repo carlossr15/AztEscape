@@ -600,26 +600,21 @@ export default class Player extends Phaser.GameObjects.Sprite {
       }else{
         this.setSize(16,16);
         this.setScale(0.2,0.2);
-        this.body.setSize(400,420);
-        this.body.setOffset(0,175);
       }
       if(this.atacando){
         let attack = 'attack' + (this.personaje === 1 ? '' : this.personaje);
-        this.play(attack, true);
+        this.play(attack, true); 
         
         if(this.lado === 'izq'){
-          this.body.setOffset(200,175);
-          //this.setOrigin(0.5,0);
-          this.zona = new PunchZone(this.scene, this.x-40, this.y+17);
+          this.zona = new PunchZone(this.scene, this.x - this.body.width/2 - 20, this.y, true);
         }
         else{
-          this.zona = new PunchZone(this.scene, this.x+40, this.y+17);
+          this.zona = new PunchZone(this.scene, this.x + this.body.width/2 + 20, this.y, false);
         }
         
-      }
+      }  
       else{
-        this.body.setOffset(0,175);
-        //this.setOrigin(0,0)
+        //this.body.setOffset(0,175);
         //this.setSize(16,16);
         //this.setScale(0.2,0.2);
         //this.body.setSize(400,420);

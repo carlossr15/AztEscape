@@ -50,8 +50,9 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('momia', 'assets/sprites/momiaSpritesheet.png', {frameWidth: 32, frameHeight: 32});
 
         this.load.spritesheet('player', 'assets/sprites/MC.png',{ frameWidth: 370, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
-        this.load.spritesheet('player-hit', 'assets/sprites/MC-Pegando.png', { frameWidth: 600, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
+        this.load.spritesheet('player-hit', 'assets/sprites/MC-Pegando.png', { frameWidth: 370, frameHeight: 600 }) //{ frameWidth: 370, frameHeight: 600 }
         this.load.spritesheet('player-dead', 'assets/sprites/MC-Muerte.png', { frameWidth: 600, frameHeight: 600 })
+        this.load.spritesheet('punch', 'assets/sprites/punch.png', { frameWidth: 230, frameHeight: 600 })
         this.load.spritesheet('antorcha', 'assets/sprites/antorcha.png', {frameWidth: 32, frameHeight: 32});
 
         this.load.spritesheet('esqueleto', 'assets/sprites/esqueleto.png', {frameWidth: 90, frameHeight: 90});
