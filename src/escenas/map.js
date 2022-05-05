@@ -265,7 +265,7 @@ export default class MyMap extends Phaser.Scene {
     }
 
     death() {
-        this.scene.start('lose');
+        this.scene.launch('lose', this.mapa);
         this.musica.stop();
     }
 

@@ -180,7 +180,9 @@ export default class MyMap extends Phaser.Scene {
         this.physics.add.collider(this.player, this.inv);
 
         //this.enemies.add(new Esqueleto(this, 700, 1000, true));
-        this.enemies.add(new Esqueleto(this, 6870, 1550, false));
+        this.enemies.add(new Esqueleto(this, 6860, 1550, false));
+        this.enemies.add(new Esqueleto(this, 11060, 1300, false));
+
         //this.esqu = new Esqueleto(this, 700, 1000);
 
         this.enemies.add(new Enemy(this, 4000, 1000));
@@ -411,7 +413,7 @@ export default class MyMap extends Phaser.Scene {
     }
 
     death() {
-        this.scene.start('lose');
+        this.scene.launch('lose', this.mapa);
         this.musica.stop();
     }
     
