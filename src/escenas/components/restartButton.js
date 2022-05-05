@@ -2,11 +2,19 @@ import { Button } from './button.js';
 
 export class RestartButton extends Button {
   constructor(scene) {
-    super(scene, 'restartButton', 850, 400);
+    super(scene, 'reiniciarButton', 650, 400);
+    this.nombre;
   }
 
   doClick() {
-    this.relatedScene.scene.start('Map2'); //Cambiar a que vaya al mapa en el que esté
+    this.relatedScene.sound.pauseAll();
+
+    this.relatedScene.reiniciar();
+  }
+
+  create(nombre){
+    super.create();
+    this.nombre = nombre;
   }
 
 }

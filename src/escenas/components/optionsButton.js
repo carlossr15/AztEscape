@@ -8,6 +8,7 @@ export class OptionsButton extends Button {
   }
 
   doClick() {
+    this.relatedScene.scene.pause();
     this.relatedScene.scene.launch('opciones', this.nombre);
   }
 

@@ -29,7 +29,8 @@ export default class inicio extends Phaser.Scene {
     }
       
     create() {
-        this.mapa = 'incio';
+        this.mapa = 'inicio';
+        this.scene.bringToTop();
         this.musica = this.sound.add('menuInicioMusic', {volume: 0.2});
         this.musica.loop = true;
         this.musica.play();
@@ -46,7 +47,6 @@ export default class inicio extends Phaser.Scene {
                 else
                     this.scene.game.scale.startFullscreen();
         })
-        this.scene.bringToTop();
     }
     
 }

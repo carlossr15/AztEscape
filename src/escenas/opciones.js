@@ -38,6 +38,7 @@ export default class opciones extends Phaser.Scene {
       
     create() {
         this.mapa = 'opciones';
+        this.scene.bringToTop();
         this.add.image(0, 0, 'background').setOrigin(0, 0);
 
         this.add.image(650, 100, 'opciones');
@@ -74,5 +75,7 @@ export default class opciones extends Phaser.Scene {
     disminuirVolumen(){
         this.volumen -= 1;
     }
+
+    
     
 }

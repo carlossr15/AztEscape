@@ -80,10 +80,9 @@ export default class MyMap extends Phaser.Scene {
         this.load.image('background', 'assets/sprites/background.png');
         this.load.image('pausa', 'assets/sprites/pausa.png');
         this.load.spritesheet('soundButton', 'assets/sprites/sonidoButton.png', {frameWidth: 75, frameHeight: 75});
-        this.load.spritesheet('soundButtonOff', 'assets/sprites/sonidoOff.png', {frameWidth: 75, frameHeight: 75});
-        this.load.spritesheet('continueButton', 'assets/sprites/continueButton.png', {frameWidth: 520, frameHeight: 340});
-        this.load.spritesheet('restartButton', 'assets/sprites/restartButton.png', {frameWidth: 480, frameHeight: 170});
-        this.load.spritesheet('mapsButton', 'assets/sprites/mapsButton.png', {frameWidth: 480, frameHeight: 170});
+        this.load.spritesheet('soundButtonOff', 'assets/sprites/sonidoOff.png', {frameWidth: 75, frameHeight: 75});        
+        this.load.spritesheet('reiniciarButton', 'assets/sprites/reiniciarButton.png', {frameWidth: 670, frameHeight: 130});
+        this.load.spritesheet('exitButton', 'assets/sprites/salirButton.png', {frameWidth: 480, frameHeight: 170});
         this.load.image('preparado', 'assets/sprites/preparado.png');
         this.load.spritesheet('optionsButton', 'assets/sprites/opcionesButton.png', {frameWidth: 75, frameHeight: 75});
         this.load.spritesheet('backButton', 'assets/sprites/atrasButton.png', {frameWidth: 100, frameHeight: 100});

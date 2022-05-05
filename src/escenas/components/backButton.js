@@ -8,7 +8,9 @@ export class BackButton extends Button {
 
   doClick() {
     console.log("Bacccckk " + this.nombre)
-    this.relatedScene.scene.stop();
+    this.relatedScene.scene.stop(this.relatedScene.name);    
+    
+    //this.relatedScene.sound.pauseAll();
     this.relatedScene.scene.resume(this.nombre);
   }
 

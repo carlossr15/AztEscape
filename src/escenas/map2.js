@@ -66,8 +66,6 @@ export default class MyMap extends Phaser.Scene {
         this.load.spritesheet('punch', 'assets/sprites/punch.png', { frameWidth: 230, frameHeight: 600 })
         
         this.load.spritesheet('idolo', 'assets/sprites/Idolo.png', {frameWidth: 32, frameHeight: 32});
-        this.load.spritesheet('restartButton', 'assets/sprites/restartButton.png', {frameWidth: 480, frameHeight: 170});
-        this.load.spritesheet('mapsButton', 'assets/sprites/mapsButton.png', {frameWidth: 480, frameHeight: 170});
         this.load.spritesheet('botonMecanismo', 'assets/sprites/Boton.png', {frameWidth: 50, frameHeight: 50});
         this.load.spritesheet('botonSuelo', 'assets/sprites/BotonSuelo.png', {frameWidth: 50, frameHeight: 50});
         this.load.spritesheet('piedraMovil', 'assets/sprites/PiedraMovil.png', {frameWidth: 128, frameHeight: 128}); 
@@ -101,10 +99,10 @@ export default class MyMap extends Phaser.Scene {
         this.load.image('background', 'assets/sprites/background.png');
         this.load.image('pausa', 'assets/sprites/pausa.png');
         this.load.spritesheet('soundButton', 'assets/sprites/sonidoButton.png', {frameWidth: 75, frameHeight: 75});
-        this.load.spritesheet('soundButtonOff', 'assets/sprites/sonidoOff.png', {frameWidth: 75, frameHeight: 75});
-        this.load.spritesheet('continueButton', 'assets/sprites/continueButton.png', {frameWidth: 520, frameHeight: 340});
-        this.load.spritesheet('restartButton', 'assets/sprites/restartButton.png', {frameWidth: 480, frameHeight: 170});
-        this.load.spritesheet('mapsButton', 'assets/sprites/mapsButton.png', {frameWidth: 480, frameHeight: 170});
+        this.load.spritesheet('soundButtonOff', 'assets/sprites/sonidoOff.png', {frameWidth: 75, frameHeight: 75});        
+        this.load.spritesheet('reiniciarButton', 'assets/sprites/reiniciarButton.png', {frameWidth: 670, frameHeight: 130});
+        this.load.spritesheet('exitButton', 'assets/sprites/salirButton.png', {frameWidth: 480, frameHeight: 170});
+        this.load.spritesheet('backButton', 'assets/sprites/atrasButton.png', {frameWidth: 100, frameHeight: 100});
         this.load.image('preparado', 'assets/sprites/preparado.png');
     
         this.load.image('columna', 'assets/sprites/columna.png')
@@ -151,6 +149,7 @@ export default class MyMap extends Phaser.Scene {
         this.botonesSuelo = this.add.group();
         this.puertasPared = this.add.group();
         this.piedras = this.add.group();
+        this.consumibles = this.add.group();
 
         this.add.image(150, 1065, "columna").setScale(0.8, 0.8).setDepth(0);
 
@@ -173,6 +172,9 @@ export default class MyMap extends Phaser.Scene {
 
 
         this.player = new Player(this, 0, 1220);
+
+        //this.consumibles.add(new Batido(this, 6550, 1260));
+        //this.consumibles.add(new Batido(this, 9900, 1420));
 
 
         this.physics.add.collider(this.player, this.inv);
@@ -285,7 +287,6 @@ export default class MyMap extends Phaser.Scene {
 
 
 
-       // this.batido = new Batido(this, 975, 260);
 
 
         //this.puerta = this.physics.add.image(450, 450, 'puerta').setImmovable();
