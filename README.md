@@ -17,7 +17,7 @@ Se trata de un juego 2D de plataformas con puzzles, orientado a la narrativa.
 
 ### Rango de edad
 
-Está enfocado para todos los públicos pero puede incluir algunos insultos
+Está enfocado para publico un publico adolescente
 
 ### PEGI info
 
@@ -25,11 +25,11 @@ PEGI 12
 
 ### Audiencia Objetivo
 
-Estará enfocado principalmente a gente entre 12 y 25 años.
+Entre 12 y 25 años.
 
 ## Lore y Contexto
 
-Nuestro juego empieza dentro de un templo azteca donde vemos que nuestro personaje principal (el madrileño) consigue llegar hasta el tesoro dorado. Se trata de una historia basada en la actualidad, pero el escenario es un templo azteca. Ésto da lugar a que se puedan escuchar expresiones actuales, encontrarnos objetos modernos y diversos elementos que se encuentran en nuestro día a día en contraste con lo antiguo que podemos encontrar en el templo, así como columnas, piedras y antorchas. Nuestro personaje tiene que conseguir salir con vida del templo, para ello se va encontrando distintas salas o niveles en los que tiene que superar distintas pruebas o puzles, evitar trampas, eliminar enemigos. En cada nivel se va encontrando distintos sombreros tirados por el suelo, que le permiten cambiar de forma (y de personalidad), lo que da lugar a nuevas habilidades a usar por parte del jugador. Durante todo el juego, el madrileño estará hablando consigo mismo (o con alguna de sus personalidades) lo que llevará a conversaciones graciosas y sin sentido con las que se crea un ambiente cómico.
+Nuestro juego empieza dentro de un templo azteca donde vemos que nuestro personaje principal (el madrileño musculoso) consigue llegar hasta el tesoro dorado. Se trata de una historia basada en la actualidad, pero el escenario es un templo azteca. Esto da lugar a que se puedan escuchar expresiones actuales, encontrarnos objetos modernos y diversos elementos que se encuentran en nuestro día a día así como los diversos peligros caracteristicos de peliculas de aventuras como pinchos, momias, ... Nuestro personaje tiene que conseguir salir con vida del templo, para ello se va encontrando distintas salas o niveles en los que tiene que superar distintas pruebas o puzles, evitar trampas, eliminar enemigos. En cada nivel se va encontrando distintos sombreros tirados por el suelo, que le permiten cambiar de forma (y de personalidad), lo que da lugar a nuevas habilidades a usar por parte del jugador. Durante todo el juego, el madrileño estará hablando consigo mismo (o con alguna de sus personalidades) lo que llevará a conversaciones graciosas y sin sentido con las que se crea un ambiente cómico.
 
 ## Mecánicas y dinámicas
 ### Mecánicas
@@ -43,7 +43,7 @@ Permite al personaje, utilizando cuerdas, poder desplazarse de manera vertical.
 El personaje lanza un puñetazo que hiere a los enemigos. (Sólo el madrileño)
 #### Disparar
 El personaje lanza una piedra. (Sólo el niño)
-#### Cambiar el gorro
+#### Cambiar el personaje
 El personaje cambia su personalidad, y con ello sus habilidades posibles.
 #### Coger objetos
 El personaje se desplaza por encima de los objetos para recogerlos.
@@ -76,11 +76,11 @@ Primer objeto que se coge en la aventura, ¡sin él el juego no tendría sentido
 ## Controles
 
 ### WASD
-Teclas utilizadas para el movimiento de personaje, se desplaza hacia los lados y permite saltar.
+Teclas utilizadas para el movimiento de personaje. Puede moverse hacia los lados, saltar y trepar por las cuerdas.
 ### Tecla espacio
 Permite al madrileño dar un puñetazo.
 ### Ratón
-Apuntando con el ratón en el mapa siendo el niño y haciendo clic izquierdo, puede lanzar una piedra hacia el lugar apuntado.
+Apuntar con el mouse si eres el niño y hacer clic izquierdo para lanzar una piedra hacia el lugar apuntado.
 ### Tecla F
 Pantalla completa
 ### Tecla Esc
