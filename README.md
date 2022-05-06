@@ -128,3 +128,9 @@ Le gustaron mucho los dialogos y la escena final, pasandose el juego sin morir. 
 
 #### David (18 años)
 También le gustaron los dialogos y la escena final. También comentó que había una falta de feedback a la hora de disparar y que la acción debería tener animación propia (está hecha pero no implementada por falta de tiempo). También dijo que los fondos le parecían un poco sosos y que le gustaría que hubiese más decoración e igual que el fondo tuviese algún tipo de efecto parallax.
+
+#### Jorge (18 años)
+Jugador habitual de videojuegos en consola. Le resulto extraño la disposición de los controles, en especial que la barra espaciadora se usara para golpear en vez de para saltar como en otros videojuegos. Esto no impidió que se pasase el juego sin morir y le resultase ameno el gameplay.
+
+#### Susana (56 años)
+Persona adulta sin experiencia reciente en videojuegos, solo en maquinas arcade en su juventud. Necesitó que se le explicaran los controles a pesar de las indicaciones en pantalla dado que desconocía la combinación de teclas WASD para moverse e intentaba moverse con las flechas de dirección. A este respecto sugirió la opción de que se pudiera seleccionar la combinación de teclas para moverse. También se le debió de indicar los pasos a seguir a continuación de sus acciones pero creemos que es debido a su falta de experiecia jugando. A pesar de las dificultades y de morir en un par de ocasiones lo acabó terminando. Tambien le pareció divertido.
