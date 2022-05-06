@@ -134,3 +134,6 @@ Jugador habitual de videojuegos en consola. Le resulto extraño la disposición 
 
 #### Susana (56 años)
 Persona adulta sin experiencia reciente en videojuegos, solo en maquinas arcade en su juventud. Necesitó que se le explicaran los controles a pesar de las indicaciones en pantalla dado que desconocía la combinación de teclas WASD para moverse e intentaba moverse con las flechas de dirección. A este respecto sugirió la opción de que se pudiera seleccionar la combinación de teclas para moverse. También se le debió de indicar los pasos a seguir a continuación de sus acciones pero creemos que es debido a su falta de experiecia jugando. A pesar de las dificultades y de morir en un par de ocasiones lo acabó terminando. Tambien le pareció divertido.
+
+#### Miguel (22 años)
+Jugador experimentado en videojuegos en consola y ordenador. Desde el principio se le hicieron fáciles los controles y argumentó que son bastante cómodos de utilizar. También añadio que los dialogos son muy graciosos e ingeniosos y que la escena final es muy divertida. No ha encontrado bugs ni fallos en el juego y ha prouesto añadir un enemigo que fuese el/la panadero/a a modo de boss final.
