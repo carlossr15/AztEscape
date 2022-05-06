@@ -112,4 +112,11 @@ Pero también existen sprites creados a mano y de manera original por nuestra pa
 
 ![Clase UML - AztEscape](https://user-images.githubusercontent.com/72986779/166735517-1c9db9fc-895b-45f5-b3de-5d26527b3b21.png)
 
+### Pruebas con usuarios
+
+#### Fernando (18 años)
+Consiguió pasarse el juego de una vez, ya que tiene bastante manejo con los videojuegos y los controles se les hizo sencillo de aprender. Le gustó mucho el personaje del niño, y la parte del lanzamiento de la piedra le resultó bastante divertida. Piensa que los diálogos son bastantes graciosos, pero puede que haya demasiados en el juego. Se atascó un poco con la combinación de los botones porque se pasó el juego rápido y sin leer. Un comentario que dijo fue: "¿Pasa algo si matas a todas las arañas?", por lo que podría ser una buena idea implementar algún logro por matar a todos los enemigos. 
+
+#### Carmen (17 años)
+No está acostumbrada a jugar videojuegos, pero al ir jugando lentamente y leyendo los diálogos pudo aprender a usar todas las mecánicas del juego. Éstos le parecieron muy divertidos y se rió en varias ocasiones. Murió una vez, pero al reiniciar el nivel consiguió pasárselo de nuevo. Aunque aprendió a utilizar al niño con soltura, prefería jugar como el madrileño, ya que prefería pegar puñetazos a lanzar las piedras. Odia a las momias, son su peor enemigo. La escena final le gustó mucho y le hizo mucha gracia.
 
