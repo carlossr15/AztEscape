@@ -120,3 +120,8 @@ Consiguió pasarse el juego de una vez, ya que tiene bastante manejo con los vid
 #### Carmen (17 años)
 No está acostumbrada a jugar videojuegos, pero al ir jugando lentamente y leyendo los diálogos pudo aprender a usar todas las mecánicas del juego. Éstos le parecieron muy divertidos y se rió en varias ocasiones. Murió una vez, pero al reiniciar el nivel consiguió pasárselo de nuevo. Aunque aprendió a utilizar al niño con soltura, prefería jugar como el madrileño, ya que prefería pegar puñetazos a lanzar las piedras. Odia a las momias, son su peor enemigo. La escena final le gustó mucho y le hizo mucha gracia.
 
+#### Yago (21 años)
+Le gustaron mucho los dialogos y la escena final, pasandose el juego sin morir. Encontró un error con una de las rocas móviles del 2º mapa que causa un softlock y hay que arreglar. Además, propuso implementar la funcionalidad de saltar dialogos. También propuso implementar más tipos de trampas, como lanzallamas o rocas persiguiendo al jugador.
+
+#### David (18 años)
+También le gustaron los dialogos y la escena final. También comentó que había una falta de feedback a la hora de disparar y que la acción debería tener animación propia (está hecha pero no implementada por falta de tiempo). También dijo que los fondos le parecían un poco sosos y que le gustaría que hubiese más decoración e igual que el fondo tuviese algún tipo de efecto parallax.
